@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategory extends Migration
+class CreateGroupUser extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,13 @@ class CreateCategory extends Migration
      */
     public function up()
     {
-        Schema::create('category', function(Blueprint $table){
+        Schema::create('group_user', function(Blueprint $table){
             $table->increments('id');
-            $table->string('category');
-            $table->string('type');
+            $table->integer('group_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+
+            $table->foreign('group_id')->references('id')->on('group');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
@@ -27,6 +30,6 @@ class CreateCategory extends Migration
      */
     public function down()
     {
-        Schema::drop('category');
+        Schema::drop('group_user');
     }
 }

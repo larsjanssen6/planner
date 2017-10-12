@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateEducation extends Migration
+class CreateEducationVehicle extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,12 @@ class CreateEducation extends Migration
      */
     public function up()
     {
-        Schema::create('education', function(Blueprint $table){
+        Schema::create('education_vehicle', function(Blueprint $table){
             $table->increments('id');
-            $table->integer('category_id')->unsigned();
+            $table->integer('education_id')->unsigned();
             $table->integer('vehicle_id')->unsigned();
 
-            $table->string('name');
-            $table->integer('duration');
-            $table->integer('required_students');
-            $table->integer('required_instructors');
-
-            $table->foreign('category_id')->references('id')->on('category');
+            $table->foreign('education_id')->references('id')->on('education');
             $table->foreign('vehicle_id')->references('id')->on('vehicle');
         });
     }
@@ -35,6 +30,6 @@ class CreateEducation extends Migration
      */
     public function down()
     {
-        Schema::drop('education');
+        Schema::drop('education_vehicle');
     }
 }
