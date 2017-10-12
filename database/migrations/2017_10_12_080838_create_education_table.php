@@ -22,6 +22,7 @@ class CreateEducationTable extends Migration
             $table->integer('duration');
             $table->integer('required_students');
             $table->integer('required_instructors');
+            $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('category');
             $table->foreign('vehicle_id')->references('id')->on('vehicle');

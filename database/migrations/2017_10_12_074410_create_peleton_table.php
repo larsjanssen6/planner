@@ -16,6 +16,7 @@ class CreatePeletonTable extends Migration
         Schema::create('peleton', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->timestamps();
         });
     }
 

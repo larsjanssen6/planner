@@ -17,6 +17,7 @@ class CreatePeletonGroupTable extends Migration
             $table->increments('id');
             $table->integer('peleton_id')->unsigned();
             $table->integer('group_id')->unsigned();
+            $table->timestamps();
 
             $table->foreign('peleton_id')->references('id')->on('peleton');
             $table->foreign('group_id')->references('id')->on('group');
