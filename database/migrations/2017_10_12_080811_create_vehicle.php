@@ -15,12 +15,12 @@ class CreateVehicle extends Migration
     {
         Schema::create('vehicle', function(Blueprint $table){
             $table->increments('id');
+            $table->integer('category_id')->unsigned();
             $table->string('name');
-            $table->integer('duration');
+            $table->integer('maintenance_interval');
+            $table->integer('maintenance_duration');
+
             $table->foreign('category_id')->references('id')->on('category');
-            $table->integer('required_students');
-            $table->integer('required_instructors');
-            $table->foreign('load_vehicle_id')->references('id')->on('vehicle');
         });
     }
 

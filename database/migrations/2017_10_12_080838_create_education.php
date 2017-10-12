@@ -13,14 +13,18 @@ class CreateEducation extends Migration
      */
     public function up()
     {
-        Schema::create('vehicle', function(Blueprint $table){
+        Schema::create('education', function(Blueprint $table){
             $table->increments('id');
+            $table->integer('category_id')->unsigned();
+            $table->integer('vehicle_id')->unsigned();
+
             $table->string('name');
             $table->integer('duration');
-            $table->foreign('category_id')->references('id')->on('category');
             $table->integer('required_students');
             $table->integer('required_instructors');
-            $table->foreign('load_vehicle_id')->references('id')->on('vehicle');
+
+            $table->foreign('category_id')->references('id')->on('category');
+            $table->foreign('vehicle_id')->references('id')->on('vehicle');
         });
     }
 
