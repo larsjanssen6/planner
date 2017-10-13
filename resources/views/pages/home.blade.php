@@ -2,6 +2,6 @@
 
 @section('content')
     <hr>
-    <h1 class="text-center">Login</h1>
+    <h1 class="text-center">Home</h1>
     <hr>
 @endsection

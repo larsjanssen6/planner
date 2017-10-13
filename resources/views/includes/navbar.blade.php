@@ -1,9 +1,29 @@
-<nav id="main-nav" class="navbar navbar-default">
-    <div class="container-fluid">
+{{--<nav id="main-nav" class="navbar navbar-default">--}}
+    {{--<div class="container-fluid">--}}
+        {{--<div class="navbar-header">--}}
+            {{--<a class="navbar-brand" href="#">--}}
+                {{--<img alt="Planner" src="...">--}}
+            {{--</a>--}}
+        {{--</div>--}}
+    {{--</div>--}}
+{{--</nav>--}}
+
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#">
-                <img alt="Planner" src="...">
-            </a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">{{config('app.name', 'Planner')}}</a>
         </div>
+        <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/login">Login</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
     </div>
 </nav>
