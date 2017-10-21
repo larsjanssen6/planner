@@ -53,19 +53,19 @@
 
                             <div class="navbar-dropdown">
                                 <a href="#" class="navbar-item">
-                                    Projecten
+                                    Opleidingen
                                 </a>
 
                                 <a href="/" class="navbar-item">
-                                    Relaties
+                                    Groepen
                                 </a>
 
                                 <a href="/" class="navbar-item">
-                                    Organisaties
+                                    Peletons
                                 </a>
 
                                 <a href="/" class="navbar-item">
-                                    Producten
+                                    Voertuigen
                                 </a>
 
                                 <hr class="navbar-divider">
