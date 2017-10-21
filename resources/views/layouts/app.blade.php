@@ -9,6 +9,8 @@
 
     <link rel="stylesheet" href="{{asset('css/bulma.css')}}" />
     <link rel="stylesheet" href="{{asset('css/app.css')}}" />
+    <link href="{{ mix('/css/packages.css') }}" rel="stylesheet">
+
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 <body>
@@ -119,5 +121,13 @@
             </div>
         </footer>
     </div>
+
+    @if(Session::has('status'))
+        <div id="is-popUp" class="notification is-popUp slideUp {!! Session::has('class') ? session('class') : '' !!}">
+            <p>
+                {!! session('status')  !!}
+            </p>
+        </div>
+    @endif
 </body>
 </html>

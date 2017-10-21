@@ -1,5 +1,6 @@
 {
-    "/js/app.js": "/js/app.js",
-    "/css/app.css": "/css/app.css",
-    "/css/bulma.css": "/css/bulma.css"
+    "/js/app.js": "/js/app.js?id=e8dcafb28366dc7d42dc",
+    "/css/app.css": "/css/app.css?id=00d4197084cb05a8d4f4",
+    "/css/bulma.css": "/css/bulma.css?id=a9276374a8fc42fdea76",
+    "/css/packages.css": "/css/packages.css?id=b38d42dfccc0dfa041bf"
 }
