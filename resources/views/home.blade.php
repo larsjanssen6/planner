@@ -1,7 +1,12 @@
 @extends('layouts.app')
-
 @section('content')
-    <hr>
-    <h1 class="text-center">Home</h1>
-    <hr>
+    @component('layouts/hero') DASHBOARD @endcomponent
+
+    <div class="container">
+        <div class="columns">
+            <div class="column is-half is-offset-one-quarter">
+                <!-- DASHBOARD -->
+            </div>
+        </div>
+    </div>
 @endsection
