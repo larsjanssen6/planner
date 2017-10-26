@@ -100,7 +100,7 @@
                             </div>
                         </div>
 
-                        <a href="/" class="navbar-item">
+                        <a href="{{ route('settings.profile', Auth::user()->id) }}" class="navbar-item">
                             <i class="fa fa-cog" aria-hidden="true"></i>
                         </a>
                     @endif

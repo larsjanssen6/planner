@@ -3,7 +3,7 @@
 
     <ul class="menu-list">
         <li>
-            <a href="#" class="/">
+            <a href="#" class="{{ setActive('instellingen/profiel/' . Auth::user()->id) }}">
                 Profiel
             </a>
         </li>

@@ -11,4 +11,5 @@
 |
 */
 
-Route::get('/instellingen/profiel', 'Settings\SettingsUserController@index');
+Route::get('/instellingen/profiel/{user}', 'Settings\SettingsUserController@index')->name('settings.profile');
+Route::put('/instellingen/profiel/{user}', 'Settings\SettingsUserController@update')->name('settings.profile');
