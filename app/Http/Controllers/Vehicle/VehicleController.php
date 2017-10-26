@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Vehicle;
 
-use App\Vehicle;
+use App\Domain\Vehicle;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 

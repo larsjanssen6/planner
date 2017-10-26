@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Peleton;
 
-use App\Peleton;
+use App\Domain\Peleton;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
