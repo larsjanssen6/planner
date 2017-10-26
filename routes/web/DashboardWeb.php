@@ -14,6 +14,6 @@
 Route::get('/dashboard', 'Dashboard\DashboardController@index')
     ->name('dashboard');
 
-Route::get('/opleidingen', 'Opleiding\OpleidingController@index')
+Route::get('/opleidingen', 'Education\EducationController@index')
     ->name('opleidingen');
 
