@@ -79,15 +79,26 @@ class CreatePermissionTables extends Migration
             $table->primary(['permission_id', 'role_id']);
         });
 
-        $settings = Category::create([
+        $settingsCategory = Category::create([
             'name'          => 'Groepen',
+            'type'          => 'permission_category',
+        ]);
+
+        $settingsPermissions = Category::create([
+            'name'          => 'Permissies',
             'type'          => 'permission_category',
         ]);
 
         Permission::create([
             'name'           => 'edit-groups-settings',
             'description'    => 'Bewerk groepen',
-            'category_id'    => $settings->id,
+            'category_id'    => $settingsCategory->id,
+        ]);
+
+        Permission::create([
+            'name'           => 'edit-permission-settings',
+            'description'    => 'Bewerk permissies',
+            'category_id'    => $settingsPermissions->id,
         ]);
 
         /*

@@ -74,7 +74,7 @@
                                     Gebruikers
                                 </a>
 
-                                <a href="/" class="navbar-item">
+                                <a href="{{ route('settings.profile', Auth::user()->id) }}" class="navbar-item">
                                     Instellingen
                                 </a>
 
