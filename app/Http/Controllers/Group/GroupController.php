@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Education;
+namespace App\Http\Controllers\Group;
 
-use App\Education;
+use App\Group;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class EducationController extends Controller
+class GroupController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class EducationController extends Controller
      */
     public function index()
     {
-        $educations = Education::with('category')->paginate(10);
+        $groups = Group::paginate(10);
 
-        return view('education.index')->with(['educations' => $educations]);
+        return view('group.index')->with(['groups' => $groups]);
     }
 
     /**

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Education;
+namespace App\Http\Controllers\Vehicle;
 
-use App\Education;
+use App\Vehicle;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class EducationController extends Controller
+class VehicleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,9 +15,9 @@ class EducationController extends Controller
      */
     public function index()
     {
-        $educations = Education::with('category')->paginate(10);
+        $vehicles = Vehicle::with('category')->paginate(10);
 
-        return view('education.index')->with(['educations' => $educations]);
+        return view('vehicle.index')->with(['vehicles' => $vehicles]);
     }
 
     /**

@@ -56,15 +56,15 @@
                                     Opleidingen
                                 </a>
 
-                                <a href="/" class="navbar-item">
+                                <a href="/groepen" class="navbar-item">
                                     Groepen
                                 </a>
 
-                                <a href="/" class="navbar-item">
+                                <a href="/peletons" class="navbar-item">
                                     Peletons
                                 </a>
 
-                                <a href="/" class="navbar-item">
+                                <a href="/voertuigen" class="navbar-item">
                                     Voertuigen
                                 </a>
 

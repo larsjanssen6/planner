@@ -2,22 +2,22 @@
 @section('content')
 
     @component('layouts/hero')
-        OPLEIDINGEN
+        VOERTUIGEN
     @endcomponent
 
     <div class="container">
         <div class="section">
-            @if(!$educations->isEmpty())
+            @if(!$vehicles->isEmpty())
 {{--                @can('create-education')--}}
                     <div class="column">
-                        <a href="{{ route('education.create') }}" class="button is-primary is-outlined">
-                            Nieuwe opleiding
+                        <a href="{{ route('vehicle.create') }}" class="button is-primary is-outlined">
+                            Nieuw voertuig
                         </a>
                     </div>
                 {{--@endcan--}}
             @endif
 
-            @if(!$educations->isEmpty())
+            @if(!$vehicles->isEmpty())
                 <div class="column">
                     <modal-wrapper name="product" inline-template v-cloak>
                         <div>
@@ -25,7 +25,7 @@
                                 <thead class="thead-is-blue">
                                 <tr>
                                     <th>
-                                        <abbr>Opleiding</abbr>
+                                        <abbr>Voertuig</abbr>
                                     </th>
 
                                     <th>
@@ -33,15 +33,11 @@
                                     </th>
 
                                     <th>
-                                        <abbr>Duur in dagen</abbr>
+                                        <abbr>Onderhoudsinterval in dagen</abbr>
                                     </th>
 
                                     <th>
-                                        <abbr>Aantal studenten</abbr>
-                                    </th>
-
-                                    <th>
-                                        <abbr>Aantal instructeurs</abbr>
+                                        <abbr>Onderhoudsduur in dagen</abbr>
                                     </th>
 
                                     <th>
@@ -57,34 +53,30 @@
                                 </thead>
 
                                 <tbody>
-                                @foreach($educations as $education)
-                                    <tr @click="show({{json_encode($education->id)}})">
+                                @foreach($vehicles as $vehicle)
+                                    <tr @click="show({{json_encode($vehicle->id)}})">
                                         <td>
-                                            {{ $education->name }}
+                                            {{ $vehicle->name }}
                                         </td>
 
                                         <td>
-                                            {{ $education->category->name }}
+                                            {{ $vehicle->category->name }}
                                         </td>
 
                                         <td>
-                                            {{ $education->duration }}
+                                            {{ $vehicle->maintenance_interval }}
                                         </td>
 
                                         <td>
-                                            {{ $education->required_students }}
+                                            {{ $vehicle->maintenance_duration }}
                                         </td>
 
                                         <td>
-                                            {{ $education->required_instructors }}
+                                            {{ $vehicle->created_at }}
                                         </td>
 
                                         <td>
-                                            {{ $education->created_at }}
-                                        </td>
-
-                                        <td>
-                                            {{ $education->updated_at }}
+                                            {{ $vehicle->updated_at }}
                                         </td>
 
                                         <td>
@@ -108,10 +100,10 @@
             @else
                 <div class="notification is-info">
                     <p>
-                        Er zijn momenteel geen opleidingen.
+                        Er zijn momenteel geen voertuigen.
 
                         {{--@can('create-education')--}}
-                            Maak deze <a href="{{ route('education.create') }}">hier</a> aan.
+                            Maak deze <a href="{{ route('vehicle.create') }}">hier</a> aan.
                         {{--@endcan--}}
                     </p>
                 </div>
@@ -119,7 +111,7 @@
         </div>
 
         <div class="column is-4 is-offset-4">
-            {{ $educations->links('vendor.pagination.default') }}
+            {{ $vehicles->links('vendor.pagination.default') }}
         </div>
     </div>
 @endsection

@@ -13,7 +13,3 @@
 
 Route::get('/dashboard', 'Dashboard\DashboardController@index')
     ->name('dashboard');
-
-Route::get('/opleidingen', 'Education\EducationController@index')
-    ->name('opleidingen');
-

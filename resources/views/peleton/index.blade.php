@@ -2,22 +2,22 @@
 @section('content')
 
     @component('layouts/hero')
-        OPLEIDINGEN
+        PELETONS
     @endcomponent
 
     <div class="container">
         <div class="section">
-            @if(!$educations->isEmpty())
+            @if(!$peletons->isEmpty())
 {{--                @can('create-education')--}}
                     <div class="column">
-                        <a href="{{ route('education.create') }}" class="button is-primary is-outlined">
-                            Nieuwe opleiding
+                        <a href="{{ route('peleton.create') }}" class="button is-primary is-outlined">
+                            Nieuw peleton
                         </a>
                     </div>
                 {{--@endcan--}}
             @endif
 
-            @if(!$educations->isEmpty())
+            @if(!$peletons->isEmpty())
                 <div class="column">
                     <modal-wrapper name="product" inline-template v-cloak>
                         <div>
@@ -25,23 +25,7 @@
                                 <thead class="thead-is-blue">
                                 <tr>
                                     <th>
-                                        <abbr>Opleiding</abbr>
-                                    </th>
-
-                                    <th>
-                                        <abbr>Categorie</abbr>
-                                    </th>
-
-                                    <th>
-                                        <abbr>Duur in dagen</abbr>
-                                    </th>
-
-                                    <th>
-                                        <abbr>Aantal studenten</abbr>
-                                    </th>
-
-                                    <th>
-                                        <abbr>Aantal instructeurs</abbr>
+                                        <abbr>Peleton</abbr>
                                     </th>
 
                                     <th>
@@ -57,34 +41,18 @@
                                 </thead>
 
                                 <tbody>
-                                @foreach($educations as $education)
-                                    <tr @click="show({{json_encode($education->id)}})">
+                                @foreach($peletons as $peleton)
+                                    <tr @click="show({{json_encode($peleton->id)}})">
                                         <td>
-                                            {{ $education->name }}
+                                            {{ $peleton->name }}
                                         </td>
 
                                         <td>
-                                            {{ $education->category->name }}
+                                            {{ $peleton->created_at }}
                                         </td>
 
                                         <td>
-                                            {{ $education->duration }}
-                                        </td>
-
-                                        <td>
-                                            {{ $education->required_students }}
-                                        </td>
-
-                                        <td>
-                                            {{ $education->required_instructors }}
-                                        </td>
-
-                                        <td>
-                                            {{ $education->created_at }}
-                                        </td>
-
-                                        <td>
-                                            {{ $education->updated_at }}
+                                            {{ $peleton->updated_at }}
                                         </td>
 
                                         <td>
@@ -108,10 +76,10 @@
             @else
                 <div class="notification is-info">
                     <p>
-                        Er zijn momenteel geen opleidingen.
+                        Er zijn momenteel geen peletons.
 
                         {{--@can('create-education')--}}
-                            Maak deze <a href="{{ route('education.create') }}">hier</a> aan.
+                            Maak deze <a href="{{ route('peleton.create') }}">hier</a> aan.
                         {{--@endcan--}}
                     </p>
                 </div>
@@ -119,7 +87,7 @@
         </div>
 
         <div class="column is-4 is-offset-4">
-            {{ $educations->links('vendor.pagination.default') }}
+            {{ $peletons->links('vendor.pagination.default') }}
         </div>
     </div>
 @endsection

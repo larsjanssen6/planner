@@ -34,9 +34,6 @@ footer {
   padding-top: 50px;
   background: linear-gradient(to right, #f9f9f9, #fff 20px);
 }
-[v-cloak] {
-  display: none;
-}
 .menu-list li {
   border-bottom: 1px dashed #d7d7d7;
 }
@@ -71,7 +68,8 @@ footer > div > div > p > strong {
 .card-meta,
 .card-meta-yellow,
 .card-meta-blue,
-.card-meta-primary {
+.card-meta-primary,
+.thead-is-blue {
   background: #fff;
   color: #abb2b9;
   font-weight: 800;
@@ -146,4 +144,26 @@ footer > div > div > p > strong {
   line-height: 22px;
   margin-right: 5px;
   margin-bottom: 5px;
+}
+.table {
+  background: #f8f8fa;
+  border-radius: 6px;
+  overflow: hidden;
+  -webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,0.16);
+          box-shadow: 0 2px 3px 0 rgba(0,0,0,0.16);
+}
+.table:hover {
+  -webkit-transform: translateY(-1px);
+          transform: translateY(-1px);
+  -webkit-box-shadow: 0 3px 3px 0 rgba(0,0,0,0.16);
+          box-shadow: 0 3px 3px 0 rgba(0,0,0,0.16);
+}
+th abbr {
+  color: #fff;
+}
+tr:hover {
+  background: #d4d8dd !important;
+}
+.thead-is-blue {
+  background: #34495e;
 }
