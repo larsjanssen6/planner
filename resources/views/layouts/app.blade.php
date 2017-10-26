@@ -52,7 +52,7 @@
                             </a>
 
                             <div class="navbar-dropdown">
-                                <a href="#" class="navbar-item">
+                                <a href="/opleidingen" class="navbar-item">
                                     Opleidingen
                                 </a>
 
