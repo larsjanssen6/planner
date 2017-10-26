@@ -13,7 +13,7 @@ use Faker\Generator as Faker;
 |
 */
 
-$factory->define(App\User::class, function (Faker $faker) {
+$factory->define(App\Domain\User::class, function (Faker $faker) {
     static $password;
 
     return [
@@ -28,42 +28,41 @@ $factory->define(App\User::class, function (Faker $faker) {
 });
 
 //factory(App\Category::class, 100)->create();
-$factory->define(App\Category::class, function (Faker $faker) {
+$factory->define(App\Domain\Category::class, function (Faker $faker) {
     return [
         'name' => $faker->firstName(),
         'type' => $faker->firstName(),
     ];
 });
 
-$factory->define(App\Vehicle::class, function (Faker $faker) {
+$factory->define(App\Domain\Vehicle::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
-        'category_id' => Factory(App\Category::class)->create()->id,
+        'category_id' => Factory(App\Domain\Category::class)->create()->id,
         'maintenance_interval' => $faker->randomDigitNotNull,
         'maintenance_duration' => $faker->randomDigitNotNull,
     ];
 });
 
-$factory->define(App\Education::class, function (Faker $faker) {
+$factory->define(App\Domain\Education::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'duration' => $faker->randomDigitNotNull,
-        'category_id' => Factory(App\Category::class)->create()->id,
+        'category_id' => Factory(App\Domain\Category::class)->create()->id,
         'required_students' => $faker->randomDigitNotNull,
         'required_instructors' => $faker->randomDigitNotNull,
-        'vehicle_id' => Factory(App\Vehicle::class)->create()->id,
+        'vehicle_id' => Factory(App\Domain\Vehicle::class)->create()->id,
     ];
 });
 
-$factory->define(App\Group::class, function (Faker $faker) {
+$factory->define(App\Domain\Group::class, function (Faker $faker) {
     return [
         'name' => $faker->numerify("Group ##"),
     ];
 });
 
-$factory->define(App\Peleton::class, function (Faker $faker) {
+$factory->define(App\Domain\Peleton::class, function (Faker $faker) {
     return [
         'name' => $faker->numerify("Peleton ?"),
     ];
 });
-

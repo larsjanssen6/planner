@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Domain;
 
-use App\Domain\Category;
+use Category;
 use Illuminate\Database\Eloquent\Model;
 
 class Education extends Model
