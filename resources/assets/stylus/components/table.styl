@@ -4,7 +4,7 @@
   overflow hidden
   box-shadow 0 2px 3px 0 rgba(0,0,0,.16);
   &:hover
-    transform translateY(-1px)
+  //  transform translateY(-1px)
     box-shadow:0 3px 3px 0 rgba(0,0,0,.16)
 
 th abbr
@@ -12,6 +12,15 @@ th abbr
 
 tr:hover
   background lighten(#373e45, 80%)!important
+
+.table
+  cursor: default
+
+.table i.fa.fa-eye
+  cursor: pointer
+
+tr:hover > th
+  background #34495e
 
 .thead-is-blue
   @extends $card-meta

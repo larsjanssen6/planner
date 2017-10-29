@@ -153,8 +153,6 @@ footer > div > div > p > strong {
           box-shadow: 0 2px 3px 0 rgba(0,0,0,0.16);
 }
 .table:hover {
-  -webkit-transform: translateY(-1px);
-          transform: translateY(-1px);
   -webkit-box-shadow: 0 3px 3px 0 rgba(0,0,0,0.16);
           box-shadow: 0 3px 3px 0 rgba(0,0,0,0.16);
 }
@@ -163,6 +161,15 @@ th abbr {
 }
 tr:hover {
   background: #d4d8dd !important;
+}
+.table {
+  cursor: default;
+}
+.table i.fa.fa-eye {
+  cursor: pointer;
+}
+tr:hover > th {
+  background: #34495e;
 }
 .thead-is-blue {
   background: #34495e;
