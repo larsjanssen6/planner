@@ -50,6 +50,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapPeletonRoutes();
 
         $this->mapVehicleRoutes();
+
+        $this->mapUserRoutes();
     }
 
     /**
@@ -148,6 +150,20 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('web')
             ->namespace($this->namespace)
             ->group(base_path('routes/web/VehicleWeb.php'));
+    }
+
+    /**
+     * Define the "web" routes for the application.
+     *
+     * These routes all receive session state, CSRF protection, etc.
+     *
+     * @return void
+     */
+    protected function mapUserRoutes()
+    {
+        Route::middleware('web')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/web/UserWeb.php'));
     }
 
     /**

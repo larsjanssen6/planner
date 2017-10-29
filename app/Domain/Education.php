@@ -2,7 +2,6 @@
 
 namespace App\Domain;
 
-use Category;
 use Illuminate\Database\Eloquent\Model;
 
 class Education extends Model

@@ -12,7 +12,7 @@ class SettingsUserController extends Controller
     /**
      * Show user profile page.
      *
-     * @return $this
+     * @return \Illuminate\View\View
      */
     public function index()
     {

@@ -70,7 +70,7 @@
 
                                 <hr class="navbar-divider">
 
-                                <a href="/" class="navbar-item is-active">
+                                <a href="/gebruikers" class="navbar-item is-active">
                                     Gebruikers
                                 </a>
 
