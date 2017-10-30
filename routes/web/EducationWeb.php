@@ -17,17 +17,17 @@ Route::get('/opleidingen', 'Education\EducationController@index')
 Route::get('/opleidingen/create', 'Education\EducationController@create')
     ->name('education.create');
 
-Route::get('/opleidingen/store', 'Education\EducationController@store')
+Route::post('/opleidingen', 'Education\EducationController@store')
     ->name('education.store');
 
-Route::get('/opleidingen/show', 'Education\EducationController@show')
+Route::get('/opleidingen/{id}', 'Education\EducationController@show')
     ->name('education.show');
 
-Route::get('/opleidingen/edit', 'Education\EducationController@edit')
+Route::get('/opleidingen/{id}', 'Education\EducationController@edit')
     ->name('education.edit');
 
-Route::get('/opleidingen/update', 'Education\EducationController@update')
+Route::put('/opleidingen/{id}', 'Education\EducationController@update')
     ->name('education.update');
 
-Route::get('/opleidingen/destroy', 'Education\EducationController@destroy')
+Route::delete('/opleidingen/{id}', 'Education\EducationController@destroy')
     ->name('education.destroy');

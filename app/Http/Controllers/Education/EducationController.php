@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Education;
 
 use App\Domain\Category;
 use App\Domain\Education;
+use App\Domain\Vehicle;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -30,7 +31,21 @@ class EducationController extends Controller
     {
         $categories = Category::all();
 
-        return view('education.create')->with(['categories' => $categories]);
+        // get key => value pair of id => name
+        $arrCategories = [];
+        foreach ($categories as $category) {
+            $arrCategories += [ $category->id  => $category->name];
+        }
+
+        $vehicles = Vehicle::all();
+
+        // get key => value pair of id => name
+        $arrVehicles = [];
+        foreach ($vehicles as $vehicle) {
+            $arrVehicles += [ $vehicle->id  => $vehicle->name];
+        }
+
+        return view('education.create')->with(['categories' => $arrCategories, 'vehicles' => $arrVehicles]);
     }
 
     /**
@@ -41,7 +56,28 @@ class EducationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+           'name' => 'required',
+           'category_id' => 'required',
+           'vehicle_id' => 'required',
+           'duration' => 'required|min:1',
+           'required_students' => 'required|min:1',
+           'required_instructors' => 'required|min:1'
+        ]);
+
+        // new education from form data
+        $education = new Education;
+        $education->name = $request->input('name');
+        $education->category_id = $request->input('category_id');
+        $education->vehicle_id = $request->input('vehicle_id');
+        $education->duration = $request->input('duration');
+        $education->required_students = $request->input('required_students');
+        $education->required_instructors = $request->input('required_instructors');
+        $education->save();
+
+        session()->flash('status', 'Opleiding aangemaakt');
+
+        return redirect()->route('education.index');
     }
 
     /**
