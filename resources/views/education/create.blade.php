@@ -7,6 +7,7 @@
 
     <div class="container">
         <div class="section">
+            <h2 class="title is-3">Nieuwe opleiding</h2>
             {!! Form::open(['route' => 'education.store', 'method' => 'post']) !!}
                 {{ csrf_field() }}
 
@@ -46,8 +47,6 @@
                 {{--{{ csrf_field() }}--}}
 
                 {{--<input name="_method" type="hidden" value="PUT">--}}
-
-
 
                 {{--@component('layouts/input', [--}}
                                     {{--'name' => 'name',--}}

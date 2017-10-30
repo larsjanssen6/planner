@@ -33,6 +33,10 @@
                                     </th>
 
                                     <th>
+                                        <abbr>Voertuig</abbr>
+                                    </th>
+
+                                    <th>
                                         <abbr>Duur in dagen</abbr>
                                     </th>
 
@@ -52,19 +56,27 @@
                                         <abbr>Laatst bijgewerkt</abbr>
                                     </th>
 
-                                    <th></th>
+                                    <th><!-- show --></th>
+
+                                    <th><!-- edit --></th>
+
+                                    <th><!-- delete --></th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
                                 @foreach($educations as $education)
-                                    <tr @click="show({{json_encode($education->id)}})">
+                                    <tr>
                                         <td>
                                             {{ $education->name }}
                                         </td>
 
                                         <td>
                                             {{ $education->category->name }}
+                                        </td>
+
+                                        <td>
+                                            {{ $education->vehicle->name }}
                                         </td>
 
                                         <td>
@@ -88,7 +100,15 @@
                                         </td>
 
                                         <td>
-                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                            <a href="{{ route('education.show', ['id' => $education->id]) }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        </td>
+
+                                        <td>
+                                            <a href="{{ route('education.edit', ['id' => $education->id]) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                        </td>
+
+                                        <td>
+                                            <a href="{{ route('education.destroy', ['id' => $education->id]) }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                         </td>
                                     </tr>
 

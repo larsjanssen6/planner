@@ -20,10 +20,10 @@ Route::get('/opleidingen/create', 'Education\EducationController@create')
 Route::post('/opleidingen', 'Education\EducationController@store')
     ->name('education.store');
 
-Route::get('/opleidingen/{id}', 'Education\EducationController@show')
+Route::get('/opleidingen/{id}/tonen', 'Education\EducationController@show')
     ->name('education.show');
 
-Route::get('/opleidingen/{id}', 'Education\EducationController@edit')
+Route::get('/opleidingen/{id}/bewerken', 'Education\EducationController@edit')
     ->name('education.edit');
 
 Route::put('/opleidingen/{id}', 'Education\EducationController@update')

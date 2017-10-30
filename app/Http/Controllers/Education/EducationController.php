@@ -17,7 +17,7 @@ class EducationController extends Controller
      */
     public function index()
     {
-        $educations = Education::with('category')->paginate(10);
+        $educations = Education::with('category', 'vehicle')->paginate(10);
 
         return view('education.index')->with(['educations' => $educations]);
     }
@@ -25,27 +25,11 @@ class EducationController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Http\Response|\Illuminate\View\View
      */
     public function create()
     {
-        $categories = Category::all();
-
-        // get key => value pair of id => name
-        $arrCategories = [];
-        foreach ($categories as $category) {
-            $arrCategories += [ $category->id  => $category->name];
-        }
-
-        $vehicles = Vehicle::all();
-
-        // get key => value pair of id => name
-        $arrVehicles = [];
-        foreach ($vehicles as $vehicle) {
-            $arrVehicles += [ $vehicle->id  => $vehicle->name];
-        }
-
-        return view('education.create')->with(['categories' => $arrCategories, 'vehicles' => $arrVehicles]);
+        return view('education.create')->with(['categories' => $this->getCategoriesDropdown(), 'vehicles' => $this->getVehiclesDropdown()]);
     }
 
     /**
@@ -84,22 +68,27 @@ class EducationController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Illuminate\View\View
      */
     public function show($id)
     {
-        //
+        $education = Education::find($id);
+
+        return view('education.show')->with(['education' => $education]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Illuminate\View\View
      */
     public function edit($id)
     {
-        //
+        $education = Education::find($id);
+
+        return view('education.edit')
+            ->with(['education' => $education, 'categories' => $this->getCategoriesDropdown(), 'vehicles' => $this->getVehiclesDropdown()]);
     }
 
     /**
@@ -111,7 +100,28 @@ class EducationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'category_id' => 'required',
+            'vehicle_id' => 'required',
+            'duration' => 'required|min:1',
+            'required_students' => 'required|min:1',
+            'required_instructors' => 'required|min:1'
+        ]);
+
+        $education = Education::find($id);
+        $education->name = $request->input('name');
+        $education->category_id = $request->input('category_id');
+        $education->vehicle_id = $request->input('vehicle_id');
+        $education->duration = $request->input('duration');
+        $education->required_students = $request->input('required_students');
+        $education->required_instructors = $request->input('required_instructors');
+        $education->save();
+
+        session()->flash('status', 'Opleiding bewerkt');
+
+        return redirect()
+            ->route('education.show', ['id' => $id]);
     }
 
     /**
@@ -123,5 +133,32 @@ class EducationController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * returns a key => value pair of the id -> name from category model
+     */
+    private function getCategoriesDropdown(){
+        $categories = Category::all();
+
+        $arr = [];
+        foreach ($categories as $category) {
+            $arr += [ $category->id  => $category->name];
+        }
+        return $arr;
+    }
+
+    /**
+     * returns a key => value pair of the id -> name from vehicle model
+     */
+    private function getVehiclesDropdown(){
+        $vehicles = Vehicle::all();
+
+        $arr = [];
+        foreach ($vehicles as $vehicle) {
+            $arr += [ $vehicle->id  => $vehicle->name];
+        }
+
+        return $arr;
     }
 }
