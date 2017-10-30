@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Education;
 
+use App\Domain\Category;
 use App\Domain\Education;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -27,9 +28,9 @@ class EducationController extends Controller
      */
     public function create()
     {
-        $education = new Education;
+        $categories = Category::all();
 
-        return view('education.create')->with(['education', $education]);
+        return view('education.create')->with(['categories' => $categories]);
     }
 
     /**
