@@ -8,7 +8,18 @@
     <div class="container">
         <div class="section">
             @if(!$education == null)
-                <h2 class="title is-3">Bewerk opleiding</h2>
+                <h2 class="title is-3 pull-left">Bewerk opleiding</h2>
+
+                {{-- DESTROY --}}
+                {!! Form::open(['route' => ['education.destroy', $education->id], 'method' => 'post']) !!}
+                {{ csrf_field() }}
+                {{Form::hidden('_method', 'DELETE')}}
+                {{Form::submit('Verwijder opleiding', ['class' =>  'button is-danger is-outlined pull-right'])}}
+                {!! Form::close() !!}
+
+                <div class="is-clearfix"></div>
+
+                {{-- EDIT --}}
                 {!! Form::open(['route' => ['education.update', $education->id], 'method' => 'post']) !!}
                 {{ csrf_field() }}
                 {{Form::hidden('_method', 'PUT')}}
@@ -41,7 +52,7 @@
                     {{Form::label('required_instructors', 'Aantal instructeurs', ['class' => 'label'])}}
                     {{Form::number('required_instructors', $education->required_instructors, ['class' => 'input', 'placeholder' => 'Aantal instructeurs', 'required' => 'required', 'min' => '1'])}}
                 </div>
-                {{ Form::submit('Bewerk opleiding', ['class' => 'button is-primary is-outlined']) }}
+                {{ Form::submit('Opslaan', ['class' => 'button is-primary is-outlined']) }}
                 {!! Form::close() !!}
             @else
                 <p>De opleiding kon niet worden geladen.</p>

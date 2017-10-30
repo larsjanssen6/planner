@@ -59,8 +59,6 @@
                                     <th><!-- show --></th>
 
                                     <th><!-- edit --></th>
-
-                                    <th><!-- delete --></th>
                                 </tr>
                                 </thead>
 
@@ -105,10 +103,6 @@
 
                                         <td>
                                             <a href="{{ route('education.edit', ['id' => $education->id]) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                        </td>
-
-                                        <td>
-                                            <a href="{{ route('education.destroy', ['id' => $education->id]) }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                         </td>
                                     </tr>
 

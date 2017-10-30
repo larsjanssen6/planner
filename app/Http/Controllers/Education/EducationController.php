@@ -132,7 +132,12 @@ class EducationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $education = Education::find($id);
+        $education->delete();
+
+        session()->flash('status', 'Opleiding verwijderd');
+
+        return redirect()->route('education.index');
     }
 
     /**
