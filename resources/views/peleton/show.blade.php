@@ -13,7 +13,7 @@
                          ])
             @endcomponent
 
-            @if(!$peleton == null)
+            @if(isset($peleton))
 
                 @component('layouts/buttons/delete', [
                      'route' => 'peleton.destroy',

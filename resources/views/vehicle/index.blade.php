@@ -48,13 +48,15 @@
                                         <abbr>Laatst bijgewerkt</abbr>
                                     </th>
 
-                                    <th></th>
+                                    <th><!-- show --></th>
+
+                                    <th><!-- edit --></th>
                                 </tr>
                                 </thead>
 
                                 <tbody>
                                 @foreach($vehicles as $vehicle)
-                                    <tr @click="show({{json_encode($vehicle->id)}})">
+                                    <tr>
                                         <td>
                                             {{ $vehicle->name }}
                                         </td>
@@ -80,7 +82,11 @@
                                         </td>
 
                                         <td>
-                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                            <a href="{{ route('vehicle.show', ['id' => $vehicle->id]) }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        </td>
+
+                                        <td>
+                                            <a href="{{ route('vehicle.edit', ['id' => $vehicle->id]) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                         </td>
                                     </tr>
 

@@ -14,7 +14,7 @@
              ])
             @endcomponent
 
-            @if(!$education == null)
+            @if(isset($education))
 
                 @component('layouts/buttons/delete', [
                      'route' => 'education.destroy',

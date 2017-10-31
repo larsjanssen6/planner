@@ -14,7 +14,7 @@
              ])
             @endcomponent
 
-            @if(!$group == null)
+            @if(isset($group))
 
                 @component('layouts/buttons/delete', [
                      'route' => 'group.destroy',
