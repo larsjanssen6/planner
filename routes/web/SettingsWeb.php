@@ -23,8 +23,18 @@ Route::put('/instellingen/profiel/{user}', 'Settings\SettingsUserController@upda
     ->name('settings.profile');
 
 /*
+| Role settings
+*/
+
+Route::get('/instellingen/rollen', 'Settings\SettingsRoleController@index')
+    ->name('settings.roles');
+
+/*
 | Permission settings
 */
 
 Route::get('/instellingen/permissies', 'Settings\SettingsPermissionController@index')
     ->name('settings.permission');
+
+Route::get('/instellingen/permissies/update', 'Settings\SettingsPermissionController@update')
+    ->name('settings.permission.update');
