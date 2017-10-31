@@ -2,62 +2,48 @@
 
 namespace App\Http\Controllers\Education;
 
+use App\Domain\Vehicle;
 use App\Domain\Category;
 use App\Domain\Education;
-use App\Domain\Vehicle;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\EducationRequest;
 
 class EducationController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Show all educations.
      *
-     * @return \Illuminate\View\View
+     * @return $this
      */
     public function index()
     {
-        $educations = Education::with('category', 'vehicle')->paginate(10);
-
-        return view('education.index')->with(['educations' => $educations]);
+        return view('education.index')->with([
+            'educations' => Education::with('category', 'vehicle')->paginate(10)
+        ]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show education create form.
      *
-     * @return \Illuminate\Http\Response|\Illuminate\View\View
+     * @return $this
      */
     public function create()
     {
-        return view('education.create')->with(['categories' => $this->getCategoriesDropdown(), 'vehicles' => $this->getVehiclesDropdown()]);
+        return view('education.create')->with([
+            'categories' => Category::all()->pluck('name', 'id'),
+            'vehicles' => Vehicle::all()->pluck('name', 'id')
+        ]);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store education.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param EducationRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(EducationRequest $request)
     {
-        $this->validate($request, [
-           'name' => 'required',
-           'category_id' => 'required',
-           'vehicle_id' => 'required',
-           'duration' => 'required|min:1',
-           'required_students' => 'required|min:1',
-           'required_instructors' => 'required|min:1'
-        ]);
-
-        // new education from form data
-        $education = new Education;
-        $education->name = $request->input('name');
-        $education->category_id = $request->input('category_id');
-        $education->vehicle_id = $request->input('vehicle_id');
-        $education->duration = $request->input('duration');
-        $education->required_students = $request->input('required_students');
-        $education->required_instructors = $request->input('required_instructors');
-        $education->save();
+        Education::create($request->all());
 
         session()->flash('status', 'Opleiding aangemaakt');
 
@@ -65,105 +51,60 @@ class EducationController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Show education.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response|\Illuminate\View\View
+     * @param Education $education
+     * @return $this
      */
-    public function show($id)
+    public function show(Education $education)
     {
-        $education = Education::find($id);
-
         return view('education.show')->with(['education' => $education]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response|\Illuminate\View\View
-     */
-    public function edit($id)
-    {
-        $education = Education::find($id);
 
-        return view('education.edit')
-            ->with(['education' => $education, 'categories' => $this->getCategoriesDropdown(), 'vehicles' => $this->getVehiclesDropdown()]);
+    /**
+     * Show edit form education.
+     *
+     * @param Education $education
+     * @return $this
+     */
+    public function edit(Education $education)
+    {
+        return view('education.edit')->with([
+                'education' => $education,
+                'categories' => Category::all()->pluck('name', 'id'),
+                'vehicles' => Vehicle::all()->pluck('name', 'id')
+            ]);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update education.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param EducationRequest $request
+     * @param Education $education
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(EducationRequest $request, Education $education)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'category_id' => 'required',
-            'vehicle_id' => 'required',
-            'duration' => 'required|min:1',
-            'required_students' => 'required|min:1',
-            'required_instructors' => 'required|min:1'
-        ]);
-
-        $education = Education::find($id);
-        $education->name = $request->input('name');
-        $education->category_id = $request->input('category_id');
-        $education->vehicle_id = $request->input('vehicle_id');
-        $education->duration = $request->input('duration');
-        $education->required_students = $request->input('required_students');
-        $education->required_instructors = $request->input('required_instructors');
-        $education->save();
+        $education->update($request->all());
 
         session()->flash('status', 'Opleiding bewerkt');
 
-        return redirect()
-            ->route('education.show', ['id' => $id]);
+        return redirect()->route('education.show', ['id' => $education->id]);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Destroy education.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Education $education
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(Education $education)
     {
-        $education = Education::find($id);
         $education->delete();
 
         session()->flash('status', 'Opleiding verwijderd');
 
         return redirect()->route('education.index');
-    }
-
-    /**
-     * returns a key => value pair of the id -> name from category model
-     */
-    private function getCategoriesDropdown(){
-        $categories = Category::all();
-
-        $arr = [];
-        foreach ($categories as $category) {
-            $arr += [ $category->id  => $category->name];
-        }
-        return $arr;
-    }
-
-    /**
-     * returns a key => value pair of the id -> name from vehicle model
-     */
-    private function getVehiclesDropdown(){
-        $vehicles = Vehicle::all();
-
-        $arr = [];
-        foreach ($vehicles as $vehicle) {
-            $arr += [ $vehicle->id  => $vehicle->name];
-        }
-
-        return $arr;
     }
 }

@@ -25,7 +25,7 @@ class SettingsPermissionController extends Controller
     public function index()
     {
         return view('settings.rights.permission.index')->with([
-                'categories' => Category::where('type', 'permission_category')->with('permissions'),
+                'categories' => Category::where('type', 'permission_category')->with('permissions')->get(),
                 'roles'      => Role::all(),
             ]
         );

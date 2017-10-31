@@ -20,14 +20,14 @@ Route::get('/opleidingen/aanmaken', 'Education\EducationController@create')
 Route::post('/opleidingen', 'Education\EducationController@store')
     ->name('education.store');
 
-Route::get('/opleidingen/{id}', 'Education\EducationController@show')
+Route::get('/opleidingen/{education}', 'Education\EducationController@show')
     ->name('education.show');
 
-Route::get('/opleidingen/{id}/bewerken', 'Education\EducationController@edit')
+Route::get('/opleidingen/{education}/bewerken', 'Education\EducationController@edit')
     ->name('education.edit');
 
-Route::put('/opleidingen/{id}', 'Education\EducationController@update')
+Route::put('/opleidingen/{education}', 'Education\EducationController@update')
     ->name('education.update');
 
-Route::delete('/opleidingen/{id}', 'Education\EducationController@destroy')
+Route::delete('/opleidingen/{education}', 'Education\EducationController@destroy')
     ->name('education.destroy');

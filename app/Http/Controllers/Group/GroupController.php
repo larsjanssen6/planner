@@ -9,97 +9,83 @@ use App\Http\Controllers\Controller;
 class GroupController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Show all groups.
      *
-     * @return \Illuminate\Http\Response|\Illuminate\View\View
+     * @return $this
      */
     public function index()
     {
-        $groups = Group::paginate(10);
-
-        return view('group.index')->with(['groups' => $groups]);
+        return view('group.index')->with(['groups' => Group::paginate(10)]);
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response|\Illuminate\View\View
+     * Show group create form.
      */
     public function create()
     {
-        //
+        //Todo
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store group.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
      */
     public function store(Request $request)
     {
-        //
+        //Todo
     }
 
     /**
-     * Display the specified resource.
+     * Show group.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response|\Illuminate\View\View
+     * @param Group $group
+     * @return $this
      */
-    public function show($id)
+    public function show(Group $group)
     {
-        $group = Group::find($id);
-
         return view('group.show')->with(['group' => $group]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show edit group form.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response|\Illuminate\View\View
+     * @param Group $group
+     * @return $this
      */
-    public function edit($id)
+    public function edit(Group $group)
     {
-        $group = Group::find($id);
-
-        return view('group.edit')
-            ->with(['group' => $group]);
+        return view('group.edit')->with(['group' => $group]);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update group.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Group $group
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Group $group)
     {
         $this->validate($request, [
             'name' => 'required',
         ]);
 
-        $group = Group::find($id);
-        $group->name = $request->input('name');
-        $group->save();
+        $group->update($request->all());
 
         session()->flash('status', 'Groep bewerkt');
 
-        return redirect()
-            ->route('group.show', ['id' => $id]);
+        return redirect()->route('group.show', ['id' => $group->id]);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Destroy group.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Group $group
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(Group $group)
     {
-        $group = Group::find($id);
         $group->delete();
 
         session()->flash('status', 'Groep verwijderd');

@@ -37,3 +37,5 @@ class SettingsProfileRequest extends FormRequest
         return $rules;
     }
 }
+
+

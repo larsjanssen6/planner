@@ -20,14 +20,14 @@ Route::get('/peletons/aanmaken', 'Peleton\PeletonController@create')
 Route::post('/peletons', 'Peleton\PeletonController@store')
     ->name('peleton.store');
 
-Route::get('/peletons/{id}', 'Peleton\PeletonController@show')
+Route::get('/peletons/{peleton}', 'Peleton\PeletonController@show')
     ->name('peleton.show');
 
-Route::get('/peletons/{id}/bewerken', 'Peleton\PeletonController@edit')
+Route::get('/peletons/{peleton}/bewerken', 'Peleton\PeletonController@edit')
     ->name('peleton.edit');
 
-Route::put('/peletons/{id}', 'Peleton\PeletonController@update')
+Route::put('/peletons/{peleton}', 'Peleton\PeletonController@update')
     ->name('peleton.update');
 
-Route::delete('/peletons/{id}', 'Peleton\PeletonController@destroy')
+Route::delete('/peletons/{peleton}', 'Peleton\PeletonController@destroy')
     ->name('peleton.destroy');

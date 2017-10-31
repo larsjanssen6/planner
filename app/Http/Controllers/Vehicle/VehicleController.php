@@ -2,57 +2,44 @@
 
 namespace App\Http\Controllers\Vehicle;
 
-use App\Domain\Category;
 use App\Domain\Vehicle;
-use Illuminate\Http\Request;
+use App\Domain\Category;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\VehicleRequest;
 
 class VehicleController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Show all vehicles.
      *
-     * @return \Illuminate\View\View
+     * @return $this
      */
     public function index()
     {
-        $vehicles = Vehicle::with('category')->paginate(10);
-
-        return view('vehicle.index')->with(['vehicles' => $vehicles]);
+        return view('vehicle.index')->with([
+            'vehicles' => Vehicle::with('category')->paginate(10)
+        ]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show vehicle create form.
      *
-     * @return \Illuminate\Http\Response|\Illuminate\View\View
+     * @return $this
      */
     public function create()
     {
-        return view('vehicle.create')->with(['categories' => $this->getCategoriesDropdown()]);
+        return view('vehicle.create')->with(['categories' => Category::all()->pluck('name', 'id')]);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store vehicle.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param VehicleRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(VehicleRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'category_id' => 'required',
-            'maintenance_interval' => 'required|min:1',
-            'maintenance_duration' => 'required|min:1'
-        ]);
-
-        // new education from form data
-        $vehicle = new Vehicle;
-        $vehicle->name = $request->input('name');
-        $vehicle->category_id = $request->input('category_id');
-        $vehicle->maintenance_interval = $request->input('maintenance_interval');
-        $vehicle->maintenance_duration = $request->input('maintenance_duration');
-        $vehicle->save();
+        Vehicle::create($request->all());
 
         session()->flash('status', 'Voertuig aangemaakt');
 
@@ -60,87 +47,57 @@ class VehicleController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Show vehicle.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response|\Illuminate\View\View
+     * @param Vehicle $vehicle
+     * @return $this
      */
-    public function show($id)
+    public function show(Vehicle $vehicle)
     {
-        $vehicle = Vehicle::find($id);
-
         return view('vehicle.show')->with(['vehicle' => $vehicle]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show edit form vehicle.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response|\Illuminate\View\View
+     * @param Vehicle $vehicle
+     * @return $this
      */
-    public function edit($id)
+    public function edit(Vehicle $vehicle)
     {
-        $vehicle = Vehicle::find($id);
-
-        return view('vehicle.edit')
-            ->with(['vehicle' => $vehicle, 'categories' => $this->getCategoriesDropdown()]);
+        return view('vehicle.edit')->with([
+            'vehicle' => $vehicle, 'categories' => Category::all()->pluck('name', 'id')
+        ]);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update vehicle.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param VehicleRequest $request
+     * @param Vehicle $vehicle
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(VehicleRequest $request, Vehicle $vehicle)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'category_id' => 'required',
-            'maintenance_interval' => 'required|min:1',
-            'maintenance_duration' => 'required|min:1'
-        ]);
-
-        $vehicle = Vehicle::find($id);
-        $vehicle->name = $request->input('name');
-        $vehicle->category_id = $request->input('category_id');
-        $vehicle->maintenance_interval = $request->input('maintenance_interval');
-        $vehicle->maintenance_duration = $request->input('maintenance_duration');
-        $vehicle->save();
+        $vehicle->update($request->all());
 
         session()->flash('status', 'Voertuig bewerkt');
 
-        return redirect()
-            ->route('vehicle.show', ['id' => $id]);
+        return redirect()->route('vehicle.show', ['id' => $vehicle->id]);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Destroy vehicle.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Vehicle $vehicle
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(Vehicle $vehicle)
     {
-        $vehicle = Vehicle::find($id);
         $vehicle->delete();
 
         session()->flash('status', 'Voertuig verwijderd');
 
         return redirect()->route('vehicle.index');
-    }
-
-    /**
-     * returns a key => value pair of the id -> name from category model
-     */
-    private function getCategoriesDropdown(){
-        $categories = Category::all();
-
-        $arr = [];
-        foreach ($categories as $category) {
-            $arr += [ $category->id  => $category->name];
-        }
-        return $arr;
     }
 }

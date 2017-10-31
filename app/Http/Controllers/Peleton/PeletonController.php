@@ -9,21 +9,21 @@ use App\Http\Controllers\Controller;
 class PeletonController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Show all peletons.
      *
-     * @return \Illuminate\Http\Response|\Illuminate\View\View
+     * @return $this
      */
     public function index()
     {
-        $peletons = Peleton::paginate(10);
-
-        return view('peleton.index')->with(['peletons' => $peletons]);
+        return view('peleton.index')->with([
+            'peletons' => Peleton::paginate(10)
+        ]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show peleton create form.
      *
-     * @return \Illuminate\Http\Response|\Illuminate\View\View
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function create()
     {
@@ -31,10 +31,10 @@ class PeletonController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store peleton.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -42,10 +42,7 @@ class PeletonController extends Controller
             'name' => 'required'
         ]);
 
-        // new education from form data
-        $peleton = new Peleton;
-        $peleton->name = $request->input('name');
-        $peleton->save();
+        Peleton::create($request->all());
 
         session()->flash('status', 'Peleton aangemaakt');
 
@@ -53,63 +50,55 @@ class PeletonController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Show peleton
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response|\Illuminate\View\View
+     * @param Peleton $peleton
+     * @return $this
      */
-    public function show($id)
+    public function show(Peleton $peleton)
     {
-        $peleton = Peleton::find($id);
-
         return view('peleton.show')->with(['peleton' => $peleton]);
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show edit peleton form.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response|\Illuminate\View\View
+     * @param Peleton $peleton
+     * @return $this
      */
-    public function edit($id)
+    public function edit(Peleton $peleton)
     {
-        $peleton = Peleton::find($id);
-
         return view('peleton.edit')->with(['peleton' => $peleton]);
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update peleton.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Peleton $peleton
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Peleton $peleton)
     {
         $this->validate($request, [
             'name' => 'required'
         ]);
 
-        $peleton = Peleton::find($id);
-        $peleton->name = $request->input('name');
-        $peleton->save();
+        $peleton->update($request->all());
 
         session()->flash('status', 'Peleton bewerkt');
 
-        return redirect()
-            ->route('peleton.show', ['id' => $id]);
+        return redirect()->route('peleton.show', ['id' => $peleton->id]);
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Destroy Peleton.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Peleton $peleton
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy($id)
+    public function destroy(Peleton $peleton)
     {
-        $peleton = Peleton::find($id);
         $peleton->delete();
 
         session()->flash('status', 'Peleton verwijderd');
