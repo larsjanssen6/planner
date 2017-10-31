@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Settings;
 
 use App\Domain\Category;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PermissionRequest;
 use Spatie\Permission\Models\Role;
 
 class SettingsPermissionController extends Controller
@@ -31,25 +32,25 @@ class SettingsPermissionController extends Controller
         );
     }
 
-//    /**
-//     * Add or revoke permissions to a role.
-//     *
-//     * @param PermissionRequest $request
-//     *
-//     * @return \Illuminate\Http\RedirectResponse
-//     */
-//    public function update(PermissionRequest $request)
-//    {
-//        $role = $this->roleRepo->find($request->role);
-//
-//        if ($role->hasPermissionTo($request->permission)) {
-//            $role->revokePermissionTo($request->permission);
-//
-//            return back()->with('status', 'Permissie ingetrokken');
-//        }
-//
-//        $role->givePermissionTo($request->permission);
-//
-//        return back()->with('status', 'Permissie toegevoegd');
-//    }
+    /**
+     * Add or revoke permissions to a role.
+     *
+     * @param PermissionRequest $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(PermissionRequest $request)
+    {
+        $role = Role::find($request->role);
+
+        if ($role->hasPermissionTo($request->permission)) {
+            $role->revokePermissionTo($request->permission);
+
+            return back()->with('status', 'Permissie ingetrokken');
+        }
+
+        $role->givePermissionTo($request->permission);
+
+        return back()->with('status', 'Permissie toegevoegd');
+    }
 }

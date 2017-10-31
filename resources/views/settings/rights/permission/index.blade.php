@@ -49,7 +49,7 @@
                                                        name="{{ $role->name }}"
                                                        type="checkbox"
                                                        {{ $role->hasPermissionTo($permission) ? 'checked="checked"' : '' }}
-                                                       onclick='window.location.assign("/instellingen/bedrijf/permissie/update?role={{ $role->id }}&permission={{ $permission->name }}")'>
+                                                       onclick='window.location.assign("/instellingen/permissies/update?role={{ $role->id }}&permission={{ $permission->name }}")'>
                                             </td>
                                         @endforeach
                                     </tr>
