@@ -131,10 +131,6 @@
     @endif
 
     <script src="{{ mix('js/app.js') }}"></script>
-    <script type="application/javascript">
-        $(document).ready(function(){
-            console.log('jquery is working!');
-        });
-    </script>
+    <script src="{{ mix('js/custom.js') }}"></script>
 </body>
 </html>

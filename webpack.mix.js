@@ -11,10 +11,17 @@ let mix = require('laravel-mix');
  |
  */
 
+//mix.js('resources/assets/js/popup.fadeout.js', 'public/js').version();
+
 mix.js('resources/assets/js/app.js', 'public/js')
     .fastSass('resources/assets/stylus/bulma.scss', 'public/css')
     .stylus('resources/assets/stylus/app.styl', 'public/css')
     .combine([
         'resources/assets/stylus/libraries/animations.css'
     ], 'public/css/packages.css')
+    .version();
+
+mix.scripts([
+    'resources/assets/js/popup.fadeout.js'
+], 'public/js/custom.js')
     .version();
