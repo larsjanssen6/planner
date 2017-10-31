@@ -7,17 +7,26 @@
 
     <div class="container">
         <div class="section">
-            @if(!$education == null)
-                <h2 class="title is-3 pull-left">Bewerk opleiding</h2>
 
-                {{-- DESTROY --}}
-                {!! Form::open(['route' => ['education.destroy', $education->id], 'method' => 'post']) !!}
-                {{ csrf_field() }}
-                {{Form::hidden('_method', 'DELETE')}}
-                {{Form::submit('Verwijder opleiding', ['class' =>  'button is-danger is-outlined pull-right'])}}
-                {!! Form::close() !!}
+            @component('layouts/buttons/back', [
+                 'route' => 'education.index',
+                 'class' => 'pull-left'
+             ])
+            @endcomponent
+
+            @if(!$education == null)
+
+                @component('layouts/buttons/delete', [
+                     'route' => 'education.destroy',
+                     'id' => $education->id,
+                     'text' => 'Verwijder opleiding'
+                 ])
+                @endcomponent
 
                 <div class="is-clearfix"></div>
+                <hr>
+
+                <h2 class="title is-3">Bewerk opleiding</h2>
 
                 {{-- EDIT --}}
                 {!! Form::open(['route' => ['education.update', $education->id], 'method' => 'post']) !!}
@@ -55,6 +64,8 @@
                 {{ Form::submit('Opslaan', ['class' => 'button is-primary is-outlined']) }}
                 {!! Form::close() !!}
             @else
+                <div class="is-clearfix"></div>
+                <hr>
                 <p>De opleiding kon niet worden geladen.</p>
             @endif
         </div>

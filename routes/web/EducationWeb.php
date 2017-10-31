@@ -14,13 +14,13 @@
 Route::get('/opleidingen', 'Education\EducationController@index')
     ->name('education.index');
 
-Route::get('/opleidingen/create', 'Education\EducationController@create')
+Route::get('/opleidingen/aanmaken', 'Education\EducationController@create')
     ->name('education.create');
 
 Route::post('/opleidingen', 'Education\EducationController@store')
     ->name('education.store');
 
-Route::get('/opleidingen/{id}/tonen', 'Education\EducationController@show')
+Route::get('/opleidingen/{id}', 'Education\EducationController@show')
     ->name('education.show');
 
 Route::get('/opleidingen/{id}/bewerken', 'Education\EducationController@edit')

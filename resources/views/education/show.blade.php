@@ -7,19 +7,26 @@
 
     <div class="container">
         <div class="section">
-            @if(!$education == null)
-            <h2 class="title is-2 pull-left">{{ $education->name }}</h2>
 
-            {{-- DESTROY --}}
-            {!! Form::open(['route' => ['education.destroy', $education->id], 'method' => 'post']) !!}
-            {{ csrf_field() }}
-            {{Form::hidden('_method', 'DELETE')}}
-            {{Form::submit('Verwijder opleiding', ['class' =>  'button is-danger is-outlined pull-right'])}}
-            {!! Form::close() !!}
-            
-            <div class="is-clearfix"></div>
-            
-            <hr>
+            @component('layouts/buttons/back', [
+                 'route' => 'education.index',
+                 'class' => 'pull-left'
+             ])
+            @endcomponent
+
+            @if(!$education == null)
+
+                @component('layouts/buttons/delete', [
+                     'route' => 'education.destroy',
+                     'id' => $education->id,
+                     'text' => 'Verwijder opleiding'
+                 ])
+                @endcomponent
+
+                <div class="is-clearfix"></div>
+                <hr>
+
+            <h2 class="title is-2">{{ $education->name }}</h2>
             <p><strong>Categorie:</strong> {{ $education->category->name }}</p>
             <p><strong>Duur in dagen:</strong> {{ $education->duration }}</p>
             <p><strong>Aantal studenten:</strong> {{ $education->required_students }}</p>
@@ -29,6 +36,8 @@
             <hr>
             <a href="{{ route('education.edit', ['id' => $education->id]) }}" class="button is-primary is-outlined">Bewerk opleiding</a>
             @else
+                <div class="is-clearfix"></div>
+                <hr>
                 <p>De opleiding kon niet worden geladen.</p>
             @endif
         </div>

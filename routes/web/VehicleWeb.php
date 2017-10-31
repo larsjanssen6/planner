@@ -14,20 +14,20 @@
 Route::get('/voertuigen', 'Vehicle\VehicleController@index')
     ->name('vehicle.index');
 
-Route::get('/voertuigen/create', 'Vehicle\VehicleController@create')
+Route::get('/voertuigen/aanmaken', 'Vehicle\VehicleController@create')
     ->name('vehicle.create');
 
-Route::get('/voertuigen/store', 'Vehicle\VehicleController@store')
+Route::post('/voertuigen', 'Vehicle\VehicleController@store')
     ->name('vehicle.store');
 
-Route::get('/voertuigen/show', 'Vehicle\VehicleController@show')
+Route::get('/voertuigen/{id}', 'Vehicle\VehicleController@show')
     ->name('vehicle.show');
 
-Route::get('/voertuigen/edit', 'Vehicle\VehicleController@edit')
+Route::get('/voertuigen/{id}/bewerken', 'Vehicle\VehicleController@edit')
     ->name('vehicle.edit');
 
-Route::get('/voertuigen/update', 'Vehicle\VehicleController@update')
+Route::put('/voertuigen/{id}', 'Vehicle\VehicleController@update')
     ->name('vehicle.update');
 
-Route::get('/voertuigen/destroy', 'Vehicle\VehicleController@destroy')
+Route::delete('/voertuigen/{id}', 'Vehicle\VehicleController@destroy')
     ->name('vehicle.destroy');

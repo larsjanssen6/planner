@@ -19,7 +19,7 @@
 
             @if(!$groups->isEmpty())
                 <div class="column">
-                    <modal-wrapper name="product" inline-template v-cloak>
+                    {{--<modal-wrapper name="product" inline-template v-cloak>--}}
                         <div>
                             <table class="table is-fullwidth">
                                 <thead class="thead-is-blue">
@@ -35,6 +35,8 @@
                                     <th>
                                         <abbr>Laatst bijgewerkt</abbr>
                                     </th>
+
+                                    <th></th>
 
                                     <th></th>
                                 </tr>
@@ -56,7 +58,11 @@
                                         </td>
 
                                         <td>
-                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                            <a href="{{ route('group.show', ['id' => $group->id]) }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        </td>
+
+                                        <td>
+                                            <a href="{{ route('group.edit', ['id' => $group->id]) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                         </td>
                                     </tr>
 
@@ -71,7 +77,7 @@
                                 </tbody>
                             </table>
                         </div>
-                    </modal-wrapper>
+                    {{--</modal-wrapper>--}}
                 </div>
             @else
                 <div class="notification is-info">

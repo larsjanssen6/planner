@@ -19,7 +19,7 @@
 
             @if(!$peletons->isEmpty())
                 <div class="column">
-                    <modal-wrapper name="product" inline-template v-cloak>
+                    {{--<modal-wrapper name="product" inline-template v-cloak>--}}
                         <div>
                             <table class="table is-fullwidth">
                                 <thead class="thead-is-blue">
@@ -36,7 +36,9 @@
                                         <abbr>Laatst bijgewerkt</abbr>
                                     </th>
 
-                                    <th></th>
+                                    <th><!-- show --></th>
+
+                                    <th><!-- edit --></th>
                                 </tr>
                                 </thead>
 
@@ -56,7 +58,11 @@
                                         </td>
 
                                         <td>
-                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                            <a href="{{ route('peleton.show', ['id' => $peleton->id]) }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        </td>
+
+                                        <td>
+                                            <a href="{{ route('peleton.edit', ['id' => $peleton->id]) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                         </td>
                                     </tr>
 
@@ -71,7 +77,7 @@
                                 </tbody>
                             </table>
                         </div>
-                    </modal-wrapper>
+                    {{--</modal-wrapper>--}}
                 </div>
             @else
                 <div class="notification is-info">

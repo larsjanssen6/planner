@@ -7,6 +7,16 @@
 
     <div class="container">
         <div class="section">
+
+            @component('layouts/buttons/back', [
+                 'route' => 'education.index',
+                 'class' => 'pull-left'
+             ])
+            @endcomponent
+
+            <div class="is-clearfix"></div>
+            <hr>
+
             <h2 class="title is-3">Nieuwe opleiding</h2>
             {!! Form::open(['route' => 'education.store', 'method' => 'post']) !!}
                 {{ csrf_field() }}

@@ -8,6 +8,34 @@
     <div class="container">
         <div class="section">
 
+            @component('layouts/buttons/back', [
+                 'route' => 'group.index',
+                 'class' => 'pull-left'
+             ])
+            @endcomponent
+
+            @if(!$group == null)
+
+                @component('layouts/buttons/delete', [
+                     'route' => 'group.destroy',
+                     'id' => $group->id,
+                     'text' => 'Verwijder group'
+                 ])
+                @endcomponent
+
+                <div class="is-clearfix"></div>
+                <hr>
+
+                <h2 class="title is-2">{{ $group->name }}</h2>
+                <p><strong>Aangemaakt:</strong> {{ $group->created_at }}</p>
+                <p><strong>Laasts bijgewerkt:</strong> {{ $group->updated_at }}</p>
+                <hr>
+                <a href="{{ route('group.edit', ['id' => $group->id]) }}" class="button is-primary is-outlined">Bewerk groep</a>
+            @else
+                <div class="is-clearfix"></div>
+                <hr>
+                <p>De groep kon niet worden geladen.</p>
+            @endif
         </div>
     </div>
 @endsection

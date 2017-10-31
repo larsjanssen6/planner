@@ -11,7 +11,7 @@ class GroupController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return \Illuminate\Http\Response|\Illuminate\View\View
      */
     public function index()
     {
@@ -23,7 +23,7 @@ class GroupController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Illuminate\View\View
      */
     public function create()
     {
@@ -45,22 +45,27 @@ class GroupController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Illuminate\View\View
      */
     public function show($id)
     {
-        //
+        $group = Group::find($id);
+
+        return view('group.show')->with(['group' => $group]);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|\Illuminate\View\View
      */
     public function edit($id)
     {
-        //
+        $group = Group::find($id);
+
+        return view('group.edit')
+            ->with(['group' => $group]);
     }
 
     /**
@@ -72,7 +77,18 @@ class GroupController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        $group = Group::find($id);
+        $group->name = $request->input('name');
+        $group->save();
+
+        session()->flash('status', 'Groep bewerkt');
+
+        return redirect()
+            ->route('group.show', ['id' => $id]);
     }
 
     /**
@@ -83,6 +99,11 @@ class GroupController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $group = Group::find($id);
+        $group->delete();
+
+        session()->flash('status', 'Groep verwijderd');
+
+        return redirect()->route('group.index');
     }
 }

@@ -14,20 +14,20 @@
 Route::get('/groepen', 'Group\GroupController@index')
     ->name('group.index');
 
-Route::get('/groepen/create', 'Group\GroupController@create')
+Route::get('/groepen/aanmaken', 'Group\GroupController@create')
     ->name('group.create');
 
-Route::get('/groepen/store', 'Group\GroupController@store')
+Route::post('/groepen', 'Group\GroupController@store')
     ->name('group.store');
 
-Route::get('/groepen/show', 'Group\GroupController@show')
+Route::get('/groepen/{id}', 'Group\GroupController@show')
     ->name('group.show');
 
-Route::get('/groepen/edit', 'Group\GroupController@edit')
+Route::get('/groepen/{id}/bewerken', 'Group\GroupController@edit')
     ->name('group.edit');
 
-Route::get('/groepen/update', 'Group\GroupController@update')
+Route::put('/groepen/{id}', 'Group\GroupController@update')
     ->name('group.update');
 
-Route::get('/groepen/destroy', 'Group\GroupController@destroy')
+Route::delete('/groepen/{id}', 'Group\GroupController@destroy')
     ->name('group.destroy');
