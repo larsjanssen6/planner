@@ -21,6 +21,7 @@
                                 <input id="email"
                                        name="email"
                                        type="email"
+                                       placeholder="email@example.com"
                                        value="{{ old('email') }}"
                                        class="input {{ $errors->has('email') ? ' is-danger' : '' }}"
                                        required
@@ -49,6 +50,7 @@
                                 <input id="password"
                                        name="password"
                                        type="password"
+                                       placeholder="**********"
                                        class="input {{ $errors->has('password') ? ' is-danger' : '' }}"
                                        required>
 

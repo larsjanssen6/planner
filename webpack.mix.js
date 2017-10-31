@@ -21,10 +21,10 @@ mix.js('resources/assets/js/app.js', 'public/js')
     ], 'public/css/packages.css')
     .version();
 
-// jQuery
+// vendors
 mix.scripts([
     'node_modules/jquery/dist/jquery.min.js'
-], 'public/js/jquery.js')
+], 'public/js/vendor.js')
     .version();
 
 // custom Javascripts

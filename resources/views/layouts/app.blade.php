@@ -88,27 +88,21 @@
                             </div>
                         </div>
 
-                        <div class="navbar-item">
-                            <div class="field">
-                                <p class="control">
-                                    <a href="{{ route('logout') }}" class="button is-primary">
-                                                <span class="icon">
-                                                    <i class="fa fa-sign-out" aria-hidden="true"></i>
-                                                </span>
+                        <a href="{{ route('logout') }}" class="navbar-item is-active">
+                            <span class="icon">
+                                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            </span>
+                            <span>Uitloggen</span>
+                        </a>
 
-                                        <span>Uitloggen</span>
-                                    </a>
-                                </p>
-                            </div>
-                        </div>
-
-                        <a href="{{ route('settings.profile', Auth::user()->id) }}" class="navbar-item">
+                        <a href="{{ route('settings.profile', Auth::user()->id) }}" class="navbar-item is-active">
                             <i class="fa fa-cog" aria-hidden="true"></i>
                         </a>
                     @endif
                 </div>
             </div>
         </nav>
+
         @yield('content')
 
         <footer class="footer">
@@ -131,8 +125,8 @@
         </div>
     @endif
 
+    <script src="{{ mix('js/vendor.js') }}"></script>
     <script src="{{ mix('js/app.js') }}"></script>
-    <script src="{{ mix('js/jquery.js') }}"></script>
     <script src="{{ mix('js/custom.js') }}"></script>
 </body>
 </html>
