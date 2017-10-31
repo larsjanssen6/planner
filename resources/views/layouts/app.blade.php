@@ -19,7 +19,7 @@
         <div class="bar"></div>
         <nav class="navbar">
             <div class="navbar-brand">
-                <a class="navbar-item" href="/">
+                <a class="navbar-item is-active" href="/">
                     <strong>PLANNER</strong>
                 </a>
 
@@ -33,12 +33,12 @@
             <div id="plannerNav" class="navbar-menu">
                 <div class="navbar-end">
                     @if(Auth::guest())
-                        <a href="/" class="navbar-item  {{ isActiveRoute(['dashboard']) }}">
+                        <a href="/" class="navbar-item  {{ isActiveRoute(['login']) }}">
                             <i class="fa fa-sign-in" aria-hidden="true"></i> &nbsp;
                             Login
                         </a>
 
-                        <a href="/info" class="navbar-item  {{ isActiveRoute(['info']) }}">
+                        <a href="/info" class="navbar-item  {{ isActiveRoute(['info.index']) }}">
                             <i class="fa fa-info" aria-hidden="true"></i> &nbsp;
                             Info
                         </a>
@@ -48,7 +48,8 @@
                         </a>
 
                         <div class="navbar-item has-dropdown is-hoverable">
-                            <a href="#" class="navbar-link">
+                            <a href="#" class="navbar-link
+                            {{ isActiveRoute(['education.index', 'group.index', 'peleton.index', 'vehicle.index', 'user.index', 'settings.profile', 'settings.permission']) }}">
                                 Overzicht
                             </a>
 
@@ -131,6 +132,7 @@
     @endif
 
     <script src="{{ mix('js/app.js') }}"></script>
+    <script src="{{ mix('js/jquery.js') }}"></script>
     <script src="{{ mix('js/custom.js') }}"></script>
 </body>
 </html>

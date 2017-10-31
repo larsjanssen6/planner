@@ -21,6 +21,13 @@ mix.js('resources/assets/js/app.js', 'public/js')
     ], 'public/css/packages.css')
     .version();
 
+// jQuery
+mix.scripts([
+    'node_modules/jquery/dist/jquery.min.js'
+], 'public/js/jquery.js')
+    .version();
+
+// custom Javascripts
 mix.scripts([
     'resources/assets/js/popup.fadeout.js'
 ], 'public/js/custom.js')
