@@ -23,27 +23,27 @@
                     <strong>PLANNER</strong>
                 </a>
 
-                <div class="navbar-burger burger" data-target="dealCloserNav">
+                <div class="navbar-burger burger" data-target="plannerNav">
                     <span></span>
                     <span></span>
                     <span></span>
                 </div>
             </div>
 
-            <div id="dealCloserNav" class="navbar-menu">
+            <div id="plannerNav" class="navbar-menu">
                 <div class="navbar-end">
                     @if(Auth::guest())
-                        <a href="/" class="navbar-item">
+                        <a href="/" class="navbar-item  {{ isActiveRoute(['dashboard']) }}">
                             <i class="fa fa-sign-in" aria-hidden="true"></i> &nbsp;
                             Login
                         </a>
 
-                        <a href="/" class="navbar-item">
+                        <a href="/info" class="navbar-item  {{ isActiveRoute(['info']) }}">
                             <i class="fa fa-info" aria-hidden="true"></i> &nbsp;
                             Info
                         </a>
                     @else
-                        <a href="/" class="navbar-item">
+                        <a href="/" class="navbar-item {{ isActiveRoute(['dashboard']) }}">
                             Dashboard
                         </a>
 
@@ -53,29 +53,29 @@
                             </a>
 
                             <div class="navbar-dropdown">
-                                <a href="/opleidingen" class="navbar-item">
+                                <a href="/opleidingen" class="navbar-item {{ isActiveRoute(['education.index']) }}">
                                     Opleidingen
                                 </a>
 
-                                <a href="/groepen" class="navbar-item">
+                                <a href="/groepen" class="navbar-item {{ isActiveRoute(['group.index']) }}">
                                     Groepen
                                 </a>
 
-                                <a href="/peletons" class="navbar-item">
+                                <a href="/peletons" class="navbar-item {{ isActiveRoute(['peleton.index']) }}">
                                     Peletons
                                 </a>
 
-                                <a href="/voertuigen" class="navbar-item">
+                                <a href="/voertuigen" class="navbar-item {{ isActiveRoute(['vehicle.index']) }}">
                                     Voertuigen
                                 </a>
 
                                 <hr class="navbar-divider">
 
-                                <a href="/gebruikers" class="navbar-item is-active">
+                                <a href="/gebruikers" class="navbar-item {{ isActiveRoute(['user.index']) }}">
                                     Gebruikers
                                 </a>
 
-                                <a href="{{ route('settings.profile', Auth::user()->id) }}" class="navbar-item">
+                                <a href="{{ route('settings.profile', Auth::user()->id) }}" class="navbar-item {{ isActiveRoute(['settings.profile', 'settings.permission']) }}">
                                     Instellingen
                                 </a>
 

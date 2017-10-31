@@ -11,7 +11,7 @@
                         'meta' => 'card-meta-primary'
                     ])
 
-                    <form method="POST" class="form-horizontal" role="form" action="/">
+                    <form method="POST" class="form-horizontal" role="form" action="{{ Route('login.submit') }}">
                         {{ csrf_field() }}
 
                         <div class="field">

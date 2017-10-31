@@ -14,3 +14,17 @@ if (! function_exists('setActive')) {
         return Request::path() == $path ? $active : '';
     }
 }
+
+/*
+|--------------------------------------------------------------------------
+| Detect Active Route
+|--------------------------------------------------------------------------
+|
+| Compare given route with current route and return output if they match.
+| Very useful for navigation, marking if the link is active.
+|
+*/
+function isActiveRoute($route, $output = "is-active")
+{
+    if (in_array(Route::currentRouteName(), $route)) return $output;
+}

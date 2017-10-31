@@ -11,11 +11,5 @@
 |
 */
 
-Route::get('/', 'Auth\LoginController@showLoginForm')
-    ->name('login');
-
-Route::post('/', 'Auth\LoginController@login')
-    ->name('login.submit');
-
-Route::get('logout', 'Auth\LoginController@logout')
-    ->name('logout');
+Route::get('/info', 'Info\InfoController@index')
+    ->name('info.index');
