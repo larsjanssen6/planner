@@ -16,10 +16,10 @@
 | Profile settings
 */
 
-Route::get('/instellingen/profiel/{user}', 'Settings\SettingsUserController@index')
+Route::get('/instellingen/{user}/profiel', 'Settings\SettingsUserController@index')
     ->name('settings.profile');
 
-Route::put('/instellingen/profiel/{user}', 'Settings\SettingsUserController@update')
+Route::put('/instellingen/{user}/profiel', 'Settings\SettingsUserController@update')
     ->name('settings.profile');
 
 /*
@@ -27,7 +27,7 @@ Route::put('/instellingen/profiel/{user}', 'Settings\SettingsUserController@upda
 */
 
 Route::get('/instellingen/rollen', 'Settings\SettingsRoleController@index')
-    ->name('settings.roles');
+    ->name('settings.role');
 
 /*
 | Permission settings

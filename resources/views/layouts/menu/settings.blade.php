@@ -3,7 +3,7 @@
 
     <ul class="menu-list">
         <li>
-            <a href="{{ route('settings.profile', Auth::user()->id) }}" class="{{ setActive('instellingen/profiel/' . Auth::user()->id) }}">
+            <a href="{{ route('settings.profile', Auth::user()->id) }}" class="{{ isActiveRoute(['settings.profile']) }}">
                 Profiel
             </a>
         </li>
@@ -13,13 +13,13 @@
 
     <ul class="menu-list">
         <li>
-            <a href="{{ route('settings.roles') }}" class="{{ setActive('instellingen/rollen') }}">
+            <a href="{{ route('settings.role') }}" class="{{ isActiveRoute(['settings.role']) }}">
                 Rollen
             </a>
         </li>
 
         <li>
-            <a href="{{ route('settings.permission') }}" class="{{ setActive('instellingen/permissies') }}">
+            <a href="{{ route('settings.permission') }}" class="{{ isActiveRoute(['settings.permission']) }}">
                 Permissies
             </a>
         </li>
