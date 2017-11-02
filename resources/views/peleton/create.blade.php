@@ -27,11 +27,13 @@
                 </div>
 
                 <div class="field">
-                    <multi-select prp-name="groups"
-                                  :prp-options="{{ json_encode($groups) }}"
-                                  prp-placeholder="Kies groep(en)">
-                    </multi-select>
+
                 </div>
+
+                <multi-select prp-name="groups"
+                              :prp-options="{{ json_encode($groups) }}"
+                              prp-placeholder="Kies groep(en)">
+                </multi-select>
 
                 {{ Form::submit('Maak peleton aan', ['class' => 'button is-primary is-outlined']) }}
             {!! Form::close() !!}

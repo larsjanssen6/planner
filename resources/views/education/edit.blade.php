@@ -51,11 +51,15 @@
                 <div class="field">
                     {{Form::label('vehicle_id', 'Voertuig', ['class' => 'label'])}}
 
-                    <multi-select prp-name="vehicles"
-                                  :prp-selected="{{ json_encode($education->vehicles) }}"
-                                  :prp-options="{{ json_encode($vehicles) }}"
-                                  prp-placeholder="Kies voertuig(en)">
-                    </multi-select>
+                    @if($vehicles->isEmpty())
+                        <p>Er zijn nog geen voertuigen. Maak deze <a href="{{ route('vehicle.create') }}">hier</a> eerst aan.</p>
+                    @else
+                        <multi-select prp-name="vehicles"
+                                      :prp-selected="{{ json_encode($education->vehicles) }}"
+                                      :prp-options="{{ json_encode($vehicles) }}"
+                                      prp-placeholder="Kies voertuig(en)">
+                        </multi-select>
+                    @endif
                 </div>
 
                 <div class="field">
