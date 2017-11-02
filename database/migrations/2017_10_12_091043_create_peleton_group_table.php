@@ -19,8 +19,8 @@ class CreatePeletonGroupTable extends Migration
             $table->integer('group_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('peleton_id')->references('id')->on('peleton');
-            $table->foreign('group_id')->references('id')->on('group');
+            $table->foreign('peleton_id')->references('id')->on('peleton')->onDelete('cascade');;
+            $table->foreign('group_id')->references('id')->on('group')->onDelete('cascade');;
         });
     }
 

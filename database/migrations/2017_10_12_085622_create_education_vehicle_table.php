@@ -19,8 +19,8 @@ class CreateEducationVehicleTable extends Migration
             $table->integer('vehicle_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('education_id')->references('id')->on('education');
-            $table->foreign('vehicle_id')->references('id')->on('vehicle');
+            $table->foreign('education_id')->references('id')->on('education')->onDelete('cascade');;
+            $table->foreign('vehicle_id')->references('id')->on('vehicle')->onDelete('cascade');;
         });
     }
 

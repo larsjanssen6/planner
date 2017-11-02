@@ -21,7 +21,7 @@ class CreateVehicleTable extends Migration
             $table->integer('maintenance_duration');
             $table->timestamps();
 
-            $table->foreign('category_id')->references('id')->on('category');
+            $table->foreign('category_id')->references('id')->on('category')->onDelete('cascade');;
         });
     }
 

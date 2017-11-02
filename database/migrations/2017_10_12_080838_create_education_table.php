@@ -16,7 +16,6 @@ class CreateEducationTable extends Migration
         Schema::create('education', function(Blueprint $table){
             $table->increments('id');
             $table->integer('category_id')->unsigned();
-            $table->integer('vehicle_id')->unsigned();
 
             $table->string('name');
             $table->integer('duration');
@@ -24,8 +23,7 @@ class CreateEducationTable extends Migration
             $table->integer('required_instructors');
             $table->timestamps();
 
-            $table->foreign('category_id')->references('id')->on('category');
-            $table->foreign('vehicle_id')->references('id')->on('vehicle');
+            $table->foreign('category_id')->references('id')->on('category')->onDelete('cascade');;
         });
     }
 
