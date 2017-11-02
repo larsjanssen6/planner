@@ -26,7 +26,7 @@ class EducationRequest extends FormRequest
         return [
             'name'                  => 'required',
             'category_id'           => 'required',
-            'vehicle_id'            => 'required',
+            'vehicles'              => 'required',
             'duration'              => 'required|min:1',
             'required_students'     => 'required|min:1',
             'required_instructors'  => 'required|min:1'
