@@ -26,6 +26,14 @@
                     {{Form::text('name', '', ['class' => 'input', 'placeholder' => 'Naam', 'required' => 'required'])}}
                 </div>
                 <div class="field">
+                    <multiselect
+                            v-model="category_id"
+                            :options="options"
+                            :multiple="true"
+                            track-by="library"
+                            :custom-label="customLabel"
+                    >
+                    </multiselect>
                     {{Form::label('category_id', 'Categorie', ['class' => 'label'])}}
                     <div class="select">
                         {{Form::select('category_id', $categories, null, ['class' => 'input', 'placeholder' => 'Kies een categorie...', 'required' => 'required'])}}
