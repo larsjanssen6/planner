@@ -19,105 +19,87 @@
 
             @if(!$educations->isEmpty())
                 <div class="column">
-                    {{--<modal-wrapper name="product" inline-template v-cloak>--}}
-                        <div>
-                            <table class="table is-fullwidth">
-                                <thead class="thead-is-blue">
+                    <div>
+                        <table class="table is-fullwidth">
+                            <thead class="thead-is-blue">
+                            <tr>
+                                <th>
+                                    <abbr>Opleiding</abbr>
+                                </th>
+
+                                <th>
+                                    <abbr>Categorie</abbr>
+                                </th>
+
+                                <th>
+                                    <abbr>Duur in dagen</abbr>
+                                </th>
+
+                                <th>
+                                    <abbr>Aantal studenten</abbr>
+                                </th>
+
+                                <th>
+                                    <abbr>Aantal instructeurs</abbr>
+                                </th>
+
+                                <th>
+                                    <abbr>Aangemaakt</abbr>
+                                </th>
+
+                                <th>
+                                    <abbr>Laatst bijgewerkt</abbr>
+                                </th>
+
+                                <th><!-- show --></th>
+
+                                <th><!-- edit --></th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            @foreach($educations as $education)
                                 <tr>
-                                    <th>
-                                        <abbr>Opleiding</abbr>
-                                    </th>
+                                    <td>
+                                        {{ $education->name }}
+                                    </td>
 
-                                    <th>
-                                        <abbr>Categorie</abbr>
-                                    </th>
+                                    <td>
+                                        {{ $education->category->name }}
+                                    </td>
 
-                                    <th>
-                                        <abbr>Voertuig</abbr>
-                                    </th>
+                                    <td>
+                                        {{ $education->duration }}
+                                    </td>
 
-                                    <th>
-                                        <abbr>Duur in dagen</abbr>
-                                    </th>
+                                    <td>
+                                        {{ $education->required_students }}
+                                    </td>
 
-                                    <th>
-                                        <abbr>Aantal studenten</abbr>
-                                    </th>
+                                    <td>
+                                        {{ $education->required_instructors }}
+                                    </td>
 
-                                    <th>
-                                        <abbr>Aantal instructeurs</abbr>
-                                    </th>
+                                    <td>
+                                        {{ $education->created_at->diffForHumans() }}
+                                    </td>
 
-                                    <th>
-                                        <abbr>Aangemaakt</abbr>
-                                    </th>
+                                    <td>
+                                        {{ $education->updated_at->diffForHumans() }}
+                                    </td>
 
-                                    <th>
-                                        <abbr>Laatst bijgewerkt</abbr>
-                                    </th>
+                                    <td>
+                                        <a href="{{ route('education.show', ['id' => $education->id]) }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                    </td>
 
-                                    <th><!-- show --></th>
-
-                                    <th><!-- edit --></th>
+                                    <td>
+                                        <a href="{{ route('education.edit', ['id' => $education->id]) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                    </td>
                                 </tr>
-                                </thead>
-
-                                <tbody>
-                                @foreach($educations as $education)
-                                    <tr>
-                                        <td>
-                                            {{ $education->name }}
-                                        </td>
-
-                                        <td>
-                                            {{ $education->category->name }}
-                                        </td>
-
-                                        <td>
-                                            {{ $education->vehicle->name }}
-                                        </td>
-
-                                        <td>
-                                            {{ $education->duration }}
-                                        </td>
-
-                                        <td>
-                                            {{ $education->required_students }}
-                                        </td>
-
-                                        <td>
-                                            {{ $education->required_instructors }}
-                                        </td>
-
-                                        <td>
-                                            {{ $education->created_at }}
-                                        </td>
-
-                                        <td>
-                                            {{ $education->updated_at }}
-                                        </td>
-
-                                        <td>
-                                            <a href="{{ route('education.show', ['id' => $education->id]) }}"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                        </td>
-
-                                        <td>
-                                            <a href="{{ route('education.edit', ['id' => $education->id]) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                        </td>
-                                    </tr>
-
-                                    {{--<div>--}}
-                                        {{--@can('edit-products')--}}
-                                            {{--<update-product :prp-product="{{json_encode($product)}}"></update-product>--}}
-                                        {{--@else--}}
-                                            {{--<product :prp-product="{{json_encode($product)}}"></product>--}}
-                                        {{--@endcan--}}
-                                    {{--</div>--}}
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    {{--</modal-wrapper>--}}
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             @else
                 <div class="notification is-info">
