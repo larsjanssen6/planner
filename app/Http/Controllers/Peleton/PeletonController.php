@@ -43,7 +43,9 @@ class PeletonController extends Controller
             'name' => 'required'
         ]);
 
-        Peleton::create($request->all());
+        $peleton = Peleton::create($request->all());
+
+        $peleton->groups()->sync($request->groups);
 
         session()->flash('status', 'Peleton aangemaakt');
 

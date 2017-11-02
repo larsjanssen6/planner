@@ -23,6 +23,6 @@ class Peleton extends Model
      */
     public function groups()
     {
-        return $this->belongsToMany(Group::class);
+        return $this->belongsToMany(Group::class, 'peleton_group');
     }
 }
