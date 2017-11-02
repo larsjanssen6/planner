@@ -22,10 +22,12 @@ class Vehicle extends Model
     ];
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * Vehicle has one Category
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->hasOne(Category::class);
     }
 }
