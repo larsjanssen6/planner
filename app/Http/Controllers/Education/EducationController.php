@@ -18,7 +18,7 @@ class EducationController extends Controller
     public function index()
     {
         return view('education.index')->with([
-            'educations' => Education::with('category', 'vehicle')->paginate(10)
+            'educations' => Education::with('category', 'vehicles')->paginate(10)
         ]);
     }
 
@@ -31,7 +31,7 @@ class EducationController extends Controller
     {
         return view('education.create')->with([
             'categories' => Category::all()->pluck('name', 'id'),
-            'vehicles' => Vehicle::all()->pluck('name', 'id')
+            'vehicles' => Vehicle::all()
         ]);
     }
 
@@ -43,7 +43,9 @@ class EducationController extends Controller
      */
     public function store(EducationRequest $request)
     {
-        Education::create($request->all());
+        $eduction = Education::create($request->all());
+
+        $eduction->vehicles()->sync($request->vehicles);
 
         session()->flash('status', 'Opleiding aangemaakt');
 
@@ -73,7 +75,7 @@ class EducationController extends Controller
         return view('education.edit')->with([
                 'education' => $education,
                 'categories' => Category::all()->pluck('name', 'id'),
-                'vehicles' => Vehicle::all()->pluck('name', 'id')
+                'vehicles' => Vehicle::all()
             ]);
     }
 
@@ -87,6 +89,8 @@ class EducationController extends Controller
     public function update(EducationRequest $request, Education $education)
     {
         $education->update($request->all());
+
+        $education->vehicles()->sync($request->vehicles);
 
         session()->flash('status', 'Opleiding bewerkt');
 
