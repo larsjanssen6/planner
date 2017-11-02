@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Peleton;
 
+use App\Domain\Group;
 use App\Domain\Peleton;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -27,7 +28,7 @@ class PeletonController extends Controller
      */
     public function create()
     {
-        return view('peleton.create');
+        return view('peleton.create')->with(['groups' => Group::all()]);
     }
 
     /**

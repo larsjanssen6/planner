@@ -15,8 +15,19 @@ window.Vue = require('vue');
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example', require('./components/Example.vue'));
+Vue.component('roles',          require('./components/authorization/roles.vue'));
+Vue.component('MultiSelect',    require('./components/shared/MultiSelect.vue'));
 
 const app = new Vue({
     el: '#app'
 });
+
+
+$("form").submit(() => {
+    $("#submit").addClass("is-loading");
+return true;
+});
+
+setTimeout(() => {
+    $('#is-popUp').fadeOut('fast');
+}, 3500);

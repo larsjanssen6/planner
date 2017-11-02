@@ -1,11 +1,7 @@
-// Original bulma styling
-// @import "node_modules/bulma/sass/utilities/initial-variables";
-
-// Minty theme variables
-@import "node_modules/bulmaswatch/minty/_variables.scss";
+// Variables
+@import "variables";
 
 // Bulma
 @import "node_modules/bulma/bulma.sass";
 
-// Minty theme overrides
-@import "node_modules/bulmaswatch/minty/_overrides.scss";
+
