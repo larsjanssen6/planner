@@ -7,6 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Education extends Model
 {
     /**
+     * @var string
+     */
+    protected $table = 'education';
+    /**
      * @var array
      */
     protected $fillable = [
@@ -19,22 +23,19 @@ class Education extends Model
     ];
 
     /**
-     * Education has one category
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function category()
     {
-        return $this->hasOne(Category::class);
+        return $this->belongsTo(Category::class);
     }
 
+
     /**
-     * Education has many Vehicles
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function vehicles()
     {
-        return $this->hasMany(Vehicle::class);
+        return $this->belongsToMany(Vehicle::class);
     }
 }
