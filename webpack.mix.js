@@ -17,7 +17,8 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .fastSass('resources/assets/stylus/bulma.scss', 'public/css')
     .stylus('resources/assets/stylus/app.styl', 'public/css')
     .combine([
-        'resources/assets/stylus/libraries/animations.css'
+        'resources/assets/stylus/libraries/animations.css',
+        './node_modules/vue-multiselect/dist/vue-multiselect.min.css'
     ], 'public/css/packages.css')
     .version();
 

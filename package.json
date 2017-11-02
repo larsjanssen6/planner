@@ -21,7 +21,7 @@
         "vue": "^2.1.10"
     },
     "dependencies": {
-        "bulmaswatch": "^0.5.2",
-        "jquery": "^3.2.1"
+        "jquery": "^3.2.1",
+        "vue-multiselect": "^2.0.6"
     }
 }

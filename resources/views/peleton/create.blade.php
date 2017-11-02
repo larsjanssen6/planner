@@ -25,6 +25,14 @@
                     {{Form::label('name', 'Naam', ['class' => 'label'])}}
                     {{Form::text('name', '', ['class' => 'input', 'placeholder' => 'Naam', 'required' => 'required'])}}
                 </div>
+
+                <div class="field">
+                    <multi-select prp-name="groups"
+                                  :prp-options="{{ json_encode($groups) }}"
+                                  prp-placeholder="Kies groep(en)">
+                    </multi-select>
+                </div>
+
                 {{ Form::submit('Maak peleton aan', ['class' => 'button is-primary is-outlined']) }}
             {!! Form::close() !!}
         </div>

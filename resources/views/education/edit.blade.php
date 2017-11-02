@@ -61,7 +61,7 @@
                     {{Form::label('required_instructors', 'Aantal instructeurs', ['class' => 'label'])}}
                     {{Form::number('required_instructors', $education->required_instructors, ['class' => 'input', 'placeholder' => 'Aantal instructeurs', 'required' => 'required', 'min' => '1'])}}
                 </div>
-                {{ Form::submit('Opslaan', ['class' => 'button is-primary is-outlined']) }}
+                {{ Form::submit('Opslaan', ['class' => 'button is-primary is-outlined', 'id' => 'submit']) }}
                 {!! Form::close() !!}
             @else
                 <div class="is-clearfix"></div>
