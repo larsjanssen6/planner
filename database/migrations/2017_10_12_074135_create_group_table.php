@@ -15,8 +15,12 @@ class CreateGroupTable extends Migration
     {
         Schema::create('group', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('peleton_id')->nullable()->unsigned();
+
             $table->string('name');
             $table->timestamps();
+
+            $table->foreign('peleton_id')->references('id')->on('peleton')->onDelete('cascade');
         });
     }
 

@@ -26,6 +26,15 @@
                 <hr>
 
                 <h2 class="title is-2">{{ $peleton->name }}</h2>
+                <p>
+                    <strong>Groepen:</strong> <br>
+
+                    @foreach($peleton->groups as $group)
+                        <a href="{{route('group.show', $group->id)}}"><span class="tag is-success">
+                            {{ $group->name }}
+                        </span></a>
+                    @endforeach
+                </p>
                 <p><strong>Aangemaakt:</strong> {{ $peleton->created_at }}</p>
                 <p><strong>Laasts bijgewerkt:</strong> {{ $peleton->updated_at }}</p>
                 <hr>

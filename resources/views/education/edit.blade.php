@@ -49,7 +49,7 @@
                 </div>
 
                 <div class="field">
-                    {{Form::label('vehicle_id', 'Voertuig', ['class' => 'label'])}}
+                    {{Form::label('vehicle_id', 'Voertuig(en)', ['class' => 'label'])}}
 
                     @if($vehicles->isEmpty())
                         <p>Er zijn nog geen voertuigen. Maak deze <a href="{{ route('vehicle.create') }}">hier</a> eerst aan.</p>

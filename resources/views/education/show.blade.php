@@ -37,9 +37,9 @@
                     <strong>Voertuigen:</strong> <br>
 
                     @foreach($education->vehicles as $vehicle)
-                        <span class="tag is-success">
+                        <a href="{{ route('vehicle.show', $vehicle->id) }}"><span class="tag is-success">
                             {{ $vehicle->name }}
-                        </span>
+                        </span></a>
                     @endforeach
                 </p>
 

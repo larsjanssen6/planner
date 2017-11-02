@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Group;
 
 use App\Domain\Group;
+use App\Domain\Peleton;
+use App\Http\Requests\GroupRequest;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -23,17 +26,22 @@ class GroupController extends Controller
      */
     public function create()
     {
-        //Todo
+        return view('group.create')->with(['peletons' => Peleton::all()->pluck('name', 'id')]);
     }
 
     /**
      * Store group.
      *
      * @param Request $request
+     * @return RedirectResponse
      */
-    public function store(Request $request)
+    public function store(GroupRequest $request)
     {
-        //Todo
+        Group::create($request->all());
+
+        session()->flash('status', 'Groep aangemaakt');
+
+        return redirect()->route('group.index');
     }
 
     /**
@@ -55,7 +63,7 @@ class GroupController extends Controller
      */
     public function edit(Group $group)
     {
-        return view('group.edit')->with(['group' => $group]);
+        return view('group.edit')->with(['group' => $group, 'peletons' => Peleton::all()->pluck('name', 'id')]);
     }
 
     /**

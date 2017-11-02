@@ -34,11 +34,14 @@
                             :custom-label="customLabel"
                     >
                     </multiselect>
-                    {{Form::label('category_id', 'Categorie', ['class' => 'label'])}}
-                    <div class="select">
-                        {{Form::select('category_id', $categories, null, ['class' => 'input', 'placeholder' => 'Kies een categorie...', 'required' => 'required'])}}
-                    </div>
                 </div>
+
+                <div class="field">
+                {{Form::label('category_id', 'Categorie', ['class' => 'label'])}}
+                <div class="select">
+                    {{Form::select('category_id', $categories, null, ['class' => 'input', 'placeholder' => 'Kies een categorie...', 'required' => 'required'])}}
+                </div>
+
                 <div class="field">
                     {{Form::label('vehicle_id', 'Voertuig', ['class' => 'label'])}}
 

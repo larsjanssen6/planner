@@ -23,7 +23,7 @@ class CreateEducationTable extends Migration
             $table->integer('required_instructors');
             $table->timestamps();
 
-            $table->foreign('category_id')->references('id')->on('category')->onDelete('cascade');;
+            $table->foreign('category_id')->references('id')->on('category')->onDelete('cascade');
         });
     }
 

@@ -43,9 +43,7 @@ class PeletonController extends Controller
             'name' => 'required'
         ]);
 
-        $peleton = Peleton::create($request->all());
-
-        $peleton->groups()->sync($request->groups);
+        Peleton::create($request->all());
 
         session()->flash('status', 'Peleton aangemaakt');
 
@@ -71,7 +69,12 @@ class PeletonController extends Controller
      */
     public function edit(Peleton $peleton)
     {
-        return view('peleton.edit')->with(['peleton' => $peleton]);
+        $groups = Group::all()->where('peleton_id', null);
+
+        return view('peleton.edit')->with([
+            'peleton' => $peleton,
+            'groups' => $groups
+        ]);
     }
 
     /**
@@ -87,7 +90,7 @@ class PeletonController extends Controller
             'name' => 'required'
         ]);
 
-        $peleton->update($request->all());
+        $peleton->groups()->sync($request->groups);
 
         session()->flash('status', 'Peleton bewerkt');
 

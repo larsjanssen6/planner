@@ -14,15 +14,15 @@ class Group extends Model
     /**
      * @var array
      */
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'peleton_id'];
 
     /**
      * Group has one Peleton
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function peleton()
     {
-        return $this->hasOne(Peleton::class);
+        return $this->belongsTo(Peleton::class);
     }
 }

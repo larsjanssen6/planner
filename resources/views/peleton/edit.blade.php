@@ -37,6 +37,19 @@
                         {{Form::label('name', 'Naam', ['class' => 'label'])}}
                         {{Form::text('name', $peleton->name, ['class' => 'input', 'placeholder' => 'Naam', 'required' => 'required'])}}
                     </div>
+
+                    <div class="field">
+                        {{Form::label('group_id', 'Groep(en)', ['class' => 'label'])}}
+                        @if($groups->isEmpty())
+                            <p>Er zijn nog geen groepen. Maak deze <a href="{{ route('group.create') }}">hier</a> eerst aan.</p>
+                        @else
+                            <multi-select prp-name="groups"
+                                          :prp-selected="{{ json_encode($peleton->groups) }}"
+                                          :prp-options="{{ json_encode($groups) }}"
+                                          prp-placeholder="Kies groep(en)">
+                            </multi-select>
+                        @endif
+                    </div>
                     {{ Form::submit('Opslaan', ['class' => 'button is-primary is-outlined']) }}
                 {!! Form::close() !!}
             @else
