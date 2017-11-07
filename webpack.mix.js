@@ -11,14 +11,13 @@ let mix = require('laravel-mix');
  |
  */
 
-//mix.js('resources/assets/js/popup.fadeout.js', 'public/js').version();
-
 mix.js('resources/assets/js/app.js', 'public/js')
     .fastSass('resources/assets/stylus/bulma.scss', 'public/css')
     .stylus('resources/assets/stylus/app.styl', 'public/css')
     .combine([
         'resources/assets/stylus/libraries/animations.css',
-        './node_modules/vue-multiselect/dist/vue-multiselect.min.css'
+        './node_modules/vue-multiselect/dist/vue-multiselect.min.css',
+        './node_modules/font-awesome/css/font-awesome.min.css'
     ], 'public/css/packages.css')
     .version();
 

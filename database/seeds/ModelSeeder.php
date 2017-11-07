@@ -20,6 +20,8 @@ class ModelSeeder extends Seeder
 
         // edit first user
         $user = App\Domain\User::first();
+        $user->name = 'Sander';
+        $user->last_name = 'van Hooff';
         $user->email = 's.vanhooff@hotmail.com';
         $user->password = bcrypt('123');
         $user->save();

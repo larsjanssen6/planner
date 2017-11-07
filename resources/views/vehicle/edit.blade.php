@@ -1,27 +1,37 @@
 @extends('layouts.app')
 @section('content')
 
-    @component('layouts/hero')
+    @component('layouts/partials/hero')
         BEWERK VOERTUIG
     @endcomponent
 
     <div class="container">
         <div class="section">
 
-            @component('layouts/buttons/back', [
-                 'route' => 'vehicle.index',
-                 'class' => 'pull-left'
-             ])
-            @endcomponent
+            <p class="control">
+                <a href="{{ route('vehicle.index') }}" class="button is-default is-outlined pull-left">
+                <span class="icon">
+                    <i aria-hidden="true" class="fa fa-angle-left"></i>
+                </span>
+                    <span>Terug</span>
+                </a>
+            </p>
 
             @if(isset($vehicle))
 
-                @component('layouts/buttons/delete', [
-                     'route' => 'vehicle.destroy',
-                     'id' => $vehicle->id,
-                     'text' => 'Verwijder voertuig'
-                 ])
-                @endcomponent
+                {!! Form::open(['route' => ['vehicle.destroy', $vehicle->id], 'method' => 'post']) !!}
+                    {{ csrf_field() }}
+                    {{Form::hidden('_method', 'DELETE')}}
+
+                    <p class="control">
+                        <button type="submit" class="button is-danger is-outlined pull-right">
+                                            <span class="icon">
+                                                <i aria-hidden="true" class="fa fa-trash"></i>
+                                            </span>
+                            <span>Verwijder voertuig</span>
+                        </button>
+                    </p>
+                {!! Form::close() !!}
 
                 <div class="is-clearfix"></div>
                 <hr>

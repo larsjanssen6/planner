@@ -1,18 +1,21 @@
 @extends('layouts.app')
 @section('content')
 
-    @component('layouts/hero')
+    @component('layouts/partials/hero')
     NIEUWE OPLEIDING
     @endcomponent
 
     <div class="container">
         <div class="section">
 
-            @component('layouts/buttons/back', [
-                 'route' => 'education.index',
-                 'class' => 'pull-left'
-             ])
-            @endcomponent
+            <p class="control">
+                <a href="{{ route('education.index') }}" class="button is-default is-outlined pull-left">
+                <span class="icon">
+                    <i aria-hidden="true" class="fa fa-angle-left"></i>
+                </span>
+                    <span>Terug</span>
+                </a>
+            </p>
 
             <div class="is-clearfix"></div>
             <hr>
@@ -25,6 +28,7 @@
                     {{Form::label('name', 'Naam', ['class' => 'label'])}}
                     {{Form::text('name', '', ['class' => 'input', 'placeholder' => 'Naam', 'required' => 'required'])}}
                 </div>
+
                 <div class="field">
                     <multiselect
                             v-model="category_id"
@@ -37,9 +41,10 @@
                 </div>
 
                 <div class="field">
-                {{Form::label('category_id', 'Categorie', ['class' => 'label'])}}
-                <div class="select">
-                    {{Form::select('category_id', $categories, null, ['class' => 'input', 'placeholder' => 'Kies een categorie...', 'required' => 'required'])}}
+                    {{Form::label('category_id', 'Categorie', ['class' => 'label'])}}
+                    <div class="select">
+                        {{Form::select('category_id', $categories, null, ['class' => 'input', 'placeholder' => 'Kies een categorie...', 'required' => 'required'])}}
+                    </div>
                 </div>
 
                 <div class="field">
@@ -54,6 +59,7 @@
                         </multi-select>
                     @endif
                 </div>
+
                 <div class="field">
                     {{Form::label('duration', 'Duur in dagen', ['class' => 'label'])}}
                     {{Form::number('duration', '', ['class' => 'input', 'placeholder' => 'Duur in dagen', 'required' => 'required', 'min' => '1'])}}

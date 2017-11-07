@@ -1,27 +1,37 @@
 @extends('layouts.app')
 @section('content')
 
-    @component('layouts/hero')
+    @component('layouts/partials/hero')
         BEWERK GROEP
     @endcomponent
 
     <div class="container">
         <div class="section">
 
-            @component('layouts/buttons/back', [
-                 'route' => 'group.index',
-                 'class' => 'pull-left'
-             ])
-            @endcomponent
+            <p class="control">
+                <a href="{{ route('group.index') }}" class="button is-default is-outlined pull-left">
+                <span class="icon">
+                    <i aria-hidden="true" class="fa fa-angle-left"></i>
+                </span>
+                    <span>Terug</span>
+                </a>
+            </p>
 
             @if(isset($group))
 
-                @component('layouts/buttons/delete', [
-                     'route' => 'group.destroy',
-                     'id' => $group->id,
-                     'text' => 'Verwijder groep'
-                 ])
-                @endcomponent
+                {!! Form::open(['route' => ['group.destroy', $group->id], 'method' => 'post']) !!}
+                    {{ csrf_field() }}
+                    {{Form::hidden('_method', 'DELETE')}}
+
+                    <p class="control">
+                        <button type="submit" class="button is-danger is-outlined pull-right">
+                                    <span class="icon">
+                                        <i aria-hidden="true" class="fa fa-trash"></i>
+                                    </span>
+                            <span>Verwijder groep</span>
+                        </button>
+                    </p>
+                {!! Form::close() !!}
 
                 <div class="is-clearfix"></div>
                 <hr>

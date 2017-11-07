@@ -1,18 +1,21 @@
 @extends('layouts.app')
 @section('content')
 
-    @component('layouts/hero')
+    @component('layouts/partials/hero')
         NIEUW VOERTUIG
     @endcomponent
 
     <div class="container">
         <div class="section">
 
-            @component('layouts/buttons/back', [
-                 'route' => 'vehicle.index',
-                 'class' => 'pull-left'
-             ])
-            @endcomponent
+            <p class="control">
+                <a href="{{ route('vehicle.index') }}" class="button is-default is-outlined pull-left">
+                <span class="icon">
+                    <i aria-hidden="true" class="fa fa-angle-left"></i>
+                </span>
+                    <span>Terug</span>
+                </a>
+            </p>
 
             <div class="is-clearfix"></div>
             <hr>

@@ -1,17 +1,20 @@
 @extends('layouts.app')
 @section('content')
 
-    @component('layouts/hero')
+    @component('layouts/partials/hero')
         NIEUWE GROEP
     @endcomponent
 
     <div class="container">
         <div class="section">
-            @component('layouts/buttons/back', [
-                 'route' => 'group.index',
-                 'class' => 'pull-left'
-             ])
-            @endcomponent
+            <p class="control">
+                <a href="{{ route('group.index') }}" class="button is-default is-outlined pull-left">
+                <span class="icon">
+                    <i aria-hidden="true" class="fa fa-angle-left"></i>
+                </span>
+                    <span>Terug</span>
+                </a>
+            </p>
 
             <div class="is-clearfix"></div>
             <hr>

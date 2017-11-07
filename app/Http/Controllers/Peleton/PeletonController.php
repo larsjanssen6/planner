@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Peleton;
 
 use App\Domain\Group;
 use App\Domain\Peleton;
+use App\Http\Requests\PeletonRequest;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -28,7 +29,7 @@ class PeletonController extends Controller
      */
     public function create()
     {
-        return view('peleton.create')->with(['groups' => Group::all()]);
+        return view('peleton.create')->with(['groups' => Group::whereNull('peleton_id')->get()]);
     }
 
     /**
@@ -37,13 +38,11 @@ class PeletonController extends Controller
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(PeletonRequest $request)
     {
-        $this->validate($request, [
-            'name' => 'required'
-        ]);
-
         Peleton::create($request->all());
+
+        // TODO: alle geselecteerde groepen 'peleton_id' updaten naar huidige peleton
 
         session()->flash('status', 'Peleton aangemaakt');
 
@@ -58,7 +57,9 @@ class PeletonController extends Controller
      */
     public function show(Peleton $peleton)
     {
-        return view('peleton.show')->with(['peleton' => $peleton]);
+        return view('peleton.show')->with([
+            'peleton' => $peleton
+        ]);
     }
 
     /**
