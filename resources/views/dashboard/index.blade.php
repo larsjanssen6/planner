@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    @component('layouts/hero') DASHBOARD @endcomponent
+    @component('layouts/partials/hero') DASHBOARD @endcomponent
 
     <div class="container">
         <div class="columns">
