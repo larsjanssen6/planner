@@ -49,8 +49,9 @@
                     </div>
 
                     <div class="field">
+
                         {{Form::label('group_id', 'Groep(en)', ['class' => 'label'])}}
-                        @if($groups->isEmpty())
+                        @if(count($groups) == 0 && count($peleton->groups) == 0)
                             <p>Er zijn nog geen groepen. Maak deze <a href="{{ route('group.create') }}">hier</a> eerst aan.</p>
                         @else
                             <multi-select prp-name="groups"

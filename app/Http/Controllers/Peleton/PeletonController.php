@@ -42,11 +42,13 @@ class PeletonController extends Controller
     {
         $peleton = Peleton::create($request->all());
 
-        $groups = Group::whereIn('id', $request->input('groups'));
+        if ($request->input('groups') != null){
 
-        $peleton->groups()->saveMany($groups->get());
+            $groups = Group::whereIn('id', $request->input('groups'))->get();
 
-        // TODO: alle geselecteerde groepen 'peleton_id' updaten naar huidige peleton
+            $peleton->groups()->saveMany($groups);
+
+        }
 
         session()->flash('status', 'Peleton aangemaakt');
 
@@ -76,9 +78,14 @@ class PeletonController extends Controller
     {
         $groups = Group::all()->where('peleton_id', null);
 
+        $groupArray = [];
+        foreach ($groups as $group) {
+            $groupArray[] = $group;
+        }
+
         return view('peleton.edit')->with([
             'peleton' => $peleton,
-            'groups' => $groups
+            'groups' => $groupArray
         ]);
     }
 
@@ -95,7 +102,12 @@ class PeletonController extends Controller
             'name' => 'required'
         ]);
 
-        $peleton->groups()->sync($request->groups);
+        // remove all related groups
+        Group::where('peleton_id', $peleton->id)->update(['peleton_id' => null]);
+
+        // fetch groups and update relation
+        $groups = Group::whereIn('id', $request->input('groups'))->get();
+        $peleton->groups()->savemany($groups);
 
         session()->flash('status', 'Peleton bewerkt');
 
@@ -110,6 +122,9 @@ class PeletonController extends Controller
      */
     public function destroy(Peleton $peleton)
     {
+        // remove all related groups
+        Group::where('peleton_id', $peleton->id)->update(['peleton_id' => null]);
+
         $peleton->delete();
 
         session()->flash('status', 'Peleton verwijderd');

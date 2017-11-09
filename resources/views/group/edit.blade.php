@@ -51,7 +51,7 @@
                 <div class="field">
                     {{Form::label('peleton_id', 'Peleton', ['class' => 'label'])}}
                     <div class="select">
-                        {{Form::select('peleton_id', $peletons, $group->peleton_id, ['class' => 'input', 'placeholder' => 'Kies een peleton...', 'required' => 'required'])}}
+                        {{Form::select('peleton_id', $peletons, $group->peleton_id, ['class' => 'input', 'placeholder' => 'Kies een peleton...'])}}
                     </div>
                 </div>
 
