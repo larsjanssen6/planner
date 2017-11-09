@@ -24,11 +24,23 @@ class EducationRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'                  => 'required',
+            'name'                  => 'required|unique:education',
             'category_id'           => 'required',
             'duration'              => 'required|min:1',
             'required_students'     => 'required|min:1',
             'required_instructors'  => 'required|min:1'
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'name.unique' => 'Deze naam bestaat al',
         ];
     }
 }

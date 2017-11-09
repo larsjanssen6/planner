@@ -7,11 +7,6 @@ use App\Http\Controllers\Controller;
 
 class InfoController extends Controller
 {
-    /**
-     * Display info of the application
-     *
-     * @return \Illuminate\View\View
-     */
     public function index()
     {
         return view('info.index');

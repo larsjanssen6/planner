@@ -10,11 +10,6 @@ use App\Http\Controllers\Controller;
 
 class PeletonController extends Controller
 {
-    /**
-     * Show all peletons.
-     *
-     * @return $this
-     */
     public function index()
     {
         return view('peleton.index')->with([
@@ -22,22 +17,11 @@ class PeletonController extends Controller
         ]);
     }
 
-    /**
-     * Show peleton create form.
-     *
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
     public function create()
     {
         return view('peleton.create')->with(['groups' => Group::whereNull('peleton_id')->get()]);
     }
 
-    /**
-     * Store peleton.
-     *
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function store(PeletonRequest $request)
     {
         $peleton = Peleton::create($request->all());
@@ -55,12 +39,6 @@ class PeletonController extends Controller
         return redirect()->route('peleton.index');
     }
 
-    /**
-     * Show peleton
-     *
-     * @param Peleton $peleton
-     * @return $this
-     */
     public function show(Peleton $peleton)
     {
         return view('peleton.show')->with([
@@ -68,12 +46,6 @@ class PeletonController extends Controller
         ]);
     }
 
-    /**
-     * Show edit peleton form.
-     *
-     * @param Peleton $peleton
-     * @return $this
-     */
     public function edit(Peleton $peleton)
     {
         $groups = Group::all()->where('peleton_id', null);
@@ -89,17 +61,10 @@ class PeletonController extends Controller
         ]);
     }
 
-    /**
-     * Update peleton.
-     *
-     * @param Request $request
-     * @param Peleton $peleton
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function update(Request $request, Peleton $peleton)
     {
         $this->validate($request, [
-            'name' => 'required'
+            'name' => 'required|u'
         ]);
 
         // remove all related groups
@@ -114,12 +79,6 @@ class PeletonController extends Controller
         return redirect()->route('peleton.show', ['id' => $peleton->id]);
     }
 
-    /**
-     * Destroy Peleton.
-     *
-     * @param Peleton $peleton
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function destroy(Peleton $peleton)
     {
         // remove all related groups

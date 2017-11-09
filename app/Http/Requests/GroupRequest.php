@@ -24,7 +24,19 @@ class GroupRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'                  => 'required',
+            'name'                  => 'required|unique:group',
+        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'name.unique' => 'Deze naam bestaat al',
         ];
     }
 }

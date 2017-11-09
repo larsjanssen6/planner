@@ -46,6 +46,9 @@
                     <div class="field">
                         {{Form::label('name', 'Naam', ['class' => 'label'])}}
                         {{Form::text('name', $vehicle->name, ['class' => 'input', 'placeholder' => 'Naam', 'required' => 'required'])}}
+                        @if ($errors->has('name'))
+                            <p class="help is-danger">{{ $errors->first('name') }}</p>
+                        @endif
                     </div>
                     <div class="field">
                         {{Form::label('category_id', 'Categorie', ['class' => 'label'])}}
