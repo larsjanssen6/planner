@@ -14,7 +14,7 @@ class ModelSeeder extends Seeder
      */
     public function run()
     {
-        // seed resource test data
+        // resource models
         factory(App\Domain\Category::class, 10)->create();
         factory(App\Domain\Peleton::class, 10)->create();
         factory(App\Domain\Vehicle::class, 10)->create();
@@ -22,107 +22,112 @@ class ModelSeeder extends Seeder
         factory(App\Domain\Education::class, 10)->create();
         factory(App\Domain\User::class, 10)->create();
 
-        // settings categories
-        $settingsEducationCategory = Category::create([ 'name' => 'Opleidingen',    'type' => 'permission_category']);
-        $settingsGroupCategory = Category::create([     'name' => 'Groepen',        'type' => 'permission_category']);
-        $settingsPeletonCategory = Category::create([   'name' => 'Peletons',       'type' => 'permission_category' ]);
-        $settingsVehicleCategory = Category::create([   'name' => 'Voertuigen',     'type' => 'permission_category']);
-        $settingsPermissions = Category::create([       'name' => 'Permissies',     'type' => 'permission_category']);
+        // categories
+        $educationCategory = Category::create([ 'name' => 'Opleidingen',    'type' => 'permission_category']);
+        $groupCategory = Category::create([     'name' => 'Groepen',        'type' => 'permission_category']);
+        $peletonCategory = Category::create([   'name' => 'Peletons',       'type' => 'permission_category' ]);
+        $vehicleCategory = Category::create([   'name' => 'Voertuigen',     'type' => 'permission_category']);
+        $dashboardCategory = Category::create([ 'name' => 'Dashboard',     'type' => 'permission_category']);
+        $permissionCategory = Category::create(['name' => 'Permissies',     'type' => 'permission_category']);
 
-        // create permissions
+        // permissions
         Permission::create([
             'name'           => 'show-education',
             'description'    => 'Opleiding tonen',
-            'category_id'    => $settingsEducationCategory->id,
+            'category_id'    => $educationCategory->id,
         ]);
         Permission::create([
             'name'           => 'create-education',
             'description'    => 'Opleiding aanmaken',
-            'category_id'    => $settingsEducationCategory->id,
+            'category_id'    => $educationCategory->id,
         ]);
         Permission::create([
             'name'           => 'edit-education',
             'description'    => 'Opleiding bewerken',
-            'category_id'    => $settingsEducationCategory->id,
+            'category_id'    => $educationCategory->id,
         ]);
         Permission::create([
             'name'           => 'delete-education',
             'description'    => 'Opleiding verwijderen',
-            'category_id'    => $settingsEducationCategory->id,
+            'category_id'    => $educationCategory->id,
         ]);
 
         Permission::create([
             'name'           => 'show-group',
             'description'    => 'Groep tonen',
-            'category_id'    => $settingsGroupCategory->id,
+            'category_id'    => $groupCategory->id,
         ]);
         Permission::create([
             'name'           => 'create-group',
             'description'    => 'Groep aanmaken',
-            'category_id'    => $settingsGroupCategory->id,
+            'category_id'    => $groupCategory->id,
         ]);
         Permission::create([
             'name'           => 'edit-group',
             'description'    => 'Groep bewerken',
-            'category_id'    => $settingsGroupCategory->id,
+            'category_id'    => $groupCategory->id,
         ]);
         Permission::create([
             'name'           => 'delete-group',
             'description'    => 'Groep verwijderen',
-            'category_id'    => $settingsGroupCategory->id,
+            'category_id'    => $groupCategory->id,
         ]);
 
         Permission::create([
             'name'           => 'show-peleton',
             'description'    => 'Peleton tonen',
-            'category_id'    => $settingsPeletonCategory->id,
+            'category_id'    => $peletonCategory->id,
         ]);
         Permission::create([
             'name'           => 'create-peleton',
             'description'    => 'Peleton aanmaken',
-            'category_id'    => $settingsPeletonCategory->id,
+            'category_id'    => $peletonCategory->id,
         ]);
         Permission::create([
             'name'           => 'edit-peleton',
             'description'    => 'Peleton bewerken',
-            'category_id'    => $settingsPeletonCategory->id,
+            'category_id'    => $peletonCategory->id,
         ]);
         Permission::create([
             'name'           => 'delete-peleton',
             'description'    => 'Peleton verwijderen',
-            'category_id'    => $settingsPeletonCategory->id,
+            'category_id'    => $peletonCategory->id,
         ]);
 
         Permission::create([
             'name'           => 'show-vehicle',
             'description'    => 'Toon voertuigen',
-            'category_id'    => $settingsVehicleCategory->id,
+            'category_id'    => $vehicleCategory->id,
         ]);
         Permission::create([
             'name'           => 'create-vehicle',
             'description'    => 'Voertuig aanmaken',
-            'category_id'    => $settingsVehicleCategory->id,
+            'category_id'    => $vehicleCategory->id,
         ]);
         Permission::create([
             'name'           => 'edit-vehicle',
             'description'    => 'Voertuig bewerken',
-            'category_id'    => $settingsVehicleCategory->id,
+            'category_id'    => $vehicleCategory->id,
         ]);
         Permission::create([
             'name'           => 'delete-vehicle',
             'description'    => 'Voertuig verwijderen',
-            'category_id'    => $settingsVehicleCategory->id,
+            'category_id'    => $vehicleCategory->id,
+        ]);
+
+        Permission::create([
+            'name'           => 'show-dashboard',
+            'description'    => 'Dashboard tonen',
+            'category_id'    => $dashboardCategory->id,
         ]);
 
         Permission::create([
             'name'           => 'edit-permission-settings',
-            'description'    => 'Bewerk permissies',
-            'category_id'    => $settingsPermissions->id,
+            'description'    => 'Permissies bewerken',
+            'category_id'    => $permissionCategory->id,
         ]);
 
-        /*
-        * Generate the role(s).
-        */
+        // roles => permissions
         $role = Role::create(['name' => 'Super-admin']);
 
         $role->givePermissionTo('show-education');
@@ -144,6 +149,8 @@ class ModelSeeder extends Seeder
         $role->givePermissionTo('create-vehicle');
         $role->givePermissionTo('edit-vehicle');
         $role->givePermissionTo('delete-vehicle');
+
+        $role->givePermissionTo('show-dashboard');
 
         $role->givePermissionTo('edit-permission-settings');
 

@@ -10,8 +10,17 @@ use App\Http\Requests\EducationRequest;
 
 class EducationController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:show-education')->only('index');
+        $this->middleware('permission:create-education')->only('create', 'store');
+        $this->middleware('permission:edit-education')->only('edit', 'update');
+        $this->middleware('permission:delete-education')->only('destroy');
+    }
+
     public function index()
     {
+
         return view('education.index')->with([
             'educations' => Education::with('category', 'vehicles')->paginate(10)
         ]);
