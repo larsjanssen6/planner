@@ -31,6 +31,6 @@ class CreateUserCompetenceTable extends Migration
      */
     public function down()
     {
-        Schema::drop('user_competence');
+        Schema::dropIfExists('user_competence');
     }
 }

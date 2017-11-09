@@ -27,6 +27,6 @@ class CreatePeletonTable extends Migration
      */
     public function down()
     {
-        Schema::drop('peleton');
+        Schema::dropIfExists('peleton');
     }
 }

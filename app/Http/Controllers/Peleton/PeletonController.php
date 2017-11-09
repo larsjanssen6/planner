@@ -40,7 +40,11 @@ class PeletonController extends Controller
      */
     public function store(PeletonRequest $request)
     {
-        Peleton::create($request->all());
+        $peleton = Peleton::create($request->all());
+
+        $groups = Group::whereIn('id', $request->input('groups'));
+
+        $peleton->groups()->saveMany($groups->get());
 
         // TODO: alle geselecteerde groepen 'peleton_id' updaten naar huidige peleton
 

@@ -31,6 +31,6 @@ class CreateGroupTable extends Migration
      */
     public function down()
     {
-        Schema::drop('group');
+        Schema::dropIfExists('group');
     }
 }

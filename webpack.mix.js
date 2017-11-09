@@ -19,7 +19,8 @@ mix.js('resources/assets/js/app.js', 'public/js')
         './node_modules/vue-multiselect/dist/vue-multiselect.min.css',
         './node_modules/font-awesome/css/font-awesome.min.css'
     ], 'public/css/packages.css')
-    .version();
+    .version()
+    .copy('./node_modules/font-awesome/fonts', 'public/fonts');
 
 // vendors
 mix.scripts([
