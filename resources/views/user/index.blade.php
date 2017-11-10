@@ -2,27 +2,26 @@
 @section('content')
 
     @component('layouts/partials/hero')
-    GEBRUIKERS
+        GEBRUIKERS
     @endcomponent
 
     <div class="container">
         <div class="section">
             @if(!$users->isEmpty())
-                {{--                @can('create-education')--}}
-                {{--<div class="column">--}}
-                    {{--<a href="{{ route('education.create') }}" class="button is-primary is-outlined">--}}
-                        {{--Nieuwe gebruiker--}}
-                    {{--</a>--}}
-                {{--</div>--}}
-                {{--@endcan--}}
+                @can('create-user')
+                    <div class="column">
+                        <a href="{{ route('user.create') }}" class="button is-primary is-outlined">
+                            Nieuwe gebruiker
+                        </a>
+                    </div>
+                @endcan
             @endif
 
             @if(!$users->isEmpty())
                 <div class="column">
-                    {{--<modal-wrapper name="product" inline-template v-cloak>--}}
-                        <div>
-                            <table class="table is-fullwidth">
-                                <thead class="thead-is-blue">
+                    <div>
+                        <table class="table is-fullwidth">
+                            <thead class="thead-is-blue">
                                 <tr>
                                     <th>
                                         <abbr>Gebruiker</abbr>
@@ -50,61 +49,52 @@
 
                                     <th></th>
                                 </tr>
-                                </thead>
+                            </thead>
 
-                                <tbody>
+                            <tbody>
                                 @foreach($users as $user)
-                                    <tr @click="show({{json_encode($user->id)}})">
-                                    <td>
-                                        {{ $user->name }} {{ $user->last_name }}
-                                    </td>
+                                    <tr>
+                                        <td>
+                                            {{ $user->name }} {{ $user->last_name }}
+                                        </td>
 
-                                    <td>
-                                        {{ $user->email }}
-                                    </td>
+                                        <td>
+                                            {{ $user->email }}
+                                        </td>
 
-                                    <td>
-                                        {{ $user-> birthday }}
-                                    </td>
+                                        <td>
+                                            {{ $user-> birthday }}
+                                        </td>
 
-                                    <td>
-                                        {{ $user->gender }}
-                                    </td>
+                                        <td>
+                                            {{ $user->gender }}
+                                        </td>
 
-                                    <td>
-                                        {{ $user->created_at }}
-                                    </td>
+                                        <td>
+                                            {{ $user->created_at->diffForHumans() }}
+                                        </td>
 
-                                    <td>
-                                        {{ $user->updated_at }}
-                                    </td>
+                                        <td>
+                                            {{ $user->updated_at->diffForHumans() }}
+                                        </td>
 
-                                    <td>
-                                        <i class="fa fa-eye" aria-hidden="true"></i>
-                                    </td>
+                                        <td>
+                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                        </td>
                                     </tr>
-
-                                    {{--<div>--}}
-                                    {{--@can('edit-products')--}}
-                                    {{--<update-product :prp-product="{{json_encode($product)}}"></update-product>--}}
-                                    {{--@else--}}
-                                    {{--<product :prp-product="{{json_encode($product)}}"></product>--}}
-                                    {{--@endcan--}}
-                                    {{--</div>--}}
                                 @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    {{--</modal-wrapper>--}}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             @else
                 <div class="notification is-info">
                     <p>
                         Er zijn momenteel geen gebruikers.
 
-                        {{--@can('create-education')--}}
-                        {{--Maak deze <a href="{{ route('education.create') }}">hier</a> aan.--}}
-                        {{--@endcan--}}
+                        @can('create-user')
+                            Maak deze <a href="{{ route('user.create') }}">hier</a> aan.
+                        @endcan
                     </p>
                 </div>
             @endif

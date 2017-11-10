@@ -33,6 +33,7 @@ class ModelSeeder extends Seeder
         $dashboardCategory = Category::create(['name' => 'Dashboard',     'type' => 'permission_category']);
         $permissionCategory = Category::create(['name' => 'Permissies',     'type' => 'permission_category']);
         $roleCategory = Category::create(['name' => 'Roles', 'type' => 'permission_category']);
+        $userCategory = Category::create(['name' => 'Gebruikers', 'type' => 'permission_category']);
 
         // permissions
         Permission::create([
@@ -135,6 +136,12 @@ class ModelSeeder extends Seeder
             'name' => 'roles',
             'description' => 'Toon/bewerk/verwijder roles',
             'category_id' => $roleCategory->id,
+        ]);
+
+        Permission::create([
+            'name' => 'create-user',
+            'description' => 'Gebruiker aanmaken',
+            'category_id' => $userCategory->id,
         ]);
 
         // roles => permissions

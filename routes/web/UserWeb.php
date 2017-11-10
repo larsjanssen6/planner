@@ -13,3 +13,9 @@
 
 Route::get('/gebruikers', 'User\UserController@index')
     ->name('user.index');
+
+Route::get('/gebruikers/aanmaken', 'User\UserController@create')
+    ->name('user.create');
+
+Route::post('/gebruikers', 'User\UserController@store')
+    ->name('user.store');

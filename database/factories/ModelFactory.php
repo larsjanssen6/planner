@@ -22,8 +22,6 @@ $factory->define(App\Domain\User::class, function (Faker $faker) {
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
         'last_name' => $faker->lastName,
-        'birthday' => $faker->date(),
-        'gender' => $faker->randomDigit,
     ];
 });
 

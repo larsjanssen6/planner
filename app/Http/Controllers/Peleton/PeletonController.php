@@ -76,13 +76,6 @@ class PeletonController extends Controller
     {
         $groups = Group::all()->where('peleton_id', null)->toArray();
 
-//        dump($groups);
-        //dump('<hr>');
-//        $groupArray = [];
-//        foreach ($groups as $group) {
-//            $groupArray[] = $group;
-//        }
-        //dd($groupArray);
         return view('peleton.edit')->with([
             'peleton' => $peleton,
             'groups' => $groups,
