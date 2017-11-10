@@ -1,11 +1,11 @@
 @extends('layouts.app')
 @section('content')
-    @component('layouts/hero') LOGIN @endcomponent
+    @component('layouts/partials/hero') LOGIN @endcomponent
 
     <div class="container">
         <div class="columns">
             <div class="column is-half is-offset-one-quarter">
-                @component('layouts/card',
+                @component('layouts/partials/card',
                     [
                         'header' => 'Login',
                         'meta' => 'card-meta-primary'

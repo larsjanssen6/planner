@@ -3,8 +3,6 @@
 use App\Domain\Category;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
-use Spatie\Permission\Models\Permission;
-use Spatie\Permission\Models\Role;
 
 class CreatePermissionTables extends Migration
 {
@@ -79,33 +77,8 @@ class CreatePermissionTables extends Migration
             $table->primary(['permission_id', 'role_id']);
         });
 
-        $settingsCategory = Category::create([
-            'name'          => 'Groepen',
-            'type'          => 'permission_category',
-        ]);
-
-        $settingsPermissions = Category::create([
-            'name'          => 'Permissies',
-            'type'          => 'permission_category',
-        ]);
-
-        Permission::create([
-            'name'           => 'edit-groups-settings',
-            'description'    => 'Bewerk groepen',
-            'category_id'    => $settingsCategory->id,
-        ]);
-
-        Permission::create([
-            'name'           => 'edit-permission-settings',
-            'description'    => 'Bewerk permissies',
-            'category_id'    => $settingsPermissions->id,
-        ]);
-
-        /*
-        * Generate the role(s).
-        */
-
-        Role::create(['name' => 'Super-admin']);
+        // clear the permissions cache
+        app()['cache']->forget('spatie.permission.cache');
     }
 
     /**
@@ -117,10 +90,10 @@ class CreatePermissionTables extends Migration
     {
         $tableNames = config('permission.table_names');
 
-        Schema::drop($tableNames['role_has_permissions']);
-        Schema::drop($tableNames['model_has_roles']);
-        Schema::drop($tableNames['model_has_permissions']);
-        Schema::drop($tableNames['roles']);
-        Schema::drop($tableNames['permissions']);
+        Schema::dropIfExists($tableNames['role_has_permissions']);
+        Schema::dropIfExists($tableNames['model_has_roles']);
+        Schema::dropIfExists($tableNames['model_has_permissions']);
+        Schema::dropIfExists($tableNames['roles']);
+        Schema::dropIfExists($tableNames['permissions']);
     }
 }

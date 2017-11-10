@@ -17,12 +17,12 @@ class Peleton extends Model
     protected $fillable = ['name'];
 
     /**
-     * A peleton belongsToMany groups.
+     * A peleton hasMany groups.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function groups()
     {
-        return $this->belongsToMany(Group::class, 'peleton_group');
+        return $this->hasMany(Group::class);
     }
 }

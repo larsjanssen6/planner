@@ -24,11 +24,23 @@ class VehicleRequest extends FormRequest
     public function rules()
     {
        return [
-           'name'                   => 'required',
+           'name'                   => 'require|unique:vehicle',
            'category_id'            => 'required',
            'maintenance_interval'   => 'required|min:1',
            'maintenance_duration'   => 'required|min:1'
        ];
+    }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'name.unique' => 'Deze naam bestaat al',
+        ];
     }
 }
 

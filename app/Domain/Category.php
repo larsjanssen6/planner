@@ -26,14 +26,4 @@ class Category extends Model
     {
         return $this->hasMany(Permission::class, 'category_id');
     }
-
-    /**
-     * A category belongs to many educations.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function educations()
-    {
-        return $this->belongsToMany(Permission::class, 'category_id');
-    }
 }

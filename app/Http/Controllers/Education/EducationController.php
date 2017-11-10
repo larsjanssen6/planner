@@ -10,23 +10,22 @@ use App\Http\Requests\EducationRequest;
 
 class EducationController extends Controller
 {
-    /**
-     * Show all educations.
-     *
-     * @return $this
-     */
+    public function __construct()
+    {
+        $this->middleware('permission:show-education')->only('index');
+        $this->middleware('permission:create-education')->only('create', 'store');
+        $this->middleware('permission:edit-education')->only('edit', 'update');
+        $this->middleware('permission:delete-education')->only('destroy');
+    }
+
     public function index()
     {
+
         return view('education.index')->with([
             'educations' => Education::with('category', 'vehicles')->paginate(10)
         ]);
     }
 
-    /**
-     * Show education create form.
-     *
-     * @return $this
-     */
     public function create()
     {
         return view('education.create')->with([
@@ -35,12 +34,6 @@ class EducationController extends Controller
         ]);
     }
 
-    /**
-     * Store education.
-     *
-     * @param EducationRequest $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function store(EducationRequest $request)
     {
         $eduction = Education::create($request->all());
@@ -52,24 +45,12 @@ class EducationController extends Controller
         return redirect()->route('education.index');
     }
 
-    /**
-     * Show education.
-     *
-     * @param Education $education
-     * @return $this
-     */
     public function show(Education $education)
     {
         return view('education.show')->with(['education' => $education]);
     }
 
 
-    /**
-     * Show edit form education.
-     *
-     * @param Education $education
-     * @return $this
-     */
     public function edit(Education $education)
     {
         return view('education.edit')->with([
@@ -79,13 +60,6 @@ class EducationController extends Controller
             ]);
     }
 
-    /**
-     * Update education.
-     *
-     * @param EducationRequest $request
-     * @param Education $education
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function update(EducationRequest $request, Education $education)
     {
         $education->update($request->all());
@@ -97,12 +71,6 @@ class EducationController extends Controller
         return redirect()->route('education.show', ['id' => $education->id]);
     }
 
-    /**
-     * Destroy education.
-     *
-     * @param Education $education
-     * @return \Illuminate\Http\RedirectResponse
-     */
     public function destroy(Education $education)
     {
         $education->delete();

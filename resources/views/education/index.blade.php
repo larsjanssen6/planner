@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 
-    @component('layouts/hero')
+    @component('layouts/partials/hero')
         OPLEIDINGEN
     @endcomponent
 

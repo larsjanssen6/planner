@@ -1,27 +1,37 @@
 @extends('layouts.app')
 @section('content')
 
-    @component('layouts/hero')
+    @component('layouts/partials/hero')
         BEWERK OPLEIDING
     @endcomponent
 
     <div class="container">
         <div class="section">
 
-            @component('layouts/buttons/back', [
-                 'route' => 'education.index',
-                 'class' => 'pull-left'
-             ])
-            @endcomponent
+            <p class="control">
+                <a href="{{ route('education.index') }}" class="button is-default is-outlined pull-left">
+                <span class="icon">
+                    <i aria-hidden="true" class="fa fa-angle-left"></i>
+                </span>
+                    <span>Terug</span>
+                </a>
+            </p>
 
             @if(isset($education))
 
-                @component('layouts/buttons/delete', [
-                     'route' => 'education.destroy',
-                     'id' => $education->id,
-                     'text' => 'Verwijder opleiding'
-                 ])
-                @endcomponent
+                {!! Form::open(['route' => ['education.destroy', $education->id], 'method' => 'post']) !!}
+                    {{ csrf_field() }}
+                    {{Form::hidden('_method', 'DELETE')}}
+
+                    <p class="control">
+                        <button type="submit" class="button is-danger is-outlined pull-right">
+                                <span class="icon">
+                                    <i aria-hidden="true" class="fa fa-trash"></i>
+                                </span>
+                            <span>Verwijder opleiding</span>
+                        </button>
+                    </p>
+                {!! Form::close() !!}
 
                 <div class="is-clearfix"></div>
                 <hr>
@@ -38,6 +48,9 @@
                 <div class="field">
                     {{Form::label('name', 'Naam', ['class' => 'label'])}}
                     {{Form::text('name', $education->name, ['class' => 'input', 'placeholder' => 'Naam', 'required' => 'required'])}}
+                    @if ($errors->has('name'))
+                        <p class="help is-danger">{{ $errors->first('name') }}</p>
+                    @endif
                 </div>
 
                 <div class="field">
@@ -49,7 +62,7 @@
                 </div>
 
                 <div class="field">
-                    {{Form::label('vehicle_id', 'Voertuig', ['class' => 'label'])}}
+                    {{Form::label('vehicle_id', 'Voertuig(en)', ['class' => 'label'])}}
 
                     @if($vehicles->isEmpty())
                         <p>Er zijn nog geen voertuigen. Maak deze <a href="{{ route('vehicle.create') }}">hier</a> eerst aan.</p>
