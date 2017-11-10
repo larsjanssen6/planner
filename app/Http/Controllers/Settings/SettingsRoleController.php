@@ -10,6 +10,14 @@ use Spatie\Permission\Models\Role;
 class SettingsRoleController extends Controller
 {
     /**
+     * SettingsRoleController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware('permission:roles');
+    }
+
+    /**
      * Show user profile page.
      *
      * @return \Illuminate\View\View

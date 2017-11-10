@@ -29,6 +29,7 @@ class ModelSeeder extends Seeder
         $vehicleCategory = Category::create([   'name' => 'Voertuigen',     'type' => 'permission_category']);
         $dashboardCategory = Category::create([ 'name' => 'Dashboard',     'type' => 'permission_category']);
         $permissionCategory = Category::create(['name' => 'Permissies',     'type' => 'permission_category']);
+        $roleCategory = Category::create(['name' => 'Roles', 'type' => 'permission_category']);
 
         // permissions
         Permission::create([
@@ -125,6 +126,12 @@ class ModelSeeder extends Seeder
             'name'           => 'edit-permission-settings',
             'description'    => 'Permissies bewerken',
             'category_id'    => $permissionCategory->id,
+        ]);
+
+        Permission::create([
+            'name' => 'roles',
+            'description' => 'Toon/bewerk/verwijder roles',
+            'category_id' => $roleCategory->id,
         ]);
 
         // roles => permissions
