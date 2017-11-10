@@ -13,14 +13,14 @@ class CreateUserCompetenceTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_competence', function(Blueprint $table){
+        Schema::create('user_competence', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('education_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
-            $table->foreign('education_id')->references('id')->on('education')->onDelete('cascade');;
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('education_id')->references('id')->on('education')->onDelete('cascade');
         });
     }
 

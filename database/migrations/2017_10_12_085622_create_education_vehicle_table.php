@@ -13,14 +13,14 @@ class CreateEducationVehicleTable extends Migration
      */
     public function up()
     {
-        Schema::create('education_vehicle', function(Blueprint $table){
+        Schema::create('education_vehicle', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('education_id')->unsigned();
             $table->integer('vehicle_id')->unsigned();
             $table->timestamps();
 
-            $table->foreign('education_id')->references('id')->on('education')->onDelete('cascade');;
-            $table->foreign('vehicle_id')->references('id')->on('vehicle')->onDelete('cascade');;
+            $table->foreign('education_id')->references('id')->on('education')->onDelete('cascade');
+            $table->foreign('vehicle_id')->references('id')->on('vehicle')->onDelete('cascade');
         });
     }
 

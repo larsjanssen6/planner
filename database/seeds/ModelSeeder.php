@@ -2,8 +2,8 @@
 
 use App\Domain\Category;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class ModelSeeder extends Seeder
 {
@@ -26,11 +26,11 @@ class ModelSeeder extends Seeder
         factory(App\Domain\User::class, 10)->create();
 
         // categories
-        $educationCategory = Category::create([ 'name' => 'Opleidingen',    'type' => 'permission_category']);
-        $groupCategory = Category::create([     'name' => 'Groepen',        'type' => 'permission_category']);
-        $peletonCategory = Category::create([   'name' => 'Peletons',       'type' => 'permission_category' ]);
-        $vehicleCategory = Category::create([   'name' => 'Voertuigen',     'type' => 'permission_category']);
-        $dashboardCategory = Category::create([ 'name' => 'Dashboard',     'type' => 'permission_category']);
+        $educationCategory = Category::create(['name' => 'Opleidingen',    'type' => 'permission_category']);
+        $groupCategory = Category::create(['name' => 'Groepen',        'type' => 'permission_category']);
+        $peletonCategory = Category::create(['name' => 'Peletons',       'type' => 'permission_category']);
+        $vehicleCategory = Category::create(['name' => 'Voertuigen',     'type' => 'permission_category']);
+        $dashboardCategory = Category::create(['name' => 'Dashboard',     'type' => 'permission_category']);
         $permissionCategory = Category::create(['name' => 'Permissies',     'type' => 'permission_category']);
         $roleCategory = Category::create(['name' => 'Roles', 'type' => 'permission_category']);
 

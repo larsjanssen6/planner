@@ -4,9 +4,8 @@ namespace App\Http\Controllers\Peleton;
 
 use App\Domain\Group;
 use App\Domain\Peleton;
-use App\Http\Requests\PeletonRequest;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PeletonRequest;
 
 class PeletonController extends Controller
 {
@@ -21,7 +20,7 @@ class PeletonController extends Controller
     public function index()
     {
         return view('peleton.index')->with([
-            'peletons' => Peleton::paginate(10)
+            'peletons' => Peleton::paginate(10),
         ]);
     }
 
@@ -34,12 +33,10 @@ class PeletonController extends Controller
     {
         $peleton = Peleton::create($request->all());
 
-        if ($request->input('groups') != null){
-
+        if ($request->input('groups') != null) {
             $groups = Group::whereIn('id', $request->input('groups'))->get();
 
             $peleton->groups()->saveMany($groups);
-
         }
 
         session()->flash('status', 'Peleton aangemaakt');
@@ -50,7 +47,7 @@ class PeletonController extends Controller
     public function show(Peleton $peleton)
     {
         return view('peleton.show')->with([
-            'peleton' => $peleton
+            'peleton' => $peleton,
         ]);
     }
 
@@ -59,15 +56,15 @@ class PeletonController extends Controller
         $groups = Group::all()->where('peleton_id', null)->toArray();
 
 //        dump($groups);
-//dump('<hr>');
+        //dump('<hr>');
 //        $groupArray = [];
 //        foreach ($groups as $group) {
 //            $groupArray[] = $group;
 //        }
-//dd($groupArray);
+        //dd($groupArray);
         return view('peleton.edit')->with([
             'peleton' => $peleton,
-            'groups' => $groups
+            'groups' => $groups,
         ]);
     }
 
