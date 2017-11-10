@@ -1640,12 +1640,31 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
 
-    props: ['roles'],
+    props: ['prp-roles'],
+
+    data: function data() {
+        return {
+            role: { name: "" },
+            roles: []
+        };
+    },
+    created: function created() {
+        this.roles = this.prpRoles;
+    },
+
 
     methods: {
         destroy: function destroy(id) {
@@ -1669,6 +1688,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 var message = Object.keys(error.response.data)[0];
 
                 swal('Geannuleerd', error.response.data[message], 'error');
+            });
+        },
+        newRole: function newRole() {
+            var _this2 = this;
+
+            swal({
+                title: 'Nieuwe rol',
+                input: 'text',
+                inputValue: this.role.name,
+                confirmButtonText: 'Opslaan',
+                showLoaderOnConfirm: true,
+                preConfirm: function preConfirm(value) {
+                    _this2.role.name = value;
+                    return new Promise(function (resolve, reject) {
+                        __WEBPACK_IMPORTED_MODULE_0__services_RoleService__["a" /* default */].store(_this2.role).then(function (_ref2) {
+                            var data = _ref2.data;
+
+                            swal({
+                                title: 'Aangemaakt',
+                                text: data.status,
+                                type: 'success',
+                                showConfirmButton: false,
+                                timer: 1000
+                            });
+
+                            _this2.roles.push(data);
+                        }).catch(function (error) {
+                            reject(error.response.data.message);
+                        });
+                    });
+                },
+                allowOutsideClick: true
             });
         }
     }
@@ -21187,27 +21238,49 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "column is-faded is-9" }, [
-    _c("h2", { staticClass: "title is-3" }, [_vm._v("\n        Rollen\n    ")]),
-    _vm._v(" "),
-    _vm.roles.length > 0
-      ? _c(
-          "div",
-          _vm._l(_vm.roles, function(role) {
-            return _c("div", { staticClass: "notification is-danger" }, [
-              _c("button", {
-                staticClass: "delete",
-                on: {
-                  click: function($event) {
-                    _vm.destroy(role.id)
+  return _c("div", [
+    _c("div", { staticClass: "column is-9" }, [
+      _c("h2", { staticClass: "title is-3" }, [
+        _vm._v("\n            Rollen\n        ")
+      ]),
+      _vm._v(" "),
+      _vm.roles.length > 0
+        ? _c(
+            "div",
+            _vm._l(_vm.roles, function(role) {
+              return _c("div", { staticClass: "notification is-danger" }, [
+                _c("button", {
+                  staticClass: "delete",
+                  on: {
+                    click: function($event) {
+                      _vm.destroy(role.id)
+                    }
                   }
-                }
-              }),
-              _vm._v("\n            " + _vm._s(role.name) + "\n        ")
-            ])
-          })
-        )
-      : _c("div", [_c("p", [_vm._v("Er zijn nog geen rollen.")])])
+                }),
+                _vm._v(
+                  "\n                " + _vm._s(role.name) + "\n            "
+                )
+              ])
+            })
+          )
+        : _c("div", [_c("p", [_vm._v("Er zijn nog geen rollen.")])])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "column is-9" }, [
+      _c(
+        "a",
+        {
+          staticClass: "button is-primary is-outlined",
+          attrs: { type: "submit", value: "Maak rol" },
+          on: {
+            click: function($event) {
+              _vm.newRole()
+            }
+          }
+        },
+        [_vm._v("\n            Nieuwe rol\n        ")]
+      )
+    ])
   ])
 }
 var staticRenderFns = []
@@ -31979,7 +32052,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\authorization\\roles.vue"
+Component.options.__file = "resources/assets/js/components/authorization/roles.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -32028,7 +32101,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources\\assets\\js\\components\\shared\\MultiSelect.vue"
+Component.options.__file = "resources/assets/js/components/shared/MultiSelect.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
 
 /* hot reload */
@@ -32057,8 +32130,11 @@ module.exports = Component.exports
 
 "use strict";
 /* harmony default export */ __webpack_exports__["a"] = ({
+    store: function store(role) {
+        return axios.post('/instellingen/rollen/', role);
+    },
     destroy: function destroy(id) {
-        return axios.delete('/instellingen/bedrijf/role/' + id);
+        return axios.delete('/instellingen/rollen/' + id);
     }
 });
 

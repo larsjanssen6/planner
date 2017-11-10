@@ -1,4 +1,4 @@
 @extends('settings.layout')
 @section('settings')
-    <roles :roles="{{ $roles }}"></roles>
+    <roles :prp-roles="{{ $roles }}"></roles>
 @endsection

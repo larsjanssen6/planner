@@ -1,15 +1,8 @@
 {
-<<<<<<< HEAD
-    "/js/app.js": "/js/app.js?id=a565ed0853757b5c7f59",
+    "/js/app.js": "/js/app.js?id=bf6942696171d7e227a0",
     "/css/app.css": "/css/app.css?id=b2ae42bf448dd1fb6241",
     "/css/bulma.css": "/css/bulma.css?id=a9276374a8fc42fdea76",
-    "/css/packages.css": "/css/packages.css?id=c1f1cf0159906caf925b",
-=======
-    "/js/app.js": "/js/app.js?id=daf96b1b303033ecfa9d",
-    "/css/app.css": "/css/app.css?id=b2ae42bf448dd1fb6241",
-    "/css/bulma.css": "/css/bulma.css?id=a9276374a8fc42fdea76",
-    "/css/packages.css": "/css/packages.css?id=62044c67da58d656aae7",
->>>>>>> 669d6f877bc7d6517a8f9600e452a22a68c98722
+    "/css/packages.css": "/css/packages.css?id=469961095564f070f24e",
     "/js/vendor.js": "/js/vendor.js?id=c9f5aeeca3ad37bf2aa0",
     "/js/custom.js": "/js/custom.js?id=d41d8cd98f00b204e980"
 }
