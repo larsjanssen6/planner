@@ -10,6 +10,9 @@ use App\Http\Requests\EducationRequest;
 
 class EducationController extends Controller
 {
+    /**
+     * EducationController constructor.
+     */
     public function __construct()
     {
         $this->middleware('permission:show-education')->only('index');
@@ -18,6 +21,9 @@ class EducationController extends Controller
         $this->middleware('permission:delete-education')->only('destroy');
     }
 
+    /**
+     * @return $this
+     */
     public function index()
     {
 
@@ -26,6 +32,9 @@ class EducationController extends Controller
         ]);
     }
 
+    /**
+     * @return $this
+     */
     public function create()
     {
         return view('education.create')->with([
@@ -34,6 +43,10 @@ class EducationController extends Controller
         ]);
     }
 
+    /**
+     * @param EducationRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function store(EducationRequest $request)
     {
         $eduction = Education::create($request->all());
@@ -45,12 +58,20 @@ class EducationController extends Controller
         return redirect()->route('education.index');
     }
 
+    /**
+     * @param Education $education
+     * @return $this
+     */
     public function show(Education $education)
     {
         return view('education.show')->with(['education' => $education]);
     }
 
 
+    /**
+     * @param Education $education
+     * @return $this
+     */
     public function edit(Education $education)
     {
         return view('education.edit')->with([
@@ -60,6 +81,11 @@ class EducationController extends Controller
             ]);
     }
 
+    /**
+     * @param EducationRequest $request
+     * @param Education $education
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function update(EducationRequest $request, Education $education)
     {
         $education->update($request->all());
@@ -71,6 +97,10 @@ class EducationController extends Controller
         return redirect()->route('education.show', ['id' => $education->id]);
     }
 
+    /**
+     * @param Education $education
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function destroy(Education $education)
     {
         $education->delete();
