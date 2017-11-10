@@ -19,4 +19,23 @@ class SettingsRoleController extends Controller
             'roles' => Role::all()
         ]);
     }
+
+    /**
+     * Destroy role.
+     *
+     * @param Role $role
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(Role $role)
+    {
+        if (Auth::user()->hasRole($role->name)) {
+            return response()->json([
+                'status' => 'U kunt deze rol niet verwijder. Koppel uzelf eerst aan een andere rol.',
+            ], 401);
+        }
+
+        $role->delete();
+
+        return response()->json(['status' => 'Rol verwijderd.']);
+    }
 }
