@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Domain\Education;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider

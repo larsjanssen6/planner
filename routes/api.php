@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +14,3 @@ use Illuminate\Http\Request;
 
 Route::delete('/instellingen/rollen/{role}', 'Settings\SettingsRoleController@destroy')
     ->name('settings.role.destroy');
-

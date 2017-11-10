@@ -11,7 +11,6 @@
 |
 */
 
-
 /*
 | Profile settings
 */

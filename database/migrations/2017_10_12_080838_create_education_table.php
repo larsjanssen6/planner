@@ -13,7 +13,7 @@ class CreateEducationTable extends Migration
      */
     public function up()
     {
-        Schema::create('education', function(Blueprint $table){
+        Schema::create('education', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('category_id')->unsigned();
 

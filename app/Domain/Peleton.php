@@ -9,7 +9,7 @@ class Peleton extends Model
     /**
      * @var string
      */
-    protected $table = "peleton";
+    protected $table = 'peleton';
 
     /**
      * @var array

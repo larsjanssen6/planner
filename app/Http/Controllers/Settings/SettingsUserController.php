@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Settings;
 
 use Auth;
 use App\Domain\User;
-use App\Http\Requests\SettingsProfileRequest;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SettingsProfileRequest;
 
 class SettingsUserController extends Controller
 {
@@ -17,7 +17,7 @@ class SettingsUserController extends Controller
     public function index()
     {
         return view('settings.profile.show')->with([
-            'user' => Auth::user()
+            'user' => Auth::user(),
         ]);
     }
 

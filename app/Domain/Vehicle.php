@@ -9,7 +9,7 @@ class Vehicle extends Model
     /**
      * @var string
      */
-    protected $table = "vehicle";
+    protected $table = 'vehicle';
 
     /**
      * @var array

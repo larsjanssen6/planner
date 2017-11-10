@@ -28,12 +28,13 @@ class EducationRequest extends FormRequest
             'category_id'           => 'required',
             'duration'              => 'required|min:1',
             'required_students'     => 'required|min:1',
-            'required_instructors'  => 'required|min:1'
+            'required_instructors'  => 'required|min:1',
         ];
 
         // update resource
-        if ($this->isMethod('put'))
+        if ($this->isMethod('put')) {
             return array_merge($rules, ['name' => 'required|unique:education,name,'.$this->input('id')]);
+        }
 
         return array_merge($rules, ['name' => 'required|unique:education']);
     }

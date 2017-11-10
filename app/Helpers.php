@@ -24,7 +24,9 @@ if (! function_exists('setActive')) {
 | Very useful for navigation, marking if the link is active.
 |
 */
-function isActiveRoute($route, $output = "is-active")
+function isActiveRoute($route, $output = 'is-active')
 {
-    if (in_array(Route::currentRouteName(), $route)) return $output;
+    if (in_array(Route::currentRouteName(), $route)) {
+        return $output;
+    }
 }
