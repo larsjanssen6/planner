@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Settings;
 
 use App\Domain\Category;
+use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PermissionRequest;
-use Spatie\Permission\Models\Role;
 
 class SettingsPermissionController extends Controller
 {

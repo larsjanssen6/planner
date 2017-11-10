@@ -20,7 +20,7 @@ class VehicleController extends Controller
     public function index()
     {
         return view('vehicle.index')->with([
-            'vehicles' => Vehicle::with('category')->paginate(10)
+            'vehicles' => Vehicle::with('category')->paginate(10),
         ]);
     }
 
@@ -46,7 +46,7 @@ class VehicleController extends Controller
     public function edit(Vehicle $vehicle)
     {
         return view('vehicle.edit')->with([
-            'vehicle' => $vehicle, 'categories' => Category::all()->pluck('name', 'id')
+            'vehicle' => $vehicle, 'categories' => Category::all()->pluck('name', 'id'),
         ]);
     }
 

@@ -9,7 +9,7 @@ class Group extends Model
     /**
      * @var string
      */
-    protected $table = "group";
+    protected $table = 'group';
 
     /**
      * @var array
@@ -17,7 +17,7 @@ class Group extends Model
     protected $fillable = ['name', 'peleton_id'];
 
     /**
-     * Group has one Peleton
+     * Group has one Peleton.
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

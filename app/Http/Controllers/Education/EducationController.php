@@ -26,9 +26,8 @@ class EducationController extends Controller
      */
     public function index()
     {
-
         return view('education.index')->with([
-            'educations' => Education::with('category', 'vehicles')->paginate(10)
+            'educations' => Education::with('category', 'vehicles')->paginate(10),
         ]);
     }
 
@@ -39,7 +38,7 @@ class EducationController extends Controller
     {
         return view('education.create')->with([
             'categories' => Category::all()->pluck('name', 'id'),
-            'vehicles' => Vehicle::all()
+            'vehicles' => Vehicle::all(),
         ]);
     }
 
@@ -66,8 +65,7 @@ class EducationController extends Controller
     {
         return view('education.show')->with(['education' => $education]);
     }
-
-
+    
     /**
      * @param Education $education
      * @return $this
@@ -77,7 +75,7 @@ class EducationController extends Controller
         return view('education.edit')->with([
                 'education' => $education,
                 'categories' => Category::all()->pluck('name', 'id'),
-                'vehicles' => Vehicle::all()
+                'vehicles' => Vehicle::all(),
             ]);
     }
 
