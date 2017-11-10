@@ -65,7 +65,7 @@ class EducationController extends Controller
     {
         return view('education.show')->with(['education' => $education]);
     }
-    
+
     /**
      * @param Education $education
      * @return $this
