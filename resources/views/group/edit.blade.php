@@ -42,6 +42,7 @@
                 {!! Form::open(['route' => ['group.update', $group->id], 'method' => 'post']) !!}
                 {{ csrf_field() }}
                 {{Form::hidden('_method', 'PUT')}}
+                {{Form::hidden('id', $group->id)}}
 
                 <div class="field">
                     {{Form::label('name', 'Naam', ['class' => 'label'])}}

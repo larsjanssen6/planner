@@ -42,6 +42,7 @@
                 {!! Form::open(['route' => ['peleton.update', $peleton->id], 'method' => 'post']) !!}
                     {{ csrf_field() }}
                     {{Form::hidden('_method', 'PUT')}}
+                    {{Form::hidden('id', $peleton->id)}}
 
                     <div class="field">
                         {{Form::label('name', 'Naam', ['class' => 'label'])}}
@@ -55,7 +56,7 @@
 
                         {{Form::label('group_id', 'Groep(en)', ['class' => 'label'])}}
                         @if(count($groups) == 0 && count($peleton->groups) == 0)
-                            <p>Er zijn nog geen groepen. Maak deze <a href="{{ route('group.create') }}">hier</a> eerst aan.</p>
+                            <p>Er zijn nog geen beschikbare groepen. Maak deze <a class="has-text-info" href="{{ route('group.create') }}">hier</a> eerst aan.</p>
                         @else
                             <multi-select prp-name="groups"
                                           :prp-selected="{{ json_encode($peleton->groups) }}"

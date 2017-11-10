@@ -49,12 +49,8 @@ class GroupController extends Controller
         return view('group.edit')->with(['group' => $group, 'peletons' => Peleton::all()->pluck('name', 'id')]);
     }
 
-    public function update(Request $request, Group $group)
+    public function update(GroupRequest $request, Group $group)
     {
-        $this->validate($request, [
-            'name' => 'required',
-        ]);
-
         $group->update($request->all());
 
         session()->flash('status', 'Groep bewerkt');

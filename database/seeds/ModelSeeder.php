@@ -14,6 +14,9 @@ class ModelSeeder extends Seeder
      */
     public function run()
     {
+        // clear the permissions cache
+        app()['cache']->forget('spatie.permission.cache');
+
         // resource models
         factory(App\Domain\Category::class, 10)->create();
         factory(App\Domain\Peleton::class, 10)->create();
@@ -159,6 +162,15 @@ class ModelSeeder extends Seeder
         $user->name = 'Sander';
         $user->last_name = 'van Hooff';
         $user->email = 's.vanhooff@hotmail.com';
+        $user->password = bcrypt('123');
+        $user->assignRole('Super-admin');
+        $user->save();
+
+        // edit first user
+        $user = App\Domain\User::all()->get(1);
+        $user->name = 'Lars';
+        $user->last_name = 'Janssen';
+        $user->email = 'larsjanssen@hotmail.com';
         $user->password = bcrypt('123');
         $user->assignRole('Super-admin');
         $user->save();

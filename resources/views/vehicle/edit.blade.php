@@ -22,6 +22,7 @@
                 {!! Form::open(['route' => ['vehicle.destroy', $vehicle->id], 'method' => 'post']) !!}
                     {{ csrf_field() }}
                     {{Form::hidden('_method', 'DELETE')}}
+                    {{Form::hidden('id', $vehicle->id)}}
 
                     <p class="control">
                         <button type="submit" class="button is-danger is-outlined pull-right">

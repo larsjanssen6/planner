@@ -23,9 +23,12 @@ class PeletonRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name'                  => 'required|unique:peleton',
-        ];
+        // update resource
+        if ($this->isMethod('put')){
+            return [ 'name' => 'required|unique:peleton,name,'.$this->input('id') ];
+        }
+
+        return [ 'name' => 'required|unique:peleton' ];
     }
 
     /**

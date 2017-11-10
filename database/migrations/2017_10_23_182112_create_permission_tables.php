@@ -76,9 +76,6 @@ class CreatePermissionTables extends Migration
 
             $table->primary(['permission_id', 'role_id']);
         });
-
-        // clear the permissions cache
-        app()['cache']->forget('spatie.permission.cache');
     }
 
     /**

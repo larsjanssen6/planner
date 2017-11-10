@@ -56,24 +56,24 @@ class PeletonController extends Controller
 
     public function edit(Peleton $peleton)
     {
-        $groups = Group::all()->where('peleton_id', null);
+        $groups = Group::all()->where('peleton_id', null)->toArray();
 
-        $groupArray = [];
-        foreach ($groups as $group) {
-            $groupArray[] = $group;
-        }
-
+//        dump($groups);
+//dump('<hr>');
+//        $groupArray = [];
+//        foreach ($groups as $group) {
+//            $groupArray[] = $group;
+//        }
+//dd($groupArray);
         return view('peleton.edit')->with([
             'peleton' => $peleton,
-            'groups' => $groupArray
+            'groups' => $groups
         ]);
     }
 
-    public function update(Request $request, Peleton $peleton)
+    public function update(PeletonRequest $request, Peleton $peleton)
     {
-        $this->validate($request, [
-            'name' => 'required|u'
-        ]);
+        $peleton->update($request->all());
 
         // remove all related groups
         Group::where('peleton_id', $peleton->id)->update(['peleton_id' => null]);

@@ -19478,7 +19478,7 @@ var render = function() {
       ? _c(
           "div",
           _vm._l(_vm.roles, function(role) {
-            return _c("div", { staticClass: "notification is-danger" }, [
+            return _c("div", { staticClass: "notification is-success" }, [
               _c("button", { staticClass: "delete" }),
               _vm._v("\n            " + _vm._s(role.name) + "\n        ")
             ])

@@ -5,7 +5,7 @@
         </h2>
 
         <div v-if="roles.length > 0">
-            <div class="notification is-danger" v-for="role in roles">
+            <div class="notification is-success" v-for="role in roles">
                 <button class="delete"></button>
                 {{ role.name }}
             </div>

@@ -23,9 +23,12 @@ class GroupRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'name'                  => 'required|unique:group',
-        ];
+        // update resource
+        if ($this->isMethod('put')){
+            return [ 'name' => 'required|unique:group,name,'.$this->input('id') ];
+        }
+
+        return [ 'name' => 'required|unique:group' ];
     }
 
     /**
