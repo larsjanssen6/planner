@@ -40,6 +40,7 @@
                 <p><strong>Categorie:</strong> {{ $vehicle->category->name }}</p>
                 <p><strong>Onderhoudsinterval:</strong> {{$vehicle->maintenance_interval}} dagen</p>
                 <p><strong>Onderhoudsduur:</strong> {{ $vehicle->maintenance_duration }} dagen</p>
+                <p><strong>In voorraad:</strong> {{ $vehicle->count }}</p>
                 <p><strong>Aangemaakt:</strong> {{ $vehicle->created_at }}</p>
                 <p><strong>Laasts bijgewerkt:</strong> {{ $vehicle->updated_at }}</p>
                 <hr>

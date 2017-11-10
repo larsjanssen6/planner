@@ -8,13 +8,13 @@
     <div class="container">
         <div class="section">
             @if(!$vehicles->isEmpty())
-{{--                @can('create-education')--}}
+                @can('create-vehicle')
                     <div class="column">
                         <a href="{{ route('vehicle.create') }}" class="button is-primary is-outlined">
                             Nieuw voertuig
                         </a>
                     </div>
-                {{--@endcan--}}
+                @endcan
             @endif
 
             @if(!$vehicles->isEmpty())
@@ -34,6 +34,10 @@
 
                                     <th>
                                         <abbr>Onderhoudsinterval in dagen</abbr>
+                                    </th>
+
+                                    <th>
+                                        <abbr>Onderhoudsduur in dagen</abbr>
                                     </th>
 
                                     <th>
@@ -74,11 +78,15 @@
                                         </td>
 
                                         <td>
-                                            {{ $vehicle->created_at }}
+                                            {{ $vehicle->count }}
                                         </td>
 
                                         <td>
-                                            {{ $vehicle->updated_at }}
+                                            {{ $vehicle->created_at->diffForHumans() }}
+                                        </td>
+
+                                        <td>
+                                            {{ $vehicle->updated_at->diffForHumans() }}
                                         </td>
 
                                         <td>

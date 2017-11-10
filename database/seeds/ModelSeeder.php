@@ -100,7 +100,7 @@ class ModelSeeder extends Seeder
 
         Permission::create([
             'name'           => 'show-vehicle',
-            'description'    => 'Toon voertuigen',
+            'description'    => 'Voertuigen tonen',
             'category_id'    => $vehicleCategory->id,
         ]);
         Permission::create([

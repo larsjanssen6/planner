@@ -45,6 +45,10 @@
                     {{Form::label('maintenance_duration', 'Onderhoudsduur in dagen', ['class' => 'label'])}}
                     {{Form::number('maintenance_duration', '', ['class' => 'input', 'placeholder' => 'Onderhoudsduur in dagen', 'required' => 'required', 'min' => '1'])}}
                 </div>
+                <div class="field">
+                    {{Form::label('count', 'Aantal in voorraad', ['class' => 'label'])}}
+                    {{Form::number('count', '', ['class' => 'input', 'placeholder' => 'Aantal in voorraad', 'required' => 'required', 'min' => '1'])}}
+                </div>
                 {{ Form::submit('Maak voertuig aan', ['class' => 'button is-primary is-outlined']) }}
             {!! Form::close() !!}
         </div>

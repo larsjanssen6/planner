@@ -18,6 +18,7 @@
 
             @if(isset($peleton))
 
+                @can('delete-peleton')
                 {!! Form::open(['route' => ['peleton.destroy', $peleton->id], 'method' => 'post']) !!}
                     {{ csrf_field() }}
                     {{Form::hidden('_method', 'DELETE')}}
@@ -31,6 +32,7 @@
                         </button>
                     </p>
                 {!! Form::close() !!}
+                @endcan
 
                 <div class="is-clearfix"></div>
                 <hr>
@@ -50,7 +52,10 @@
                 <p><strong>Aangemaakt:</strong> {{ $peleton->created_at }}</p>
                 <p><strong>Laasts bijgewerkt:</strong> {{ $peleton->updated_at }}</p>
                 <hr>
+
+                @can('edit-peleton')
                 <a href="{{ route('peleton.edit', ['id' => $peleton->id]) }}" class="button is-primary is-outlined">Bewerk peleton</a>
+                @endcan
             @else
                 <div class="is-clearfix"></div>
                 <hr>

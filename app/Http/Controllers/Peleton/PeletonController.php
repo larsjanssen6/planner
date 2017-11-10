@@ -11,7 +11,7 @@ class PeletonController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('permission:show-peleton')->only('index');
+        $this->middleware('permission:show-peleton')->only('show');
         $this->middleware('permission:create-peleton')->only('create', 'store');
         $this->middleware('permission:edit-peleton')->only('edit', 'update');
         $this->middleware('permission:delete-peleton')->only('destroy');
