@@ -14,7 +14,7 @@ class GroupController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('permission:show-group')->only('index');
+        $this->middleware('permission:show-group')->only('show');
         $this->middleware('permission:create-group')->only('create', 'store');
         $this->middleware('permission:edit-group')->only('edit', 'update');
         $this->middleware('permission:delete-group')->only('destroy');

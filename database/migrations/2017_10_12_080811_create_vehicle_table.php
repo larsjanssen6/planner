@@ -19,6 +19,7 @@ class CreateVehicleTable extends Migration
             $table->string('name');
             $table->integer('maintenance_interval');
             $table->integer('maintenance_duration');
+            $table->integer('count');
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('category')->onDelete('cascade');

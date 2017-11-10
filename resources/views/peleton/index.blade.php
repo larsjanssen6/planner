@@ -8,13 +8,13 @@
     <div class="container">
         <div class="section">
             @if(!$peletons->isEmpty())
-{{--                @can('create-education')--}}
+                @can('create-peleton')
                     <div class="column">
                         <a href="{{ route('peleton.create') }}" class="button is-primary is-outlined">
                             Nieuw peleton
                         </a>
                     </div>
-                {{--@endcan--}}
+                @endcan
             @endif
 
             @if(!$peletons->isEmpty())
@@ -50,11 +50,11 @@
                                         </td>
 
                                         <td>
-                                            {{ $peleton->created_at }}
+                                            {{ $peleton->created_at->diffForHumans() }}
                                         </td>
 
                                         <td>
-                                            {{ $peleton->updated_at }}
+                                            {{ $peleton->updated_at->diffForHumans() }}
                                         </td>
 
                                         <td>
@@ -65,14 +65,6 @@
                                             <a href="{{ route('peleton.edit', ['id' => $peleton->id]) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                         </td>
                                     </tr>
-
-                                    {{--<div>--}}
-                                        {{--@can('edit-products')--}}
-                                            {{--<update-product :prp-product="{{json_encode($product)}}"></update-product>--}}
-                                        {{--@else--}}
-                                            {{--<product :prp-product="{{json_encode($product)}}"></product>--}}
-                                        {{--@endcan--}}
-                                    {{--</div>--}}
                                 @endforeach
                                 </tbody>
                             </table>
@@ -84,9 +76,9 @@
                     <p>
                         Er zijn momenteel geen peletons.
 
-                        {{--@can('create-education')--}}
+                        @can('create-peleton')
                             Maak deze <a href="{{ route('peleton.create') }}">hier</a> aan.
-                        {{--@endcan--}}
+                        @endcan
                     </p>
                 </div>
             @endif

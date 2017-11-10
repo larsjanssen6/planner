@@ -19,6 +19,7 @@
 
             @if(isset($peleton))
 
+                @can('delete-peleton')
                 {!! Form::open(['route' => ['peleton.destroy', $peleton->id], 'method' => 'post']) !!}
                     {{ csrf_field() }}
                     {{Form::hidden('_method', 'DELETE')}}
@@ -32,6 +33,7 @@
                         </button>
                     </p>
                 {!! Form::close() !!}
+                @endcan
 
                 <div class="is-clearfix"></div>
                 <hr>

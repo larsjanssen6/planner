@@ -19,6 +19,7 @@ class Vehicle extends Model
         'name',
         'maintenance_interval',
         'maintenance_duration',
+        'count',
     ];
 
     /**

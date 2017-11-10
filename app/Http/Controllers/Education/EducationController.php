@@ -7,6 +7,7 @@ use App\Domain\Category;
 use App\Domain\Education;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EducationRequest;
+use Carbon\Carbon;
 
 class EducationController extends Controller
 {
@@ -15,7 +16,7 @@ class EducationController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('permission:show-education')->only('index');
+        $this->middleware('permission:show-education')->only('show');
         $this->middleware('permission:create-education')->only('create', 'store');
         $this->middleware('permission:edit-education')->only('edit', 'update');
         $this->middleware('permission:delete-education')->only('destroy');

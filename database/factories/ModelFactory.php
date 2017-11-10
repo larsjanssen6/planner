@@ -38,6 +38,7 @@ $factory->define(App\Domain\Vehicle::class, function (Faker $faker) {
         'category_id' => Factory(App\Domain\Category::class)->create()->id,
         'maintenance_interval' => $faker->randomDigitNotNull,
         'maintenance_duration' => $faker->randomDigitNotNull,
+        'count' => $faker->randomDigitNotNull,
     ];
 });
 
@@ -47,19 +48,19 @@ $factory->define(App\Domain\Education::class, function (Faker $faker) {
         'duration' => $faker->randomDigitNotNull,
         'category_id' => Factory(App\Domain\Category::class)->create()->id,
         'required_students' => $faker->randomDigitNotNull,
-        'required_instructors' => $faker->randomDigitNotNull,
+        'required_instructors' => $faker->randomDigitNotNull
     ];
 });
 
 $factory->define(App\Domain\Group::class, function (Faker $faker) {
     return [
-        'name' => $faker->numerify('Group ##'),
+        'name' => $faker->numerify("Group ##"),
         'peleton_id' => Factory(App\Domain\Peleton::class)->create()->id,
     ];
 });
 
 $factory->define(App\Domain\Peleton::class, function (Faker $faker) {
     return [
-        'name' => $faker->numerify('Peleton ##'),
+        'name' => $faker->numerify("Peleton ##"),
     ];
 });

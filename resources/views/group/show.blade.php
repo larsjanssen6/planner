@@ -19,6 +19,7 @@
 
             @if(isset($group))
 
+                @can('delete-group')
                 {!! Form::open(['route' => ['group.destroy', $group->id], 'method' => 'post']) !!}
                     {{ csrf_field() }}
                     {{Form::hidden('_method', 'DELETE')}}
@@ -32,6 +33,7 @@
                         </button>
                     </p>
                 {!! Form::close() !!}
+                @endcan
 
                 <div class="is-clearfix"></div>
                 <hr>
@@ -54,7 +56,10 @@
                 <p><strong>Aangemaakt:</strong> {{ $group->created_at }}</p>
                 <p><strong>Laasts bijgewerkt:</strong> {{ $group->updated_at }}</p>
                 <hr>
+
+                @can('edit-group')
                 <a href="{{ route('group.edit', ['id' => $group->id]) }}" class="button is-primary is-outlined">Bewerk groep</a>
+                @endcan
             @else
                 <div class="is-clearfix"></div>
                 <hr>

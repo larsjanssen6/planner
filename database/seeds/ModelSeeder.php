@@ -32,8 +32,9 @@ class ModelSeeder extends Seeder
         $vehicleCategory = Category::create(['name' => 'Voertuigen',     'type' => 'permission_category']);
         $dashboardCategory = Category::create(['name' => 'Dashboard',     'type' => 'permission_category']);
         $permissionCategory = Category::create(['name' => 'Permissies',     'type' => 'permission_category']);
-        $roleCategory = Category::create(['name' => 'Roles', 'type' => 'permission_category']);
+        $roleCategory = Category::create(['name' => 'Rollen', 'type' => 'permission_category']);
         $userCategory = Category::create(['name' => 'Gebruikers', 'type' => 'permission_category']);
+
 
         // permissions
         Permission::create([
@@ -101,7 +102,7 @@ class ModelSeeder extends Seeder
 
         Permission::create([
             'name'           => 'show-vehicle',
-            'description'    => 'Toon voertuigen',
+            'description'    => 'Voertuigen tonen',
             'category_id'    => $vehicleCategory->id,
         ]);
         Permission::create([
@@ -134,7 +135,7 @@ class ModelSeeder extends Seeder
 
         Permission::create([
             'name' => 'roles',
-            'description' => 'Toon/bewerk/verwijder roles',
+            'description' => 'Toon/bewerk/verwijder rollen',
             'category_id' => $roleCategory->id,
         ]);
 

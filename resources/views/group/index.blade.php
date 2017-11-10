@@ -8,13 +8,13 @@
     <div class="container">
         <div class="section">
             @if(!$groups->isEmpty())
-{{--                @can('create-education')--}}
+                @can('create-group')
                     <div class="column">
                         <a href="{{ route('group.create') }}" class="button is-primary is-outlined">
                             Nieuwe groep
                         </a>
                     </div>
-                {{--@endcan--}}
+                @endcan
             @endif
 
             @if(!$groups->isEmpty())
@@ -44,17 +44,17 @@
 
                                 <tbody>
                                 @foreach($groups as $group)
-                                    <tr @click="show({{json_encode($group->id)}})">
+                                    <tr>
                                         <td>
                                             {{ $group->name }}
                                         </td>
 
                                         <td>
-                                            {{ $group->created_at }}
+                                            {{ $group->created_at->diffForHumans() }}
                                         </td>
 
                                         <td>
-                                            {{ $group->updated_at }}
+                                            {{ $group->updated_at->diffForHumans() }}
                                         </td>
 
                                         <td>
@@ -65,14 +65,6 @@
                                             <a href="{{ route('group.edit', ['id' => $group->id]) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                                         </td>
                                     </tr>
-
-                                    {{--<div>--}}
-                                        {{--@can('edit-products')--}}
-                                            {{--<update-product :prp-product="{{json_encode($product)}}"></update-product>--}}
-                                        {{--@else--}}
-                                            {{--<product :prp-product="{{json_encode($product)}}"></product>--}}
-                                        {{--@endcan--}}
-                                    {{--</div>--}}
                                 @endforeach
                                 </tbody>
                             </table>
@@ -84,9 +76,9 @@
                     <p>
                         Er zijn momenteel geen groepen.
 
-                        {{--@can('create-education')--}}
+                        @can('create-group')
                             Maak deze <a href="{{ route('group.create') }}">hier</a> aan.
-                        {{--@endcan--}}
+                        @endcan
                     </p>
                 </div>
             @endif

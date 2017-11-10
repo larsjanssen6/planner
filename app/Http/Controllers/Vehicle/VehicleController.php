@@ -14,7 +14,7 @@ class VehicleController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('permission:show-vehicle')->only('index');
+        $this->middleware('permission:show-vehicle')->only('show');
         $this->middleware('permission:create-vehicle')->only('create', 'store');
         $this->middleware('permission:edit-vehicle')->only('edit', 'update');
         $this->middleware('permission:delete-vehicle')->only('destroy');

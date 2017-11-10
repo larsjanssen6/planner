@@ -7,15 +7,13 @@
 
     <div class="container">
         <div class="section">
-            @if(!$educations->isEmpty())
-{{--                @can('create-education')--}}
-                    <div class="column">
-                        <a href="{{ route('education.create') }}" class="button is-primary is-outlined">
-                            Nieuwe opleiding
-                        </a>
-                    </div>
-                {{--@endcan--}}
-            @endif
+            @can('create-education')
+                <div class="column">
+                    <a href="{{ route('education.create') }}" class="button is-primary is-outlined">
+                        Nieuwe opleiding
+                    </a>
+                </div>
+            @endcan
 
             @if(!$educations->isEmpty())
                 <div class="column">
@@ -106,9 +104,9 @@
                     <p>
                         Er zijn momenteel geen opleidingen.
 
-                        {{--@can('create-education')--}}
+                        @can('create-education')
                             Maak deze <a href="{{ route('education.create') }}">hier</a> aan.
-                        {{--@endcan--}}
+                        @endcan
                     </p>
                 </div>
             @endif

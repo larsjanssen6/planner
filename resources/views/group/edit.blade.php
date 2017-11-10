@@ -19,6 +19,7 @@
 
             @if(isset($group))
 
+                @can('delete-group')
                 {!! Form::open(['route' => ['group.destroy', $group->id], 'method' => 'post']) !!}
                     {{ csrf_field() }}
                     {{Form::hidden('_method', 'DELETE')}}
@@ -32,6 +33,7 @@
                         </button>
                     </p>
                 {!! Form::close() !!}
+                @endcan
 
                 <div class="is-clearfix"></div>
                 <hr>

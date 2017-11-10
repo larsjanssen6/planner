@@ -19,6 +19,7 @@
 
             @if(isset($education))
 
+                @can('delete-education')
                 {!! Form::open(['route' => ['education.destroy', $education->id], 'method' => 'post']) !!}
                     {{ csrf_field() }}
                     {{Form::hidden('_method', 'DELETE')}}
@@ -32,6 +33,7 @@
                         </button>
                     </p>
                 {!! Form::close() !!}
+                @endcan
 
                 <div class="is-clearfix"></div>
                 <hr>
