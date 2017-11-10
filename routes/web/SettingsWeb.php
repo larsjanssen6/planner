@@ -29,6 +29,10 @@ Route::put('/instellingen/{user}/profiel', 'Settings\SettingsUserController@upda
 Route::get('/instellingen/rollen', 'Settings\SettingsRoleController@index')
     ->name('settings.role');
 
+Route::post('/instellingen/rollen', 'Settings\SettingsRoleController@store');
+
+Route::delete('/instellingen/rollen/{role}', 'Settings\SettingsRoleController@destroy');
+
 /*
 | Permission settings
 */

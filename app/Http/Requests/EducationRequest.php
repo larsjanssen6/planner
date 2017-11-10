@@ -24,6 +24,7 @@ class EducationRequest extends FormRequest
     public function rules()
     {
         $rules = [
+            'name'                  => 'required|unique:education,name,'.$this->request->all()['name'],
             'category_id'           => 'required',
             'duration'              => 'required|min:1',
             'required_students'     => 'required|min:1',

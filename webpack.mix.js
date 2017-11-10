@@ -17,7 +17,8 @@ mix.js('resources/assets/js/app.js', 'public/js')
     .combine([
         'resources/assets/stylus/libraries/animations.css',
         './node_modules/vue-multiselect/dist/vue-multiselect.min.css',
-        './node_modules/font-awesome/css/font-awesome.min.css'
+        './node_modules/font-awesome/css/font-awesome.min.css',
+        './node_modules/sweetalert2/dist/sweetalert2.css',
     ], 'public/css/packages.css')
     .version()
     .copy('./node_modules/font-awesome/fonts', 'public/fonts');
