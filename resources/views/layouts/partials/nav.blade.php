@@ -1,6 +1,6 @@
 <nav class="navbar">
     <div class="navbar-brand">
-        <a class="navbar-item is-active" href="/">
+        <a class="navbar-item" href="/">
             <strong>PLANNER</strong>
         </a>
 
@@ -69,14 +69,14 @@
                     </div>
                 </div>
 
-                <a href="{{ route('logout') }}" class="navbar-item is-active">
+                <a href="{{ route('logout') }}" class="navbar-item">
                             <span class="icon">
                                 <i class="fa fa-sign-out" aria-hidden="true"></i>
                             </span>
                     <span>Uitloggen</span>
                 </a>
 
-                <a href="{{ route('settings.profile', Auth::user()->id) }}" class="navbar-item is-active">
+                <a href="{{ route('settings.profile', Auth::user()->id) }}" class="navbar-item">
                     <i class="fa fa-cog" aria-hidden="true"></i>
                 </a>
             @endif
