@@ -35,7 +35,6 @@ class ModelSeeder extends Seeder
         $roleCategory = Category::create(['name' => 'Rollen', 'type' => 'permission_category']);
         $userCategory = Category::create(['name' => 'Gebruikers', 'type' => 'permission_category']);
 
-
         // permissions
         Permission::create([
             'name'           => 'show-education',

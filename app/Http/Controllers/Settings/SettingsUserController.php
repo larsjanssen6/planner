@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Settings;
 
 use Auth;
-use App\Repositories\User\UserRepoInterface;
 use App\Http\Controllers\Controller;
+use App\Repositories\User\UserRepoInterface;
 use App\Http\Requests\SettingsProfileRequest;
 
 class SettingsUserController extends Controller

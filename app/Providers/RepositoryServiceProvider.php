@@ -2,20 +2,20 @@
 
 namespace App\Providers;
 
-use App\Repositories\Category\CategoryRepo;
-use App\Repositories\Category\CategoryRepoInterface;
-use App\Repositories\Group\GroupRepo;
-use App\Repositories\Group\GroupRepoInterface;
-use App\Repositories\Peleton\PeletonRepo;
-use App\Repositories\Peleton\PeletonRepoInterface;
 use App\Repositories\Role\RoleRepo;
-use App\Repositories\Role\RoleRepoInterface;
 use App\Repositories\User\UserRepo;
-use App\Repositories\User\UserRepoInterface;
-use App\Repositories\Vehicle\VehicleRepo;
-use App\Repositories\Vehicle\VehicleRepoInterface;
+use App\Repositories\Group\GroupRepo;
 use Illuminate\Support\ServiceProvider;
+use App\Repositories\Peleton\PeletonRepo;
+use App\Repositories\Vehicle\VehicleRepo;
+use App\Repositories\Category\CategoryRepo;
+use App\Repositories\Role\RoleRepoInterface;
+use App\Repositories\User\UserRepoInterface;
 use App\Repositories\Education\EducationRepo;
+use App\Repositories\Group\GroupRepoInterface;
+use App\Repositories\Peleton\PeletonRepoInterface;
+use App\Repositories\Vehicle\VehicleRepoInterface;
+use App\Repositories\Category\CategoryRepoInterface;
 use App\Repositories\Education\EducationRepoInterface;
 
 class RepositoryServiceProvider extends ServiceProvider
