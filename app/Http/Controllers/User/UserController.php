@@ -2,20 +2,30 @@
 
 namespace App\Http\Controllers\User;
 
-use App\Domain\User;
-use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRequest;
 use App\Notifications\Registration;
+use App\Http\Controllers\Controller;
+use App\Repositories\User\UserRepoInterface;
 
 class UserController extends Controller
 {
+    /**
+     * @var UserRepoInterface
+     */
+    protected $userRepo;
+
+    public function __construct(UserRepoInterface $userRepo)
+    {
+        $this->userRepo = $userRepo;
+    }
+
     /**
      * @return $this
      */
     public function index()
     {
         return view('user.index')->with([
-            'users' => User::orderBy('id', 'DESC')->paginate(10),
+            'users' => $this->userRepo->paginate(),
         ]);
     }
 
@@ -33,19 +43,16 @@ class UserController extends Controller
      */
     public function store(UserRequest $request)
     {
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'last_name' => $request->last_name,
-        ]);
+        $request['password'] = bcrypt($request->password);
+
+        $user = $this->userRepo->create($request->all());
 
         $user->notify(new Registration($user));
 
         session()->flash('status', 'Gebruiker aangemaakt');
 
         return view('user.index')->with([
-            'users' => User::orderBy('id', 'DESC')->paginate(10),
+            'users' => $this->userRepo->paginate(),
         ]);
     }
 }

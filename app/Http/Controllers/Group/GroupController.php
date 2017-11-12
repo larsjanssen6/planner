@@ -3,17 +3,33 @@
 namespace App\Http\Controllers\Group;
 
 use App\Domain\Group;
-use App\Domain\Peleton;
 use App\Http\Requests\GroupRequest;
 use App\Http\Controllers\Controller;
+use App\Repositories\Group\GroupRepoInterface;
+use App\Repositories\Peleton\PeletonRepoInterface;
 
 class GroupController extends Controller
 {
     /**
-     * GroupController constructor.
+     * @var GroupRepoInterface
      */
-    public function __construct()
+    protected $groupRepo;
+
+    /**
+     * @var PeletonRepoInterface
+     */
+    protected $peletonRepo;
+
+    /**
+     * GroupController constructor.
+     * @param GroupRepoInterface $groupRepo
+     * @param PeletonRepoInterface $peletonRepo
+     */
+    public function __construct(GroupRepoInterface $groupRepo, PeletonRepoInterface $peletonRepo)
     {
+        $this->groupRepo = $groupRepo;
+        $this->peletonRepo = $peletonRepo;
+
         $this->middleware('permission:show-group')->only('show');
         $this->middleware('permission:create-group')->only('create', 'store');
         $this->middleware('permission:edit-group')->only('edit', 'update');
@@ -25,7 +41,7 @@ class GroupController extends Controller
      */
     public function index()
     {
-        return view('group.index')->with(['groups' => Group::paginate(10)]);
+        return view('group.index')->with(['groups' => $this->groupRepo->paginate()]);
     }
 
     /**
@@ -33,7 +49,7 @@ class GroupController extends Controller
      */
     public function create()
     {
-        return view('group.create')->with(['peletons' => Peleton::all()->pluck('name', 'id')]);
+        return view('group.create')->with(['peletons' => $this->peletonRepo->getAll()->pluck('name', 'id')]);
     }
 
     /**
@@ -42,7 +58,7 @@ class GroupController extends Controller
      */
     public function store(GroupRequest $request)
     {
-        Group::create($request->all());
+        $this->groupRepo->create($request->all());
 
         session()->flash('status', 'Groep aangemaakt');
 
@@ -50,44 +66,48 @@ class GroupController extends Controller
     }
 
     /**
-     * @param Group $group
+     * @param $groupId
      * @return $this
      */
-    public function show(Group $group)
+    public function show($groupId)
     {
+        $group = $this->groupRepo->find($groupId);
+
         return view('group.show')->with(['group' => $group]);
     }
 
     /**
-     * @param Group $group
+     * @param $groupId
      * @return $this
      */
-    public function edit(Group $group)
+    public function edit($groupId)
     {
-        return view('group.edit')->with(['group' => $group, 'peletons' => Peleton::all()->pluck('name', 'id')]);
+        $group = $this->groupRepo->find($groupId);
+
+        return view('group.edit')->with(['group' => $group, 'peletons' => $this->peletonRepo->getAll()->pluck('name', 'id')]);
     }
 
     /**
      * @param GroupRequest $request
-     * @param Group $group
+     * @param $groupId
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(GroupRequest $request, Group $group)
+    public function update(GroupRequest $request, $groupId)
     {
-        $group->update($request->all());
+        $this->groupRepo->update($groupId, $request->all());
 
         session()->flash('status', 'Groep bewerkt');
 
-        return redirect()->route('group.show', ['id' => $group->id]);
+        return redirect()->route('group.show', ['id' => $groupId]);
     }
 
     /**
-     * @param Group $group
+     * @param $groupId
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Group $group)
+    public function destroy($groupId)
     {
-        $group->delete();
+        $this->groupRepo->delete($groupId);
 
         session()->flash('status', 'Groep verwijderd');
 

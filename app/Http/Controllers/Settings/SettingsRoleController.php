@@ -4,16 +4,24 @@ namespace App\Http\Controllers\Settings;
 
 use Auth;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
+use App\Repositories\Role\RoleRepoInterface;
 
 class SettingsRoleController extends Controller
 {
     /**
-     * SettingsRoleController constructor.
+     * @var mixed
      */
-    public function __construct()
+    protected $roleRepo;
+
+    /**
+     * SettingsRoleController constructor.
+     * @param RoleRepoInterface $roleRepo
+     */
+    public function __construct(RoleRepoInterface $roleRepo)
     {
+        $this->roleRepo = $roleRepo;
+
         $this->middleware('permission:roles');
     }
 
@@ -25,7 +33,7 @@ class SettingsRoleController extends Controller
     public function index()
     {
         return view('settings.rights.role.index')->with([
-            'roles' => Role::all(),
+            'roles' => $this->roleRepo->getAll(),
         ]);
     }
 
@@ -37,26 +45,26 @@ class SettingsRoleController extends Controller
     {
         $this->validate($request, ['name' => 'max:15|required|unique:roles']);
 
-        $role = Role::create($request->all());
+        $role = $this->roleRepo->create($request->all());
 
         return response()->json($role);
     }
 
     /**
-     * Destroy role.
-     *
-     * @param Role $role
+     * @param $roleId
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Role $role)
+    public function destroy($roleId)
     {
+        $role = $this->roleRepo->find($roleId);
+
         if (Auth::user()->hasRole($role->name)) {
             return response()->json([
                 'status' => 'U kunt deze rol niet verwijder. Koppel uzelf eerst aan een andere rol.',
             ], 401);
         }
 
-        $role->delete();
+        $this->roleRepo->delete($roleId);
 
         return response()->json(['status' => 'Rol verwijderd.']);
     }

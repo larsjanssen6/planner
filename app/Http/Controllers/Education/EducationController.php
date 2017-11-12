@@ -2,20 +2,41 @@
 
 namespace App\Http\Controllers\Education;
 
-use App\Domain\Vehicle;
-use App\Domain\Category;
 use App\Domain\Education;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EducationRequest;
-use Carbon\Carbon;
+use App\Repositories\Category\CategoryRepoInterface;
+use App\Repositories\Vehicle\VehicleRepoInterface;
+use App\Repositories\Education\EducationRepoInterface;
 
 class EducationController extends Controller
 {
     /**
-     * EducationController constructor.
+     * @var EducationRepoInterface
      */
-    public function __construct()
+    protected $educationRepo;
+
+    /**
+     * @var
+     */
+    protected $vehicleRepo;
+
+    /**
+     * @var CategoryRepoInterface
+     */
+    protected $categoryRepo;
+
+    /**
+     * EducationController constructor.
+     * @param EducationRepoInterface $educationRepo
+     * @param VehicleRepoInterface $vehicleRepo
+     */
+    public function __construct(EducationRepoInterface $educationRepo, VehicleRepoInterface $vehicleRepo, CategoryRepoInterface $categoryRepo)
     {
+        $this->educationRepo = $educationRepo;
+        $this->vehicleRepo = $vehicleRepo;
+        $this->categoryRepo = $categoryRepo;
+
         $this->middleware('permission:show-education')->only('show');
         $this->middleware('permission:create-education')->only('create', 'store');
         $this->middleware('permission:edit-education')->only('edit', 'update');
@@ -28,7 +49,7 @@ class EducationController extends Controller
     public function index()
     {
         return view('education.index')->with([
-            'educations' => Education::with('category', 'vehicles')->paginate(10),
+            'educations' => $this->educationRepo->paginate(['category', 'vehicles'])
         ]);
     }
 
@@ -38,8 +59,8 @@ class EducationController extends Controller
     public function create()
     {
         return view('education.create')->with([
-            'categories' => Category::all()->pluck('name', 'id'),
-            'vehicles' => Vehicle::all(),
+            'categories' => $this->categoryRepo->getAll()->pluck('name', 'id'),
+            'vehicles' => $this->vehicleRepo->getAll()
         ]);
     }
 
@@ -49,7 +70,7 @@ class EducationController extends Controller
      */
     public function store(EducationRequest $request)
     {
-        $eduction = Education::create($request->all());
+        $eduction = $this->educationRepo->create($request->all());
 
         $eduction->vehicles()->sync($request->vehicles);
 
@@ -59,35 +80,39 @@ class EducationController extends Controller
     }
 
     /**
-     * @param Education $education
+     * @param $educationId
      * @return $this
      */
-    public function show(Education $education)
+    public function show($educationId)
     {
+        $education = $this->educationRepo->find($educationId);
+
         return view('education.show')->with(['education' => $education]);
     }
 
     /**
-     * @param Education $education
+     * @param $educationId
      * @return $this
      */
-    public function edit(Education $education)
+    public function edit($educationId)
     {
+        $education = $this->educationRepo->find($educationId);
+
         return view('education.edit')->with([
                 'education' => $education,
-                'categories' => Category::all()->pluck('name', 'id'),
-                'vehicles' => Vehicle::all(),
+                'categories' => $this->categoryRepo->getAll()->pluck('name', 'id'),
+                'vehicles' => $this->vehicleRepo->getAll(),
             ]);
     }
 
     /**
      * @param EducationRequest $request
-     * @param Education $education
+     * @param $educationId
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(EducationRequest $request, Education $education)
+    public function update(EducationRequest $request, $educationId)
     {
-        $education->update($request->all());
+        $education = $this->educationRepo->update($educationId, $request->all());
 
         $education->vehicles()->sync($request->vehicles);
 
@@ -97,12 +122,12 @@ class EducationController extends Controller
     }
 
     /**
-     * @param Education $education
+     * @param $educationId
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Education $education)
+    public function destroy($educationId)
     {
-        $education->delete();
+        $this->educationRepo->delete($educationId);
 
         session()->flash('status', 'Opleiding verwijderd');
 

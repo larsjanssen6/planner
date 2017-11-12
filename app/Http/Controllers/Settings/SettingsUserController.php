@@ -3,12 +3,26 @@
 namespace App\Http\Controllers\Settings;
 
 use Auth;
-use App\Domain\User;
+use App\Repositories\User\UserRepoInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SettingsProfileRequest;
 
 class SettingsUserController extends Controller
 {
+    /**
+     * @var UserRepoInterface
+     */
+    protected $userRepo;
+
+    /**
+     * SettingsUserController constructor.
+     * @param UserRepoInterface $userRepo
+     */
+    public function __construct(UserRepoInterface $userRepo)
+    {
+        $this->userRepo = $userRepo;
+    }
+
     /**
      * Show user profile page.
      *
@@ -22,22 +36,15 @@ class SettingsUserController extends Controller
     }
 
     /**
-     * Update user profile.
-     *
      * @param SettingsProfileRequest $request
-     * @param User $user
+     * @param $userId
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(SettingsProfileRequest $request, User $user)
+    public function update(SettingsProfileRequest $request, $userId)
     {
-        $items = collect(['name', 'last_name', 'email', 'gender']);
+        $items = collect(['name', 'last_name', 'email']);
 
-        $user->update($request->only($items->toArray()));
-
-        if (isset($request->password)) {
-            $user->password = bcrypt($request->password);
-            $user->save();
-        }
+        $this->userRepo->update($userId, $request->only($items->toArray()));
 
         session()->flash('status', 'Profiel geupdated');
 

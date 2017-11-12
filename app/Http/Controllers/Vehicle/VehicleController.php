@@ -6,14 +6,31 @@ use App\Domain\Vehicle;
 use App\Domain\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VehicleRequest;
+use App\Repositories\Category\CategoryRepoInterface;
+use App\Repositories\Vehicle\VehicleRepoInterface;
 
 class VehicleController extends Controller
 {
     /**
-     * VehicleController constructor.
+     * @var VehicleRepoInterface
      */
-    public function __construct()
+    protected $vehicleRepo;
+
+    /**
+     * @var CategoryRepoInterface
+     */
+    protected $categoryRepo;
+
+    /**
+     * VehicleController constructor.
+     * @param VehicleRepoInterface $vehicleRepo
+     * @param CategoryRepoInterface $categoryRepo
+     */
+    public function __construct(VehicleRepoInterface $vehicleRepo, CategoryRepoInterface $categoryRepo)
     {
+        $this->vehicleRepo = $vehicleRepo;
+        $this->categoryRepo = $categoryRepo;
+
         $this->middleware('permission:show-vehicle')->only('show');
         $this->middleware('permission:create-vehicle')->only('create', 'store');
         $this->middleware('permission:edit-vehicle')->only('edit', 'update');
@@ -26,7 +43,7 @@ class VehicleController extends Controller
     public function index()
     {
         return view('vehicle.index')->with([
-            'vehicles' => Vehicle::with('category')->paginate(10),
+            'vehicles' => $this->vehicleRepo->paginate(['category']),
         ]);
     }
 
@@ -35,7 +52,7 @@ class VehicleController extends Controller
      */
     public function create()
     {
-        return view('vehicle.create')->with(['categories' => Category::all()->pluck('name', 'id')]);
+        return view('vehicle.create')->with(['categories' => $this->vehicleRepo->getAll()->pluck('name', 'id')]);
     }
 
     /**
@@ -44,7 +61,7 @@ class VehicleController extends Controller
      */
     public function store(VehicleRequest $request)
     {
-        Vehicle::create($request->all());
+        $this->vehicleRepo->create($request->all());
 
         session()->flash('status', 'Voertuig aangemaakt');
 
@@ -52,11 +69,13 @@ class VehicleController extends Controller
     }
 
     /**
-     * @param Vehicle $vehicle
+     * @param $vehicleId
      * @return $this
      */
-    public function show(Vehicle $vehicle)
+    public function show($vehicleId)
     {
+        $vehicle = $this->vehicleRepo->find($vehicleId);
+
         return view('vehicle.show')->with(['vehicle' => $vehicle]);
     }
 
@@ -67,31 +86,31 @@ class VehicleController extends Controller
     public function edit(Vehicle $vehicle)
     {
         return view('vehicle.edit')->with([
-            'vehicle' => $vehicle, 'categories' => Category::all()->pluck('name', 'id'),
+            'vehicle' => $vehicle, 'categories' => $this->categoryRepo->getAll()->pluck('name', 'id'),
         ]);
     }
 
     /**
      * @param VehicleRequest $request
-     * @param Vehicle $vehicle
+     * @param $vehicleId
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(VehicleRequest $request, Vehicle $vehicle)
+    public function update(VehicleRequest $request, $vehicleId)
     {
-        $vehicle->update($request->all());
+        $this->vehicleRepo->update($vehicleId, $request->all());
 
         session()->flash('status', 'Voertuig bewerkt');
 
-        return redirect()->route('vehicle.show', ['id' => $vehicle->id]);
+        return redirect()->route('vehicle.show', ['id' => $vehicleId]);
     }
 
     /**
-     * @param Vehicle $vehicle
+     * @param $vehicleId
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(Vehicle $vehicle)
+    public function destroy($vehicleId)
     {
-        $vehicle->delete();
+        $this->vehicleRepo->delete($vehicleId);
 
         session()->flash('status', 'Voertuig verwijderd');
 

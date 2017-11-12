@@ -6,14 +6,20 @@ use App\Domain\Group;
 use App\Domain\Peleton;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PeletonRequest;
+use App\Repositories\Peleton\PeletonRepoInterface;
 
 class PeletonController extends Controller
 {
+    protected $peletonRepo;
+
     /**
      * PeletonController constructor.
+     * @param PeletonRepoInterface $peletonRepo
      */
-    public function __construct()
+    public function __construct(PeletonRepoInterface $peletonRepo)
     {
+        $this->peletonRepo = $peletonRepo;
+
         $this->middleware('permission:show-peleton')->only('show');
         $this->middleware('permission:create-peleton')->only('create', 'store');
         $this->middleware('permission:edit-peleton')->only('edit', 'update');
@@ -26,7 +32,7 @@ class PeletonController extends Controller
     public function index()
     {
         return view('peleton.index')->with([
-            'peletons' => Peleton::paginate(10),
+            'peletons' => $this->peletonRepo->getAll(),
         ]);
     }
 
@@ -44,7 +50,7 @@ class PeletonController extends Controller
      */
     public function store(PeletonRequest $request)
     {
-        $peleton = Peleton::create($request->all());
+        $peleton = $this->peletonRepo->create($request->all());
 
         if ($request->input('groups') != null) {
             $groups = Group::whereIn('id', $request->input('groups'))->get();
@@ -58,11 +64,12 @@ class PeletonController extends Controller
     }
 
     /**
-     * @param Peleton $peleton
+     * @param $peletonId
      * @return $this
      */
-    public function show(Peleton $peleton)
+    public function show($peletonId)
     {
+        $peleton = $this->peletonRepo->find($peletonId);
         return view('peleton.show')->with([
             'peleton' => $peleton,
         ]);
