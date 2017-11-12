@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Education;
 use App\Domain\Education;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\EducationRequest;
-use App\Repositories\Category\CategoryRepoInterface;
 use App\Repositories\Vehicle\VehicleRepoInterface;
+use App\Repositories\Category\CategoryRepoInterface;
 use App\Repositories\Education\EducationRepoInterface;
 
 class EducationController extends Controller
@@ -49,7 +49,7 @@ class EducationController extends Controller
     public function index()
     {
         return view('education.index')->with([
-            'educations' => $this->educationRepo->paginate(['category', 'vehicles'])
+            'educations' => $this->educationRepo->paginate(['category', 'vehicles']),
         ]);
     }
 
@@ -60,7 +60,7 @@ class EducationController extends Controller
     {
         return view('education.create')->with([
             'categories' => $this->categoryRepo->getAll()->pluck('name', 'id'),
-            'vehicles' => $this->vehicleRepo->getAll()
+            'vehicles' => $this->vehicleRepo->getAll(),
         ]);
     }
 

@@ -6,8 +6,8 @@ use App\Domain\Vehicle;
 use App\Domain\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VehicleRequest;
-use App\Repositories\Category\CategoryRepoInterface;
 use App\Repositories\Vehicle\VehicleRepoInterface;
+use App\Repositories\Category\CategoryRepoInterface;
 
 class VehicleController extends Controller
 {

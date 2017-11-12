@@ -70,6 +70,7 @@ class PeletonController extends Controller
     public function show($peletonId)
     {
         $peleton = $this->peletonRepo->find($peletonId);
+
         return view('peleton.show')->with([
             'peleton' => $peleton,
         ]);
