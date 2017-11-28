@@ -19,18 +19,21 @@
 
                     <a href="{{ route('education.index') }}">Opleidingen</a>
 
-                    <pie-chart :data="{{ json_encode([
-                                $educations_total_last_month,
-                                $educations_total_current_month
-                            ]) }}"
-                               :labels="{{ json_encode([
-                                Date::now()->subMonth()->format('F'),
-                                Date::now()->format('F')
-                            ]) }}"
-                               :label="'Nieuwe opleidingen'"
-                               :background="'rgba(253, 228, 40, 0.6)'"
-                               :border="'rgba(253, 228, 40, 1)'">
-                    </pie-chart>
+                    @can('see-graphs')
+
+                        <pie-chart :data="{{ json_encode([
+                                    $educations_total_last_month,
+                                    $educations_total_current_month
+                                ]) }}"
+                                   :labels="{{ json_encode([
+                                    Date::now()->subMonth()->format('F'),
+                                    Date::now()->format('F')
+                                ]) }}"
+                                   :label="'Nieuwe opleidingen'"
+                                   :background="'rgba(253, 228, 40, 0.6)'"
+                                   :border="'rgba(253, 228, 40, 1)'">
+                        </pie-chart>
+                    @endcan
                 @endcomponent
             </div>
 
@@ -45,18 +48,21 @@
 
                     <a href="{{ route('group.index') }}">Groepen</a>
 
-                    <pie-chart :data="{{ json_encode([
-                                $groups_total_last_month,
-                                $groups_total_current_month
-                            ]) }}"
-                               :labels="{{ json_encode([
-                                Date::now()->subMonth()->format('F'),
-                                Date::now()->format('F')
-                            ]) }}"
-                               :label="'Nieuwe groepen'"
-                               :background="'rgba(253, 228, 40, 0.6)'"
-                               :border="'rgba(253, 228, 40, 1)'">
-                    </pie-chart>
+                    @can('see-graphs')
+
+                        <pie-chart :data="{{ json_encode([
+                                    $groups_total_last_month,
+                                    $groups_total_current_month
+                                ]) }}"
+                                   :labels="{{ json_encode([
+                                    Date::now()->subMonth()->format('F'),
+                                    Date::now()->format('F')
+                                ]) }}"
+                                   :label="'Nieuwe groepen'"
+                                   :background="'rgba(253, 228, 40, 0.6)'"
+                                   :border="'rgba(253, 228, 40, 1)'">
+                        </pie-chart>
+                    @endcan
                 @endcomponent
             </div>
 
@@ -70,19 +76,20 @@
                    ])
 
                     <a href="{{ route('peleton.index') }}">Peletons</a>
-
-                    <pie-chart :data="{{ json_encode([
-                                $peletons_total_last_month,
-                                $peletons_total_current_month
-                            ]) }}"
-                               :labels="{{ json_encode([
-                                Date::now()->subMonth()->format('F'),
-                                Date::now()->format('F')
-                            ]) }}"
-                               :label="'Nieuwe peletons'"
-                               :background="'rgba(253, 228, 40, 0.6)'"
-                               :border="'rgba(253, 228, 40, 1)'">
-                    </pie-chart>
+                    @can('see-graphs')
+                        <pie-chart :data="{{ json_encode([
+                                    $peletons_total_last_month,
+                                    $peletons_total_current_month
+                                ]) }}"
+                                   :labels="{{ json_encode([
+                                    Date::now()->subMonth()->format('F'),
+                                    Date::now()->format('F')
+                                ]) }}"
+                                   :label="'Nieuwe peletons'"
+                                   :background="'rgba(253, 228, 40, 0.6)'"
+                                   :border="'rgba(253, 228, 40, 1)'">
+                        </pie-chart>
+                    @endcan
                 @endcomponent
             </div>
 
@@ -97,18 +104,20 @@
 
                     <a href="{{ route('vehicle.index') }}">Voertuigen</a>
 
-                    <pie-chart :data="{{ json_encode([
-                                $vehicles_total_last_month,
-                                $vehicles_total_current_month
-                            ]) }}"
-                               :labels="{{ json_encode([
-                                Date::now()->subMonth()->format('F'),
-                                Date::now()->format('F')
-                            ]) }}"
-                               :label="'Nieuwe voertuigen'"
-                               :background="'rgba(253, 228, 40, 0.6)'"
-                               :border="'rgba(253, 228, 40, 1)'">
-                    </pie-chart>
+                    @can('see-graphs')
+                        <pie-chart :data="{{ json_encode([
+                                    $vehicles_total_last_month,
+                                    $vehicles_total_current_month
+                                ]) }}"
+                                   :labels="{{ json_encode([
+                                    Date::now()->subMonth()->format('F'),
+                                    Date::now()->format('F')
+                                ]) }}"
+                                   :label="'Nieuwe voertuigen'"
+                                   :background="'rgba(253, 228, 40, 0.6)'"
+                                   :border="'rgba(253, 228, 40, 1)'">
+                        </pie-chart>
+                    @endcan
                 @endcomponent
             </div>
         </div>
