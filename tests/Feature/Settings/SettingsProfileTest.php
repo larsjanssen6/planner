@@ -17,7 +17,7 @@ class SettingsProfileTest extends TestCase
         $this->signIn();
         $user = Auth::user();
 
-        $response = $this->get('/instellingen/' . Auth::user()->id . '/profiel');
+        $response = $this->get('/instellingen/'.Auth::user()->id.'/profiel');
 
         $response->assertSee($user->name);
     }
