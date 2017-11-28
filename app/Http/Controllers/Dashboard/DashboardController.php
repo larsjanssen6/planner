@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+use Carbon\Carbon;
 use App\Http\Controllers\Controller;
-use App\Repositories\Education\EducationRepoInterface;
+use App\Repositories\User\UserRepoInterface;
 use App\Repositories\Group\GroupRepoInterface;
 use App\Repositories\Peleton\PeletonRepoInterface;
-use App\Repositories\User\UserRepoInterface;
 use App\Repositories\Vehicle\VehicleRepoInterface;
-use Carbon\Carbon;
+use App\Repositories\Education\EducationRepoInterface;
 
 class DashboardController extends Controller
 {
