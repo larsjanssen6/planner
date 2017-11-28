@@ -43,6 +43,7 @@
                 {!! Form::open(['route' => ['vehicle.update', $vehicle->id], 'method' => 'post']) !!}
                     {{ csrf_field() }}
                     {{Form::hidden('_method', 'PUT')}}
+                    {{Form::hidden('id', $vehicle->id)}}
 
                     <div class="field">
                         {{Form::label('name', 'Naam', ['class' => 'label'])}}
