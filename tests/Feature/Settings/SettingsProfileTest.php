@@ -2,6 +2,7 @@
 
 namespace Tests\Settings;
 
+use Auth;
 use Tests\TestCase;
 
 class SettingsProfileTest extends TestCase
@@ -13,8 +14,11 @@ class SettingsProfileTest extends TestCase
      */
     public function testBasicTest()
     {
-        $response = $this->get('/');
+        $this->signIn();
+        $user = Auth::user();
 
-        $response->assertStatus(200);
+        $response = $this->get('/instellingen/' . Auth::user()->id . '/profiel');
+
+        $response->assertSee($user->name);
     }
 }

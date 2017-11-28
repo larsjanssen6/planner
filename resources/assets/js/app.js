@@ -27,6 +27,13 @@ window.Vue = require('vue');
 Vue.component('roles',          require('./components/authorization/roles.vue'));
 Vue.component('MultiSelect',    require('./components/shared/MultiSelect.vue'));
 
+/*
+ Charts
+*/
+
+Vue.component('BarChart',                       require('./components/charts/BarChart.vue'));
+Vue.component('PieChart',                       require('./components/charts/PieChart.vue'));
+
 const app = new Vue({
     el: '#app'
 });
