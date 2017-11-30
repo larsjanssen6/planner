@@ -32,14 +32,6 @@
                                     </th>
 
                                     <th>
-                                        <abbr>Geboortedatum</abbr>
-                                    </th>
-
-                                    <th>
-                                        <abbr>Geslacht</abbr>
-                                    </th>
-
-                                    <th>
                                         <abbr>Aangemaakt</abbr>
                                     </th>
 
@@ -60,14 +52,6 @@
 
                                         <td>
                                             {{ $user->email }}
-                                        </td>
-
-                                        <td>
-                                            {{ $user-> birthday }}
-                                        </td>
-
-                                        <td>
-                                            {{ $user->gender }}
                                         </td>
 
                                         <td>

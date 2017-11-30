@@ -135,10 +135,10 @@ footer > div > div > p > strong {
   bottom: 20px;
   right: 20px;
 }
-.tag {
+.tag:not(body) {
   color: #455097;
   font-size: 12px;
-  background: #dde0f3;
+  background: #dde0f3 !important;
   border-radius: 4px;
   padding: 0 9px;
   line-height: 22px;
@@ -192,4 +192,13 @@ td i.fa:hover {
 }
 .navbar-link.is-active:after {
   border-color: #209cee !important;
+}
+.header-border {
+  border-bottom: 1px solid #dbdbe0;
+}
+.header-clearance {
+  padding-top: 26px;
+}
+.header-align {
+  line-height: 50px;
 }

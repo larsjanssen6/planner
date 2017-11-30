@@ -32,7 +32,7 @@ class PeletonController extends Controller
     public function index()
     {
         return view('peleton.index')->with([
-            'peletons' => $this->peletonRepo->getAll(),
+            'peletons' => $this->peletonRepo->paginate(),
         ]);
     }
 

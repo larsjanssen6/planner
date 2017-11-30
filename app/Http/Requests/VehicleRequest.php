@@ -24,17 +24,18 @@ class VehicleRequest extends FormRequest
     public function rules()
     {
         $rules = [
-           'category_id'            => 'required',
-           'maintenance_interval'   => 'required|min:1',
-           'maintenance_duration'   => 'required|min:1',
+            'name'                   => 'required|unique:vehicle',
+            'category_id'            => 'required',
+            'maintenance_interval'   => 'required|min:1',
+            'maintenance_duration'   => 'required|min:1',
        ];
 
         // update resource
         if ($this->isMethod('put')) {
-            return array_merge($rules, ['name' => 'required|unique:vehicle,name,'.$this->input('id')]);
+            $rules = array_merge($rules, ['name' => 'required|unique:vehicle,name,'.$this->input('id')]);
         }
 
-        return array_merge($rules, ['name' => 'required|unique:vehicle']);
+        return $rules;
     }
 
     /**

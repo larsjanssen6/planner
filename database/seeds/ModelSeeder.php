@@ -30,10 +30,10 @@ class ModelSeeder extends Seeder
         $groupCategory = Category::create(['name' => 'Groepen',        'type' => 'permission_category']);
         $peletonCategory = Category::create(['name' => 'Peletons',       'type' => 'permission_category']);
         $vehicleCategory = Category::create(['name' => 'Voertuigen',     'type' => 'permission_category']);
-        $dashboardCategory = Category::create(['name' => 'Dashboard',     'type' => 'permission_category']);
         $permissionCategory = Category::create(['name' => 'Permissies',     'type' => 'permission_category']);
         $roleCategory = Category::create(['name' => 'Rollen', 'type' => 'permission_category']);
         $userCategory = Category::create(['name' => 'Gebruikers', 'type' => 'permission_category']);
+        $dashboardCategory = Category::create(['name' => 'Dashboard', 'type' => 'permission_category']);
 
         // permissions
         Permission::create([
@@ -144,6 +144,12 @@ class ModelSeeder extends Seeder
             'category_id' => $userCategory->id,
         ]);
 
+        Permission::create([
+            'name' => 'see-graphs',
+            'description' => 'Grafieken inzien',
+            'category_id' => $dashboardCategory->id,
+        ]);
+
         // roles => permissions
         $role = Role::create(['name' => 'Super-admin']);
 
@@ -170,6 +176,9 @@ class ModelSeeder extends Seeder
         $role->givePermissionTo('show-dashboard');
 
         $role->givePermissionTo('edit-permission-settings');
+        $role->givePermissionTo('create-user');
+        $role->givePermissionTo('roles');
+        $role->givePermissionTo('see-graphs');
 
         // edit first user
         $user = App\Domain\User::first();
