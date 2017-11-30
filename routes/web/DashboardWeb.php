@@ -13,3 +13,4 @@
 
 Route::get('/dashboard', 'Dashboard\DashboardController@index')
     ->name('dashboard');
+
